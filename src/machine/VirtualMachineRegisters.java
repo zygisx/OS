@@ -40,7 +40,4 @@ public class VirtualMachineRegisters {
 		this.SF = sF;
 	}
 	
-	
-	
-	
 }
