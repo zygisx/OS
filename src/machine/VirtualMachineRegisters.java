@@ -1,7 +1,7 @@
 package machine;
 
 public class VirtualMachineRegisters {
-	//ToDo is it ok not to have separate registers class???
+	//ToDo is it OK not to have separate registers class???
 	private char[] R1;
 	private char[] R2;
 	private char[] IC;
