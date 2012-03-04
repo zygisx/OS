@@ -1,6 +1,7 @@
 package machine;
 
 public class VirtualMachineRegisters {
+	//ToDo is it ok not to have separate registers class???
 	private char[] R1;
 	private char[] R2;
 	private char[] IC;
@@ -8,35 +9,35 @@ public class VirtualMachineRegisters {
 	
 	
 	/**
-	 * By default all registers values set 
+	 * By default all registers values are zero
 	 */
 	public VirtualMachineRegisters() {
 		
 	}
 	
 	public char[] getR1() {
-		return R1;
+		return this.R1;
 	}
 	public void setR1(char[] r1) {
-		R1 = r1;
+		this.R1 = r1;
 	}
 	public char[] getR2() {
-		return R2;
+		return this.R2;
 	}
 	public void setR2(char[] r2) {
-		R2 = r2;
+		this.R2 = r2;
 	}
 	public char[] getIC() {
-		return IC;
+		return this.IC;
 	}
 	public void setIC(char[] iC) {
-		IC = iC;
+		this.IC = iC;
 	}
 	public byte getSF() {
-		return SF;
+		return this.SF;
 	}
 	public void setSF(byte sF) {
-		SF = sF;
+		this.SF = sF;
 	}
 	
 	
