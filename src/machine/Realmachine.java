@@ -5,7 +5,7 @@ public class Realmachine {
 	/**
 	 * shows from where starts code segment in virtual memory
 	 */
-	public static final int INSTRUCTON_COUNTER_START = 0x81; // not sure if hex OK
+	public static final int CODE_SEGMENT_START = 0x81; // not sure if hex OK
 	public static final int REAL_MEMORY_SIZE = 0xfff;
 	private static final int WORD_SIZE = 4;
 	private char[][] memory;
