@@ -10,8 +10,25 @@ public class Word extends Register {
 		};
 	}
 	public Word(char[] initValue) {
-		if (initValue.length == 4) 
+		if (initValue.length == WORD_SIZE) 
 			this.value = initValue;
 		//TODO else throw exception or smth
+	}
+	public Word(String initValue) {
+		if (initValue.length() == WORD_SIZE) {
+			this.value = initValue.toCharArray();
+		}
+		//TODO else throw exception or smth
+	}
+	
+	/**
+	 * 
+	 * @param initValue
+	 * @param hexFlag True if initValue in hex, false if in decimal
+	 */
+	public Word(int initValue, boolean hexFlag) { 
+		if (hexFlag) {
+			this.value = (Integer.toHexString(initValue)).toCharArray();
+		}
 	}
 }
