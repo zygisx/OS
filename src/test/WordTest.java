@@ -11,22 +11,71 @@ public class WordTest {
 	@Test
 	public void testWord() {
 		Word w = new Word();
-		assertTrue(w.getValue().length == 4);
+		assertTrue(w.getValue().length == Word.WORD_SIZE);
 	}
 
 	@Test
 	public void testWordCharArray() {
-		fail("Not yet implemented");
+		char[] array, result;
+		/* Good case */
+		array = new char[] {
+			'k', 'l', 'k', 'j'
+		};
+		Word w = new Word(array);
+		result = w.getValue();
+		assertArrayEquals(array, result);
+		assertTrue(result.length == Word.WORD_SIZE);
+		/*END*/
+		
+		/* Bad case */
+		w = null;
+		array = new char[] { 
+				'h', 'r', 't'
+		};
+		w = new Word(array);
+		result = w.getValue();
+		assertNull(result);
 	}
 
 	@Test
 	public void testWordString() {
-		fail("Not yet implemented");
+		Word w = new Word("ciupakabra");
+		char[] array = new char[] {
+			'c', 'i', 'u', 'p'
+		};
+		assertArrayEquals(w.getValue(), array);
+		w = new Word("ciup");
+		assertArrayEquals(w.getValue(), array);
+		w = new Word("ciu");
+		assertNull(w.getValue());
 	}
 
 	@Test
 	public void testWordIntBoolean() {
-		fail("Not yet implemented");
+		/* Hex cases */
+		Word w = new Word(0x1234, true);
+		assertEquals("1234", w.getStringValue());
+		w = new Word(0x123, true);
+		assertEquals("0123", w.getStringValue());
+		w = new Word(0xbf, true);
+		assertEquals("00bf", w.getStringValue());
+		w = new Word(0xbf145, true);
+		assertEquals("bf14", w.getStringValue());
+		w = new Word(0x0, true);
+		assertEquals("0000", w.getStringValue());
+		
+		/* decimal cases */
+		w = new Word(1234, false);
+		assertEquals("1234", w.getStringValue());
+		w = new Word(123, false);
+		assertEquals("0123", w.getStringValue());
+		w = new Word(1, false);
+		assertEquals("0001", w.getStringValue());
+		w = new Word(12345, false);
+		assertEquals("1234", w.getStringValue());
+		// test fails!!! What to do with negative numbers ?
+		//w = new Word(-1, false);
+		//assertEquals("00?1", w.getStringValue());
 	}
 
 }
