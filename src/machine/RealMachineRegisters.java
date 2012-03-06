@@ -1,22 +1,23 @@
 package machine;
 
 public class RealMachineRegisters {
-	private static char[] R1, R2, IC, PLR, MODE;
+	private static Word R1, R2;	
+	private static byte IC, PLR, MODE;
 	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
 	
-	public static char[] getR1() {
+	public static Word getR1() {
 		return R1;
 	}
-	public static char[] getR2() {
+	public static Word getR2() {
 		return R2;
 	}
-	public static char[] getIC() {
+	public static byte getIC() {
 		return IC;
 	}
-	public static char[] getPLR() {
+	public static byte getPLR() {
 		return PLR;
 	}
-	public static char[] getMODE() {
+	public static byte getMODE() {
 		return MODE;
 	}
 	public static byte getSF() {
@@ -49,19 +50,19 @@ public class RealMachineRegisters {
 	public static byte getTI() {
 		return TI;
 	}
-	public static void setR1(char[] r1) {
+	public static void setR1(Word r1) {
 		R1 = r1;
 	}
-	public static void setR2(char[] r2) {
+	public static void setR2(Word r2) {
 		R2 = r2;
 	}
-	public static void setIC(char[] iC) {
+	public static void setIC(byte iC) {
 		IC = iC;
 	}
-	public static void setPLR(char[] pLR) {
+	public static void setPLR(byte pLR) {
 		PLR = pLR;
 	}
-	public static void setMODE(char[] mODE) {
+	public static void setMODE(byte mODE) {
 		MODE = mODE;
 	}
 	public static void setSF(byte sF) {
