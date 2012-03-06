@@ -47,7 +47,9 @@ public class WordTest {
 		w = new Word("ciup");
 		assertArrayEquals(w.getValue(), array);
 		w = new Word("ciu");
-		assertNull(w.getValue());
+		assertEquals(" ciu", w.getStringValue());
+		w.setWordString("15");
+		assertEquals("  15", w.getStringValue());
 	}
 
 	@Test
@@ -76,6 +78,39 @@ public class WordTest {
 		// test fails!!! What to do with negative numbers ?
 		//w = new Word(-1, false);
 		//assertEquals("00?1", w.getStringValue());
+	}
+	@Test
+	public void testGetDecimalValue() {
+		// decimal
+		Word w = new Word("1234");
+		w.setHexValues(false);
+		assertEquals(1234, w.getDecimalValue());
+		w.setWordString("50000");
+		assertEquals(5000, w.getDecimalValue());
+		
+		// hex
+		w.setWordHexInt(0xf);
+		assertEquals("000f", w.getStringValue());
+		assertEquals(15, w.getDecimalValue());
+		w.setWordHexInt(0xf0);
+		assertEquals(240, w.getDecimalValue());
+		
+	}
+	@Test
+	public void testGetHexValue()
+	{
+		// decimal
+		assertEquals(0xc, 12);
+		Word w = new Word();
+		w.setHexValues(false);
+		w.setWordString("12");
+		assertEquals(0xc, w.getHexValue());
+		w.setWordDecInt(32);
+		assertEquals(0x20, w.getHexValue());
+		
+		// hex
+		w.setWordHexInt(0xff);
+		assertEquals(0xff, w.getHexValue());
 	}
 
 }
