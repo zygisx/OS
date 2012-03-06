@@ -2,9 +2,9 @@ package machine;
 
 public class VirtualMachineRegisters {
 	//ToDo is it OK not to have separate registers class???
-	private char[] R1;
-	private char[] R2;
-	private char[] IC;
+	private Word R1;
+	private Word R2;
+	private byte IC;
 	private byte SF;
 	
 	
@@ -15,22 +15,22 @@ public class VirtualMachineRegisters {
 		
 	}
 	
-	public char[] getR1() {
+	public Word getR1() {
 		return this.R1;
 	}
-	public void setR1(char[] r1) {
+	public void setR1(Word r1) {
 		this.R1 = r1;
 	}
-	public char[] getR2() {
+	public Word getR2() {
 		return this.R2;
 	}
-	public void setR2(char[] r2) {
+	public void setR2(Word r2) {
 		this.R2 = r2;
 	}
-	public char[] getIC() {
+	public byte getIC() {
 		return this.IC;
 	}
-	public void setIC(char[] iC) {
+	public void setIC(byte iC) {
 		this.IC = iC;
 	}
 	public byte getSF() {
