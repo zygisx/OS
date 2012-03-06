@@ -2,7 +2,7 @@ package machine;
 
 public abstract class Register {
 
-	private char[] value;
+	protected char[] value;
 
 	public char[] getValue() {
 		return value;
