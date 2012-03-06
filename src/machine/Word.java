@@ -12,17 +12,10 @@ public class Word extends Register {
 		};
 	}
 	public Word(char[] initValue) {
-		if (initValue.length == WORD_SIZE) 
-			this.value = initValue;
-		//TODO else throw exception or smth
+		this.setValue(initValue);
 	}
 	public Word(String initValue) {
-		if (initValue.length() >= WORD_SIZE) {
-			initValue = initValue.substring(0, WORD_SIZE);
-			this.value = initValue.toCharArray();
-		}
-
-		//TODO else throw exception or smth
+		this.setWordString(initValue);
 	}
 	
 	/**
@@ -31,18 +24,42 @@ public class Word extends Register {
 	 * @param hexFlag True if initValue in hex, false if in decimal
 	 */
 	public Word(int initValue, boolean hexFlag) { 
-		String formatString;
 		if (hexFlag) {
-			formatString = "%0" + WORD_SIZE + "x"; 
+			this.setWordDecInt(initValue); 
 		}
 		else {
-			formatString = "%0" + WORD_SIZE + "d";
+			this.setWordDecInt(initValue);
 		}
-		String formattedValue = String.format(formatString, initValue);
+	}
+	
+	@Override
+	public void setValue(char[] value) {
+		if (value.length == WORD_SIZE) 
+			super.setValue(value);
+		//TODO else throw exception or smth
+	}
+	
+	public void setWordString(String value) {
+		if (value.length() >= WORD_SIZE) {
+			value = value.substring(0, WORD_SIZE);
+			this.value = value.toCharArray();
+		}
+		//TODO else throw exception or smth
+	}
+	
+	public void setWordDecInt(int value) {
+		String formatString = "%0" + WORD_SIZE + "d";
+		String formattedValue = String.format(formatString, value);
 		formattedValue = formattedValue.substring(0, WORD_SIZE);
 		this.value = formattedValue.toCharArray();
 	}
 	
+	public void setWordHexInt(int value) {
+		String formatString = "%0" + WORD_SIZE + "x";
+		String formattedValue = String.format(formatString, value);
+		formattedValue = formattedValue.substring(0, WORD_SIZE);
+		this.value = formattedValue.toCharArray();
+	}
 	
 	public String getStringValue() {
 		return new String(this.value);
