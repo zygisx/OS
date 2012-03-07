@@ -25,7 +25,7 @@ public class Realmachine {
 			memory[i] = new Word();
 		}
 		activeVirtualMachine = null;
-		setRegisters(new RealMachineRegisters());
+		registers = new RealMachineRegisters();
 		virtualMachines = new ArrayList<VirtualMachine>();
 		// create pagination table and fill it with first 256 bytes from memory
 		Word[] paginationTable = new Word[BLOCK_SIZE*PAGINATION_TABLE_SIZE];
@@ -63,7 +63,7 @@ public class Realmachine {
 	public static void addVirtualMachine(VirtualMachine vm) {
 		virtualMachines.add(vm);
 	}
-
+	
 	public static RealMachineRegisters getRegisters() {
 		return registers;
 	}
