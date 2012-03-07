@@ -16,7 +16,7 @@ public class Realmachine {
 	private static VirtualMachine activeVirtualMachine;
 	private static RealMachineRegisters registers;
 	private static ArrayList<VirtualMachine> virtualMachines;
-	private static Pagination paginationMechanizm;
+	private static Pagination paginationMechanism;
 	
 	static {
 		memory = new Word[REAL_MEMORY_SIZE];
@@ -35,7 +35,7 @@ public class Realmachine {
 				paginationTable[i*BLOCK_SIZE + j] = block[j];
 			}
 		}
-		paginationMechanizm = new Pagination(paginationTable);		
+		paginationMechanism = new Pagination(paginationTable);		
 	}
 	
 	public static void setActiveVirtualMachine(VirtualMachine machine) {
