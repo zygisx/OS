@@ -15,5 +15,10 @@ public class RealMachineTest {
 		assertEquals(w.getStringValue(), Realmachine.getWord(69).getStringValue());
 		
 	}
+	@Test
+	public void testGetBlock()
+	{
+		Realmachine.getBlock(255);
+	}
 
 }

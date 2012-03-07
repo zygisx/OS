@@ -9,6 +9,7 @@ public class Realmachine {
 	 */
 	public static final int CODE_SEGMENT_START = 0x81; // not sure if hex OK
 	public static final int REAL_MEMORY_SIZE = 0xfff;
+	public static final int BLOCK_SIZE = 0xf; 
 	
 	private static Word[] memory;
 	private static VirtualMachine activeVirtualMachine;
@@ -36,6 +37,16 @@ public class Realmachine {
 	}
 	
 	public static Word[] getBlock(int blockNum) {
+		if (blockNum < (REAL_MEMORY_SIZE+1 / BLOCK_SIZE+1)) { // blockNum < 256 
+			Word[] mem = new Word[BLOCK_SIZE+1];
+			for (int i=0; i <= BLOCK_SIZE; i++) {
+				mem[i] = memory[blockNum*(BLOCK_SIZE) + i];
+				// for testing.. To test it run test.RealMachineTest
+				//System.out.println(Integer.toHexString((blockNum*(BLOCK_SIZE+1) + i))+" " + i);
+			}
+			return mem;
+		}
+		//TODO exception or smth
 		return null;
 	}
 	
