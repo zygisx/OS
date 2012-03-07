@@ -25,7 +25,7 @@ public class Realmachine {
 			memory[i] = new Word();
 		}
 		activeVirtualMachine = null;
-		registers = new RealMachineRegisters();
+		setRegisters(new RealMachineRegisters());
 		virtualMachines = new ArrayList<VirtualMachine>();
 		// create pagination table and fill it with first 256 bytes from memory
 		Word[] paginationTable = new Word[BLOCK_SIZE*PAGINATION_TABLE_SIZE];
@@ -52,7 +52,7 @@ public class Realmachine {
 			for (int i=0; i < BLOCK_SIZE; i++) {
 				mem[i] = memory[blockNum*(BLOCK_SIZE) + i];
 				// for testing.. To test it run test.RealMachineTest
-				System.out.println(Integer.toHexString((blockNum*BLOCK_SIZE + i))+" " + i);
+				//System.out.println(Integer.toHexString((blockNum*BLOCK_SIZE + i))+" " + i);
 			}
 			return mem;
 		}
@@ -62,6 +62,10 @@ public class Realmachine {
 	
 	public static void addVirtualMachine(VirtualMachine vm) {
 		virtualMachines.add(vm);
+	}
+
+	public static RealMachineRegisters getRegisters() {
+		return registers;
 	}
 	
 }
