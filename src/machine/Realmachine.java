@@ -66,9 +66,11 @@ public class Realmachine {
 	}
 	
 	public static VirtualMachine initVirtualMachine() { // not sure about return type...
-		
-		addVirtualMachine(new VirtualMachine(null, paginationMechanism.getVirtualMachineMemory()));
-		return null;
+		VirtualMachine vm = 
+				new VirtualMachine(new VirtualMachineRegisters(), 
+						paginationMechanism.getVirtualMachineMemory());
+		addVirtualMachine(vm);
+		return vm;
 	}
 	
 }
