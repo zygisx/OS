@@ -2,10 +2,9 @@ package machine;
 
 public class VirtualMachine {
 	
-	public static final int VIRTUAL_MEMORY_SIZE = 0xff;
+	public static final int VIRTUAL_MEMORY_SIZE = 0x100;
 	
 	private VirtualMachineRegisters registers;
-	//ToDo memory ... Class or RealMachine field ?
 	private Word[] memory;
 	
 	public VirtualMachine(VirtualMachineRegisters registers, Word[] memory) {
@@ -19,7 +18,6 @@ public class VirtualMachine {
 	}
 	
 	public Word getWord(int index) {
-		
 		return memory[index];
 	}
 	
