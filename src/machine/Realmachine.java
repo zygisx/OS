@@ -1,5 +1,7 @@
 package machine;
 
+import java.util.ArrayList;
+
 public class Realmachine {
 
 	/**
@@ -11,6 +13,7 @@ public class Realmachine {
 	private static Word[] memory;
 	private static VirtualMachine activeVirtualMachine;
 	private static RealMachineRegisters registers;
+	private static ArrayList<VirtualMachine> virtualMachines;
 	
 	static {
 		memory = new Word[REAL_MEMORY_SIZE];
@@ -20,6 +23,7 @@ public class Realmachine {
 		}
 		activeVirtualMachine = null;
 		registers = new RealMachineRegisters();
+		virtualMachines = new ArrayList<VirtualMachine>();
 	}
 	
 	public static void setActiveVirtualMachine(VirtualMachine machine) {
@@ -28,5 +32,9 @@ public class Realmachine {
 	
 	public static Word getWord(int index) {
 		return memory[index];
+	}
+	
+	public static void addVirtualMachine(VirtualMachine vm) {
+		virtualMachines.add(vm);
 	}
 }
