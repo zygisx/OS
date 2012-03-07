@@ -3,15 +3,14 @@ package machine;
 public class VirtualMachine {
 	
 	public static final int VIRTUAL_MEMORY_SIZE = 0xff;
-	private static final int WORD_SIZE = 4;
 	
 	private VirtualMachineRegisters registers;
 	//ToDo memory ... Class or RealMachine field ?
-	private char[][] memory;
+	private Word[] memory;
 	
-	public VirtualMachine(VirtualMachineRegisters registers) {
+	public VirtualMachine(VirtualMachineRegisters registers, Word[] memory) {
 		this.registers = registers;
-		this.memory = new char[VIRTUAL_MEMORY_SIZE][WORD_SIZE];
+		this.memory = memory;
 		
 	}
 	
@@ -19,7 +18,7 @@ public class VirtualMachine {
 		return this.registers;
 	}
 	
-	public char[] getWord(int index) {
+	public Word getWord(int index) {
 		
 		return memory[index];
 	}
