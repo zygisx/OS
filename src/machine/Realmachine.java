@@ -7,9 +7,10 @@ public class Realmachine {
 	/**
 	 * shows from where starts code segment in virtual memory
 	 */
-	public static final int CODE_SEGMENT_START = 0x81; // not sure if hex OK
-	public static final int REAL_MEMORY_SIZE = 0xfff;
-	public static final int BLOCK_SIZE = 0xf; 
+	public static final int CODE_SEGMENT_START = 0x81;
+	public static final int REAL_MEMORY_SIZE = 0x1000;
+	public static final int BLOCK_SIZE = 0x10; // block size is 0x10 = 16 not 0xf = 15
+	public static final int PAGINATION_TABLE_SIZE = 0x10; //table consist of 16 blocks
 	
 	private static Word[] memory;
 	private static VirtualMachine activeVirtualMachine;
@@ -26,6 +27,15 @@ public class Realmachine {
 		activeVirtualMachine = null;
 		registers = new RealMachineRegisters();
 		virtualMachines = new ArrayList<VirtualMachine>();
+		// create pagination table and fill it with first 256 bytes from memory
+		Word[] paginationTable = new Word[BLOCK_SIZE*PAGINATION_TABLE_SIZE];
+		for (int i = 0; i < PAGINATION_TABLE_SIZE; i++) {
+			Word[] block = getBlock(i);
+			for (int j = 0; j < BLOCK_SIZE; j++) {
+				paginationTable[i*BLOCK_SIZE + j] = block[j];
+			}
+		}
+		paginationMechanizm = new Pagination(paginationTable);		
 	}
 	
 	public static void setActiveVirtualMachine(VirtualMachine machine) {
@@ -37,12 +47,12 @@ public class Realmachine {
 	}
 	
 	public static Word[] getBlock(int blockNum) {
-		if (blockNum < (REAL_MEMORY_SIZE+1 / BLOCK_SIZE+1)) { // blockNum < 256 
-			Word[] mem = new Word[BLOCK_SIZE+1];
-			for (int i=0; i <= BLOCK_SIZE; i++) {
+		if (blockNum < (REAL_MEMORY_SIZE / BLOCK_SIZE)) { // blockNum < 256 
+			Word[] mem = new Word[BLOCK_SIZE];
+			for (int i=0; i < BLOCK_SIZE; i++) {
 				mem[i] = memory[blockNum*(BLOCK_SIZE) + i];
 				// for testing.. To test it run test.RealMachineTest
-				//System.out.println(Integer.toHexString((blockNum*(BLOCK_SIZE+1) + i))+" " + i);
+				System.out.println(Integer.toHexString((blockNum*BLOCK_SIZE + i))+" " + i);
 			}
 			return mem;
 		}
