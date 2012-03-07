@@ -1,7 +1,6 @@
 package machine;
 
 public class VirtualMachineRegisters {
-	//ToDo is it OK not to have separate registers class???
 	private Word R1;
 	private Word R2;
 	private byte IC;
@@ -12,7 +11,8 @@ public class VirtualMachineRegisters {
 	 * By default all registers values are zero
 	 */
 	public VirtualMachineRegisters() {
-		
+		this.R1 = new Word();
+		this.R2 = new Word();
 	}
 	
 	public Word getR1() {
