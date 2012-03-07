@@ -35,7 +35,7 @@ public class Realmachine {
 				paginationTable[i*BLOCK_SIZE + j] = block[j];
 			}
 		}
-		paginationMechanism = new Pagination(paginationTable);		
+		paginationMechanism = new Pagination(paginationTable);	//FIXME NEED TEST!!!!	
 	}
 	
 	public static void setActiveVirtualMachine(VirtualMachine machine) {
