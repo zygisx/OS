@@ -5,7 +5,7 @@ public class Pagination {
 	
 	private Word[] table;
 	public static final int PAGING_TABLE_BEGIN = 0;
-	public static final int PAGING_TABLE_END = 0xff;
+	public static final int PAGING_TABLE_END = 0x99;
 	
 	public Pagination(Word[] table) {
 		this.table = table;
@@ -29,8 +29,11 @@ public class Pagination {
 		 * TODO ask lecture how allocate memory, random ?
 		 * 
 		 */
-		for (int i = PAGING_TABLE_END + 1; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
-			Word[] block = Realmachine.getBlock(i);
+		int VMNum = 0; // Just for now, when only one VM needed
+		
+		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
+			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
+			this.table[VMNum*0x10+i] = new Word(i + Realmachine.PAGINATION_TABLE_SIZE, true); // set block address in paging table  
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
 			}
