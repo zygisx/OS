@@ -11,6 +11,7 @@ public class Realmachine {
 	public static final int REAL_MEMORY_SIZE = 0x1000;
 	public static final int BLOCK_SIZE = 0x10; // block size is 0x10 = 16 not 0xf = 15
 	public static final int PAGINATION_TABLE_SIZE = 0x10; //table consist of 16 blocks
+	public static final int VIRTUAL_MACHINE_MEMORY_SIZE = 0x10;
 	
 	private static Word[] memory;
 	private static VirtualMachine activeVirtualMachine;
@@ -64,8 +65,10 @@ public class Realmachine {
 		virtualMachines.add(vm);
 	}
 	
-	public static RealMachineRegisters getRegisters() {
-		return registers;
+	public static VirtualMachine initVirtualMachine() { // not sure about return type...
+		
+		addVirtualMachine(new VirtualMachine(null, paginationMechanism.getVirtualMachineMemory()));
+		return null;
 	}
 	
 }
