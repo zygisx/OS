@@ -14,6 +14,7 @@ public class Realmachine {
 	private static VirtualMachine activeVirtualMachine;
 	private static RealMachineRegisters registers;
 	private static ArrayList<VirtualMachine> virtualMachines;
+	private static Pagination paginationMechanizm;
 	
 	static {
 		memory = new Word[REAL_MEMORY_SIZE];
@@ -37,4 +38,5 @@ public class Realmachine {
 	public static void addVirtualMachine(VirtualMachine vm) {
 		virtualMachines.add(vm);
 	}
+	
 }
