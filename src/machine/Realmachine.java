@@ -35,6 +35,10 @@ public class Realmachine {
 		return memory[index];
 	}
 	
+	public static Word[] getBlock(int blockNum) {
+		return null;
+	}
+	
 	public static void addVirtualMachine(VirtualMachine vm) {
 		virtualMachines.add(vm);
 	}
