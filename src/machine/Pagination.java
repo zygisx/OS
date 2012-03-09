@@ -33,7 +33,7 @@ public class Pagination {
 		
 		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
 			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
-			this.table[VMNum*0x10+i] = new Word(i + Realmachine.PAGINATION_TABLE_SIZE, true); // set block address in paging table  
+			this.table[VMNum*0x10+i].setWordHexInt(i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
 			}

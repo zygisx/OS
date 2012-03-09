@@ -20,5 +20,4 @@ public class RealMachineTest {
 	{
 		Realmachine.getBlock(255);
 	}
-
 }
