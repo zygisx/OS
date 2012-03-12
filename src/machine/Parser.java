@@ -22,10 +22,22 @@ public class Parser {
 			
 			// Read first line
 			line = bufRead.readLine();
-			
-			// Read through file one line at time. Print line # and line
-			while (line != null){
+			if (! line.startsWith("DATA")) {
+				//TODO BAD FILE
 			}
+			
+			int cursor = 0;
+			// read data segment
+			while (line != null){
+				if (line.matches("\\$[0-9A-Fa-f]{2}:\\$.*$")) {
+					cursor = Integer.parseInt(line.substring(1, 3), 16);
+				}
+				else if (true) {
+					
+				}
+				
+			}
+			
 		
 		
 		} catch (FileNotFoundException e) {
