@@ -100,6 +100,24 @@ public class Realmachine {
 		memory[realAddress].setWordHexInt(result);
 	}
 	
+	public static void DV(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		int num1 = RealMachineRegisters.getR1().getHexValue();
+		int num2 = RealMachineRegisters.getR2().getHexValue();
+		int mod = 0;
+		int div = 0;
+		
+		while(num1 >= num2) {
+			div++;
+			num1 = num1 - num2;
+		}
+		
+		mod = num1;
+		
+		memory[realAddress].setWordHexInt(div);
+		RealMachineRegisters.getR1().setWordHexInt(mod);
+	}
+	
 	// toString
 	
 	public static String toString2()
