@@ -18,7 +18,10 @@ public class VirtualMachine {
 	}
 	
 	public Word getWord(int index) {
-		return memory[index];
+		return this.memory[index];
 	}
+	
+	
+	
 	
 }
