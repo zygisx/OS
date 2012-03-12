@@ -118,6 +118,60 @@ public class Realmachine {
 		RealMachineRegisters.getR1().setWordHexInt(mod);
 	}
 	
+	public static void CP() {
+		int R1 = RealMachineRegisters.getR1().getHexValue();
+		int R2 = RealMachineRegisters.getR2().getHexValue();
+		
+		if (R1 == R2) {
+			RealMachineRegisters.setSF((byte) 0);
+		} else if(R1 > R2) {
+			RealMachineRegisters.setSF((byte) 1);
+		} else {
+			RealMachineRegisters.setSF((byte) 2);
+		}
+	}
+	
+	public static void CS() {
+		int R1 = RealMachineRegisters.getR1().getHexValue();
+		int R2 = RealMachineRegisters.getR2().getHexValue();
+		
+		if(R1 >= R2) {
+			RealMachineRegisters.setSF((byte) 3);
+		} else {
+			RealMachineRegisters.setSF((byte) 4);
+		}
+	}
+	
+	public static void L1(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		RealMachineRegisters.getR1().setWordHexInt(memory[realAddress].getHexValue());
+	}
+	
+	public static void L2(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		RealMachineRegisters.getR2().setWordHexInt(memory[realAddress].getHexValue());
+	}
+	
+	public static void S1(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		memory[realAddress].setWordHexInt(RealMachineRegisters.getR1().getHexValue());
+	}
+	
+	public static void S2(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		memory[realAddress].setWordHexInt(RealMachineRegisters.getR2().getHexValue());
+	}
+	
+	public static void SI(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		memory[realAddress].setWordHexInt(RealMachineRegisters.getIC());
+	}
+	
+	public static void JP(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+//		RealMachineRegisters.setIC(iC)
+	}
+	
 	// toString
 	
 	public static String toString2()
