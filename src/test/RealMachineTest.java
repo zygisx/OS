@@ -23,7 +23,7 @@ public class RealMachineTest {
 	
 	public static void main(String args[]) {
 		Realmachine.initVirtualMachine();
-		
+		System.out.println(Realmachine.toString2());
 	}
 
 }
