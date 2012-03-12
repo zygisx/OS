@@ -73,4 +73,28 @@ public class Realmachine {
 		return vm;
 	}
 	
+	// COMMANDS
+	
+	public static void AD(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		Word[] block = getBlock(realAddress);
+		
+	}
+	
+	// toString
+	
+	public static String toString2()
+	{
+		String fullString;
+		fullString = "Registers \n";
+		fullString += registers.toString() + "\n";
+		fullString += "Memory:\n";
+		for(Word word : memory) {
+			fullString += word.getStringValue() + "\n";
+		}
+		
+		return fullString;
+		
+	}
+	
 }
