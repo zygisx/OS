@@ -23,6 +23,11 @@ public class RealMachineTest {
 	
 	public static void main(String args[]) {
 		Realmachine.initVirtualMachine();
+		RealMachineRegisters.setR1(new Word());
+		RealMachineRegisters.setR2(new Word());
+		RealMachineRegisters.getR1().setWordHexInt(2);
+		RealMachineRegisters.getR2().setWordHexInt(5);
+		Realmachine.ML((byte) 00);
 		System.out.println(Realmachine.toString2());
 	}
 }

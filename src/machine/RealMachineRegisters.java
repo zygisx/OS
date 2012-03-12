@@ -98,7 +98,7 @@ public class RealMachineRegisters {
 	
 	public String toString()
 	{
-		String fullString = "|R1| " + getR1() + "      |R2| " + getR2() + "      |IC| " + getIC() + "      |PLR| " + getPLR() + "      |MODE| " + getMODE() + "\n";
+		String fullString = "|R1| " + getR1().getStringValue() + "      |R2| " + getR2().getStringValue() + "      |IC| " + getIC() + "      |PLR| " + getPLR() + "      |MODE| " + getMODE() + "\n";
 		fullString += "|SF| " + getSF() + "         |TIMER| " + getTIMER() + "      |CH1| " + getCH1() + "     |CH2| " + getCH2() + "      |CH3| " + getCH3() + "\n";
 		fullString += "|CH4| " + getCH4() + "        |PI| " + getPI() + "         |SI| " + getSI() + "      |IOI| " + getIOI() + "      |TI| " + getTI();
 		return fullString;

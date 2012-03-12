@@ -77,20 +77,41 @@ public class Realmachine {
 	
 	public static void AD(byte virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		Word[] block = getBlock(realAddress);
+		int result = RealMachineRegisters.getR1().getHexValue() + RealMachineRegisters.getR2().getHexValue();
+		memory[realAddress].setWordHexInt(result);
+	}
+	
+	public static void SB(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		int result = RealMachineRegisters.getR1().getHexValue() - RealMachineRegisters.getR2().getHexValue();
+		memory[realAddress].setWordHexInt(result);
+	}
+	
+	public static void ML(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		int result = 0;
+		int num1 = RealMachineRegisters.getR1().getHexValue();
+		int num2 = RealMachineRegisters.getR2().getHexValue();
 		
+		for(int i = 0; i < num2; i++) {
+			result = result + num1;
+		}
+		
+		memory[realAddress].setWordHexInt(result);
 	}
 	
 	// toString
 	
 	public static String toString2()
 	{
+		int i = 0;
 		String fullString;
 		fullString = "Registers \n";
 		fullString += registers.toString() + "\n";
 		fullString += "Memory:\n";
 		for(Word word : memory) {
-			fullString += word.getStringValue() + "\n";
+			fullString += i + "| " + word.getStringValue() + "\n";
+			i++;
 		}
 		
 		return fullString;
