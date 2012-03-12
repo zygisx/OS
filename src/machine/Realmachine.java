@@ -65,10 +65,11 @@ public class Realmachine {
 		virtualMachines.add(vm);
 	}
 	
-	public static VirtualMachine initVirtualMachine() { // not sure about return type...
+	public static VirtualMachine initVirtualMachine(String fileName) { // not sure about return type...
+		Word[] mem = paginationMechanism.getVirtualMachineMemory();  // get allocated memory
+		mem = Parser.load(fileName, mem);	// create code and data segments in memory
 		VirtualMachine vm = 
-				new VirtualMachine(new VirtualMachineRegisters(), 
-						paginationMechanism.getVirtualMachineMemory());
+				new VirtualMachine(new VirtualMachineRegisters(), mem); // create vm
 		addVirtualMachine(vm);
 		return vm;
 	}
