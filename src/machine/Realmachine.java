@@ -167,9 +167,38 @@ public class Realmachine {
 		memory[realAddress].setWordHexInt(RealMachineRegisters.getIC());
 	}
 	
-	public static void JP(byte virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-//		RealMachineRegisters.setIC(iC)
+	public static void JP(byte address) {
+		RealMachineRegisters.setIC(address);
+	}
+	
+	public static void JE(byte address) {
+		if (RealMachineRegisters.getSF() == 0) {
+			RealMachineRegisters.setIC(address);
+		}
+	}
+		
+	public static void JM(byte address) {
+		if (RealMachineRegisters.getSF() == 1) {
+			RealMachineRegisters.setIC(address);
+		}	
+	}
+	
+	public static void JL(byte address) {
+		if (RealMachineRegisters.getSF() == 2) {
+			RealMachineRegisters.setIC(address);
+		}	
+	}
+	
+	public static void JF(byte address) {
+		if (RealMachineRegisters.getSF() == 3) {
+			RealMachineRegisters.setIC(address);
+		}	
+	}
+	
+	public static void JS(byte address) {
+		if (RealMachineRegisters.getSF() == 4) {
+			RealMachineRegisters.setIC(address);
+		}	
 	}
 	
 	// toString
