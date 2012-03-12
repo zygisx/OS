@@ -81,4 +81,20 @@ public class Realmachine {
 		
 	}
 	
+	// toString
+	
+	public static String toString2()
+	{
+		String fullString;
+		fullString = "Registers \n";
+		fullString += registers.toString() + "\n";
+		fullString += "Memory:\n";
+		for(Word word : memory) {
+			fullString += word.getStringValue() + "\n";
+		}
+		
+		return fullString;
+		
+	}
+	
 }
