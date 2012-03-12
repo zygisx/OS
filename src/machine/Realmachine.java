@@ -73,4 +73,12 @@ public class Realmachine {
 		return vm;
 	}
 	
+	// COMMANDS
+	
+	public static void AD(byte virtualAddress) {
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		Word[] block = getBlock(realAddress);
+		
+	}
+	
 }
