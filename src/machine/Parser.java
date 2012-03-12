@@ -8,10 +8,10 @@ import java.io.IOException;
 public class Parser {
 
 	
-	public Parser() {		
+	private Parser() {		
 	}
 	
-	public Word[] load(String fileName, Word[] memory) {
+	public static Word[] load(String fileName, Word[] memory) {
 		
 		FileReader input;
 		BufferedReader bufRead;
@@ -28,9 +28,11 @@ public class Parser {
 			
 			int cursor = 0;
 			// read data segment
-			while (line != null && !(line.equals("ENDDATA")) ){
+			while ( (line = bufRead.readLine() )!= null && 
+					!(line.startsWith("ENDDATA")) ) {
 				if (line.matches("\\$[0-9A-Fa-f]{2}:\\$.*$")) {
 					cursor = Integer.parseInt(line.substring(1, 3), 16);
+					continue;
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) { //TODO decimal! operates only hex values
 					String s = line.substring(3).replace(" ", "");
@@ -46,11 +48,18 @@ public class Parser {
 				}
 				else
 					continue;
-				
+				cursor++;
+			}
+			if (line == null) {
+				//TODO exception
+			}
+			// read code segment
+			cursor = 0x81;
+			while ( (line = bufRead.readLine() )!= null && 
+					!(line.startsWith("ENDCODE")) ) {
+				memory[cursor].setWordString(line.substring(0, 4));
 			}
 			
-			// read code segment
-			//TODO
 		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
