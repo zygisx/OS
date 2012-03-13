@@ -112,6 +112,11 @@ public class WordTest {
 		// hex
 		w.setWordHexInt(0xff);
 		assertEquals(0xff, w.getHexValue());
+		
+		w.setWordHexInt(Integer.parseInt("10", 16));
+		assertEquals(w.getStringValue(), "0010");
+		assertEquals(w.getHexValue(), 0x10);
+		
 	}
 
 }
