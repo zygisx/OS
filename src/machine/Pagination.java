@@ -24,10 +24,8 @@ public class Pagination {
 		Word[] virtualMachineMemory = 
 				new Word[Realmachine.BLOCK_SIZE * Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE];
 		
-		/* FOR NOW NEW VIRTUAL MACHINES MEMORY ALLOCATED AFTER PAGINATION TABLE 
-		 * 
-		 * TODO ask lecture how allocate memory, random ?
-		 * 
+		/* 
+		 * TODO allocate memory random
 		 */
 		int VMNum = 0; // Just for now, when only one VM needed
 		
