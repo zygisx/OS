@@ -61,6 +61,7 @@ public class Word extends Register {
 		String formattedValue = String.format(formatString, value);
 		formattedValue = formattedValue.substring(0, WORD_SIZE);
 		this.value = formattedValue.toCharArray();
+		//System.out.println(formattedValue);
 		this.hexValue = true;
 	}
 	
