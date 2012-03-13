@@ -39,6 +39,7 @@ public class Parser {
 					String s = line.substring(3).replace(" ", "");
 					if (s.length() > 4)
 						s = s.substring(0, 4);
+					System.out.println(Integer.parseInt(s, 16));
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
@@ -53,11 +54,13 @@ public class Parser {
 			}
 			if (line == null) {
 				//TODO exception
+				System.out.println("BAD FILE"); //TODO destroy
 			}
 			
 			line = bufRead.readLine();
 			if (! line.startsWith("CODE")) {
 				//TODO BAD FILE
+				System.out.println("BAD FILE"); //TODO destroy
 			}
 			
 			
@@ -65,7 +68,7 @@ public class Parser {
 			cursor = 0x81;
 			while ( (line = bufRead.readLine() )!= null && 
 					!(line.startsWith("ENDCODE")) ) {
-				memory[cursor].setWordString(line.substring(0, 4));
+				memory[cursor++].setWordString(line.substring(0, 4));
 			}
 			
 		
