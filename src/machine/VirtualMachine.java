@@ -25,9 +25,9 @@ public class VirtualMachine {
 	public void processCommand(String command) {
 		String commandPart;
 		byte address = 0;
-		commandPart = command.substring(0, 1);
+		commandPart = command.substring(0, 2);
 		if (command.length() >= 4) {
-			address = Byte.parseByte(command.substring(2,3));
+			address = Byte.parseByte(command.substring(2, 4), 16);
 		}
 		
 		switch (commandPart) {
@@ -83,6 +83,14 @@ public class VirtualMachine {
 			Realmachine.JS(address);
 		break;
 		}
+	}
+	
+	public void Run() {
+		
+	}
+	
+	public void Step() {
+		
 	}
 	
 }

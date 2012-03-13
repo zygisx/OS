@@ -26,6 +26,7 @@ public class Parser {
 				//TODO BAD FILE
 			}
 			
+			
 			int cursor = 0;
 			// read data segment
 			while ( (line = bufRead.readLine() )!= null && 
@@ -34,13 +35,13 @@ public class Parser {
 					cursor = Integer.parseInt(line.substring(1, 3), 16);
 					continue;
 				}
-				else if (line.startsWith("DB") || line.startsWith("db")) { //TODO decimal! operates only hex values
+				else if (line.startsWith("DW") || line.startsWith("dw")) { //TODO decimal! operates only hex values
 					String s = line.substring(3).replace(" ", "");
 					if (s.length() > 4)
 						s = s.substring(0, 4);
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
-				else if (line.startsWith("DW") || line.startsWith("dw")) {
+				else if (line.startsWith("DB") || line.startsWith("db")) {
 					String s = line.substring(3).replace(" ", "");
 					if (s.length() > 4)
 						s = s.substring(0, 4);
@@ -53,6 +54,13 @@ public class Parser {
 			if (line == null) {
 				//TODO exception
 			}
+			
+			line = bufRead.readLine();
+			if (! line.startsWith("CODE")) {
+				//TODO BAD FILE
+			}
+			
+			
 			// read code segment
 			cursor = 0x81;
 			while ( (line = bufRead.readLine() )!= null && 
