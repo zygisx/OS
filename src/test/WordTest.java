@@ -15,6 +15,12 @@ public class WordTest {
 	}
 
 	@Test
+	public void testSetString() {
+		Word w = new Word();
+		assertTrue(w.getValue().length == Word.WORD_SIZE);
+	}
+	
+	@Test
 	public void testWordCharArray() {
 		char[] array, result;
 		/* Good case */
@@ -50,6 +56,8 @@ public class WordTest {
 		assertEquals(" ciu", w.getStringValue());
 		w.setWordString("15");
 		assertEquals("  15", w.getStringValue());
+		w.setWordString("rezu");
+		assertEquals("rezu", w.getStringValue());
 	}
 
 	@Test
