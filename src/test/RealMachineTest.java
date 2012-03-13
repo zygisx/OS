@@ -21,11 +21,9 @@ public class RealMachineTest {
 	
 	public static void main(String args[]) {
 		Realmachine.initVirtualMachine("././program.txt");
-		RealMachineRegisters.setR1(new Word());
-		RealMachineRegisters.setR2(new Word());
-		RealMachineRegisters.getR1().setWordHexInt(100);
-		RealMachineRegisters.getR2().setWordHexInt(3);
-		Realmachine.DV((byte) 0000);
+//		RealMachineRegisters.getR1().setWordHexInt(100);
+//		RealMachineRegisters.getR2().setWordHexInt(3);
+//		Realmachine.DV((byte) 0000);
 		System.out.println(Realmachine.toString2());
 	}
 }
