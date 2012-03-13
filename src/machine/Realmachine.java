@@ -61,6 +61,10 @@ public class Realmachine {
 		return null;
 	}
 	
+	public static VirtualMachine getActiveVM() {
+		return activeVirtualMachine;
+	}
+	
 	public static void addVirtualMachine(VirtualMachine vm) {
 		virtualMachines.add(vm);
 	}
@@ -212,7 +216,8 @@ public class Realmachine {
 		fullString += registers.toString() + "\n";
 		fullString += "Memory:\n";
 		for(Word word : memory) {
-			fullString += i + "| " + word.getStringValue() + "\n";
+			fullString += String.format("%04x", i);
+			fullString += "| " + word.getStringValue() + "\n";
 			i++;
 		}
 		

@@ -5,13 +5,24 @@ public class RealMachineRegisters {
 	private static byte IC, PLR, MODE;
 	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
 	
+	static {
+		setR1(new Word());
+		setR2(new Word());
+	}
+	
 	public static Word getR1() {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) return vm.getRegisters().getR1();
 		return R1;
 	}
 	public static Word getR2() {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) return vm.getRegisters().getR2();
 		return R2;
 	}
 	public static byte getIC() {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) return vm.getRegisters().getIC();
 		return IC;
 	}
 	public static byte getPLR() {
@@ -21,6 +32,8 @@ public class RealMachineRegisters {
 		return MODE;
 	}
 	public static byte getSF() {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) return vm.getRegisters().getSF();
 		return SF;
 	}
 	public static byte getTIMER() {
