@@ -35,6 +35,11 @@ public class ParserTest {
 		if (s1.length() > 4)
 			s1 = s1.substring(0, 4);
 		assertEquals(s1, "12");
+		
+		s = "DW njihsdfvdoir";
+		s1 = s.substring(3).replace(" ", "");
+		if (s.length() > 4)
+			s = s.substring(0, 4);
 	}
 
 }

@@ -42,7 +42,7 @@ public class Word extends Register {
 	}
 	
 	public void setWordString(String value) {
-		String formatString = "%1$#" + WORD_SIZE + "s";
+		String formatString = "%" + WORD_SIZE + "s";
 		String formattedValue = String.format(formatString, value);
 		formattedValue = formattedValue.substring(0, WORD_SIZE);
 		this.value = formattedValue.toCharArray();

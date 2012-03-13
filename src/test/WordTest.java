@@ -50,6 +50,7 @@ public class WordTest {
 		assertEquals(" ciu", w.getStringValue());
 		w.setWordString("15");
 		assertEquals("  15", w.getStringValue());
+		
 	}
 
 	@Test

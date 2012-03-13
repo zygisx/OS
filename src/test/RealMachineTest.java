@@ -1,10 +1,7 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import machine.*;
 
-import org.junit.Test;
 
 public class RealMachineTest {
 
@@ -22,7 +19,7 @@ public class RealMachineTest {
 //	}
 	
 	public static void main(String args[]) {
-		Realmachine.initVirtualMachine();
+		Realmachine.initVirtualMachine(null);
 		RealMachineRegisters.setR1(new Word());
 		RealMachineRegisters.setR2(new Word());
 		RealMachineRegisters.getR1().setWordHexInt(100);
