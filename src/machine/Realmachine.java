@@ -9,6 +9,7 @@ public class Realmachine {
 	 */
 	public static final int CODE_SEGMENT_START = 0x81;
 	public static final int REAL_MEMORY_SIZE = 0x1000;
+	public static final int BLOCK_COUNT = 0x100;
 	public static final int BLOCK_SIZE = 0x10; // block size is 0x10 = 16 not 0xf = 15
 	public static final int PAGINATION_TABLE_SIZE = 0x10; //table consist of 16 blocks
 	public static final int VIRTUAL_MACHINE_MEMORY_SIZE = 0x10;
@@ -48,7 +49,7 @@ public class Realmachine {
 	}
 	
 	public static Word[] getBlock(int blockNum) {
-		if (blockNum < (REAL_MEMORY_SIZE / BLOCK_SIZE)) { // blockNum < 256 
+		if (blockNum < (BLOCK_COUNT)) { // blockNum < 256 
 			Word[] mem = new Word[BLOCK_SIZE];
 			for (int i=0; i < BLOCK_SIZE; i++) {
 				mem[i] = memory[blockNum*(BLOCK_SIZE) + i];

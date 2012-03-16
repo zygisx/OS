@@ -93,4 +93,10 @@ public class Word extends Register {
 	public boolean isHexValue() {
 		return this.hexValue;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getStringValue();
+		
+	}
 }
