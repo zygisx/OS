@@ -1,5 +1,8 @@
 package machine;
 
+import gui.MainFrame;
+
+import java.awt.EventQueue;
 import java.util.ArrayList;
 
 public class Realmachine {
@@ -20,6 +23,8 @@ public class Realmachine {
 	private static ArrayList<VirtualMachine> virtualMachines;
 	private static Pagination paginationMechanism;
 	
+	private static MainFrame frame;
+	
 	static {
 		memory = new Word[REAL_MEMORY_SIZE];
 		/* all memory bytes set to 0 */
@@ -38,6 +43,22 @@ public class Realmachine {
 			}
 		}
 		paginationMechanism = new Pagination(paginationTable);	//FIXME NEED TEST!!!!	
+	}
+	
+	/*
+	 * main method
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new MainFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public static void setActiveVirtualMachine(VirtualMachine machine) {
@@ -206,6 +227,10 @@ public class Realmachine {
 			RealMachineRegisters.setIC(address);
 		}	
 	}
+	
+	/*
+	 * for output/input commands call frame.output(String) and String s = frame.input();
+	 */
 	
 	// toString
 	
