@@ -1,29 +1,22 @@
 package gui;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.Color;
-import javax.swing.JTextField;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class ConsolePanel extends JPanel {
 
-	private JTextArea console;
-	private MainFrame parent;
-	private String input;
 	
-	public ConsolePanel(MainFrame parent) {
-		this.parent = parent;
-		
+	private static final long serialVersionUID = 1L;
+	private JTextArea console;
+	
+	public ConsolePanel() {
+
+		setBorder(BorderFactory.createTitledBorder("Output"));
 		console = new JTextArea();
 		console.setEditable(false);
 		console.setLineWrap(true);
