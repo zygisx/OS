@@ -49,12 +49,8 @@ public class ComponentsPanel extends JPanel {
 		JPanel memPanel = new JPanel();
 		table = new JTable(new MemoryTableModel());
 		table.setPreferredSize(new Dimension(575, 4100));
-		/*
-		TableColumn col;
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			col = table.getColumnModel().getColumn(i);
-			col.setPreferredWidth(60);
-		}*/
+		
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(595, 300));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -210,6 +206,7 @@ public class ComponentsPanel extends JPanel {
 
 class MemoryTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
 	private String[] columnNames = {
 		"No.", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
 	};
@@ -235,7 +232,6 @@ class MemoryTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int arg0, int arg1) {
 		if (arg1 == 0) return Integer.toHexString(arg0).toUpperCase();
-		//System.out.println(arg0 + "       " + arg1);
 		return Realmachine.getBlock(arg0)[arg1-1];
 	}
 	
