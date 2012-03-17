@@ -85,11 +85,11 @@ public class VirtualMachine {
 		}
 	}
 	
-	public void Run() {
+	public void run() {
 		
 	}
 	
-	public void Step() {
+	public void step() {
 		
 	}
 	
