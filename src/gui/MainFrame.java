@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import exception.BadFileException;
@@ -36,10 +37,21 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
+		//set windows look instead of default swing
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this,
+				    "Unexpected error:\n" + e.getMessage(),
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+		}
+		
 		setTitle("Operating System Emulator");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 520);
+		setBounds(100, 100, 950, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -95,10 +107,9 @@ public class MainFrame extends JFrame {
 							    "Bad file exception",
 							    JOptionPane.ERROR_MESSAGE);
 						return;
-					}
-		            
+					}    
 		        }
-				
+		        ((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
 				//FIXME For testing input !
 //				MainFrame.this.input();
 //				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
@@ -147,7 +158,7 @@ public class MainFrame extends JFrame {
 		
 		
 		// CONSOLE PANEL
-		console = new ConsolePanel(this);
+		console = new ConsolePanel();
 		contentPane.add(console, BorderLayout.EAST);
 		
 	
