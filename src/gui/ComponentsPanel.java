@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
 
 import machine.RealMachineRegisters;
 import machine.Realmachine;
@@ -13,21 +12,19 @@ import machine.Word;
 
 import javax.swing.JTable;
 import java.awt.Dimension;
-import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
 public class ComponentsPanel extends JPanel {
-	private JTable table;
-
-	/**
-	 * Create the panel.
-	 */
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+	private JTable table;
+
 	private JLabel labelR1;
 	private JLabel labelR2;
 	private JLabel labelIC;
@@ -80,105 +77,105 @@ public class ComponentsPanel extends JPanel {
 		
 		
 		
-		JLabel lblR1 = new JLabel("R1:");
+		JLabel lblR1 = new JLabel("R1: ");
 		lblR1.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblR1);
 		
 		this.labelR1 = new JLabel("");
 		registersPanel.add(labelR1);
 		
-		JLabel lblR2 = new JLabel("R2:");
+		JLabel lblR2 = new JLabel("R2: ");
 		lblR2.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblR2);
 		
 		this.labelR2 = new JLabel("");
 		registersPanel.add(labelR2);
 		
-		JLabel lblIC = new JLabel("IC:");
+		JLabel lblIC = new JLabel("IC: ");
 		lblIC.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblIC);
 		
 		this.labelIC = new JLabel("");
 		registersPanel.add(labelIC);
 		
-		JLabel lblSF = new JLabel("SF:");
+		JLabel lblSF = new JLabel("SF: ");
 		lblSF.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblSF);
 		
 		this.labelSF = new JLabel("");
 		registersPanel.add(labelSF);
 		
-		JLabel lblPLR = new JLabel("PLR:");
+		JLabel lblPLR = new JLabel("PLR: ");
 		lblPLR.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblPLR);
 		
 		this.labelPLR = new JLabel("");
 		registersPanel.add(labelPLR);
 		
-		JLabel lblMODE = new JLabel("MODE:");
+		JLabel lblMODE = new JLabel("MODE: ");
 		lblMODE.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblMODE);
 		
 		this.labelMODE = new JLabel("");
 		registersPanel.add(labelMODE);
 		
-		JLabel lblTIMER = new JLabel("TIMER");
+		JLabel lblTIMER = new JLabel("TIMER: ");
 		lblTIMER.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblTIMER);
 		
 		this.labelTIMER = new JLabel("");
 		registersPanel.add(labelTIMER);
 		
-		JLabel lblCH1 = new JLabel("CH1");
+		JLabel lblCH1 = new JLabel("CH1: ");
 		lblCH1.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblCH1);
 		
 		this.labelCH1 = new JLabel("");
 		registersPanel.add(labelCH1);
 		
-		JLabel lblCH2 = new JLabel("CH2");
+		JLabel lblCH2 = new JLabel("CH2: ");
 		lblCH2.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblCH2);
 		
 		this.labelCH2 = new JLabel("");
 		registersPanel.add(labelCH2);
 		
-		JLabel lblCH3 = new JLabel("CH3");
+		JLabel lblCH3 = new JLabel("CH3: ");
 		lblCH3.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblCH3);
 		
 		this.labelCH3 = new JLabel("");
 		registersPanel.add(labelCH3);
 		
-		JLabel lblCH4 = new JLabel("CH4");
+		JLabel lblCH4 = new JLabel("CH4: ");
 		lblCH4.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblCH4);
 		
 		this.labelCH4 = new JLabel("");
 		registersPanel.add(labelCH4);
 		
-		JLabel lblSI = new JLabel("SI");
+		JLabel lblSI = new JLabel("SI: ");
 		lblSI.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblSI);
 		
 		this.labelSI = new JLabel("");
 		registersPanel.add(labelSI);
 		
-		JLabel lblPI = new JLabel("PI");
+		JLabel lblPI = new JLabel("PI: ");
 		lblPI.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblPI);
 		
 		this.labelPI = new JLabel("");
 		registersPanel.add(labelPI);
 		
-		JLabel lblIOI = new JLabel("IOI");
+		JLabel lblIOI = new JLabel("IOI: ");
 		lblIOI.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblIOI);
 		
 		this.labelIOI = new JLabel("");
 		registersPanel.add(labelIOI);
 		
-		JLabel lblTI = new JLabel("TI");
+		JLabel lblTI = new JLabel("TI: ");
 		lblTI.setHorizontalAlignment(SwingConstants.RIGHT);
 		registersPanel.add(lblTI);
 		
