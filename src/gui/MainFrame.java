@@ -1,16 +1,20 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import exception.BadFileException;
 
 import machine.Realmachine;
 
@@ -22,24 +26,11 @@ public class MainFrame extends JFrame {
 	private JPanel componentsPanel;
 	private JPanel buttonsPanel;
 	private ConsolePanel console;
-	private static boolean isInputAccepted;
-	private static String input;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -75,7 +66,7 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				System.exit(0);
 				
 			}
 		});
@@ -91,17 +82,67 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrame.getInput();
-				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				JFileChooser fc = new JFileChooser("././");
+				int returnVal = fc.showOpenDialog(MainFrame.this);
+
+		        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		            File file = fc.getSelectedFile();
+		            try {
+		            	Realmachine.initVirtualMachine(file.getName());
+		            } catch (BadFileException ex) {
+		            	JOptionPane.showMessageDialog(MainFrame.this,
+							    ex.getMessage(),
+							    "Bad file exception",
+							    JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+		            
+		        }
+				
+				//FIXME For testing input !
+//				MainFrame.this.input();
+//				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
 				
 			}
 		});
 		rightPanel.add(btnLoad);
 		
 		JButton btnStep = new JButton("Step");
+		btnStep.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Realmachine.getActiveVM() == null || Realmachine.getActiveVM().isHalted()) {
+					JOptionPane.showMessageDialog(MainFrame.this,
+						    "Not virtual machine loaded.",
+						    "VM error",
+						    JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Realmachine.getActiveVM().step();
+				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				
+			}
+		});
 		rightPanel.add(btnStep);
 		
 		JButton btnRun = new JButton("Run");
+		btnRun.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Realmachine.getActiveVM() == null || Realmachine.getActiveVM().isHalted()) {
+					JOptionPane.showMessageDialog(MainFrame.this,
+						    "Not virtual machine loaded.",
+						    "VM error",
+						    JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Realmachine.getActiveVM().run();
+				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				
+			}
+		});
 		rightPanel.add(btnRun);
 		
 		
@@ -109,29 +150,29 @@ public class MainFrame extends JFrame {
 		console = new ConsolePanel(this);
 		contentPane.add(console, BorderLayout.EAST);
 		
-		
-		
-		
-		// // // ONLY TEST PURPOSE
-		Realmachine.initVirtualMachine("././program.txt");
+	
 	}
 	
-	public static String getInput()  {
-		isInputAccepted = false;
-		while (! isInputAccepted) {
+	public String input()  {
+		
+		String s = (String)JOptionPane.showInputDialog(
+				this, "Enter your input", "Input", JOptionPane.OK_OPTION);
+		while (s == null || s.equals("")) {
 			
+			if (s == null || s.equals("")) {
+				JOptionPane.showMessageDialog(this,
+					    "Not valid input.",
+					    "Input error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+			s = (String)JOptionPane.showInputDialog(
+					this, "Enter your input", "Input", JOptionPane.OK_OPTION);
 		}
-		System.out.println(input);
-		return input;
+		return s;
 	}
 	
-	public void output() {
-		
-	}
-	
-	public void inputAccepted(String in) {
-		isInputAccepted = true;
-		input = in;
+	public void output(String text) {
+		this.console.output(text);
 	}
 	
 	public JPanel getComponentsPanel() {
