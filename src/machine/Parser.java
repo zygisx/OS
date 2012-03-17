@@ -5,13 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import exception.BadFileException;
+
 public class Parser {
 
 	
 	private Parser() {		
 	}
 	
-	public static Word[] load(String fileName, Word[] memory) {
+	public static Word[] load(String fileName, Word[] memory) 
+			throws BadFileException {
 		
 		FileReader input;
 		BufferedReader bufRead;
@@ -23,7 +26,7 @@ public class Parser {
 			// Read first line
 			line = bufRead.readLine();
 			if (! line.startsWith("DATA")) {
-				//TODO BAD FILE
+				throw new BadFileException("File must start with DATA");
 			}
 			
 			
@@ -39,7 +42,7 @@ public class Parser {
 					String s = line.substring(3).replace(" ", "");
 					if (s.length() > 4)
 						s = s.substring(0, 4);
-					System.out.println(Integer.parseInt(s, 16));
+					//System.out.println(Integer.parseInt(s, 16));
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
@@ -53,14 +56,12 @@ public class Parser {
 				cursor++;
 			}
 			if (line == null) {
-				//TODO exception
-				System.out.println("BAD FILE"); //TODO destroy
+				throw new BadFileException("Bad file. No code segment.");
 			}
 			
 			line = bufRead.readLine();
 			if (! line.startsWith("CODE")) {
-				//TODO BAD FILE
-				System.out.println("BAD FILE"); //TODO destroy
+				throw new BadFileException("Bad file. Code segment must start with CODE.");
 			}
 			
 			
