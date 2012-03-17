@@ -11,6 +11,4 @@ public abstract class Register {
 	public void setValue(char[] value) {
 		this.value = value;
 	}
-	
-	
 }

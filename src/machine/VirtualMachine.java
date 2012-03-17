@@ -6,6 +6,7 @@ public class VirtualMachine {
 	
 	private VirtualMachineRegisters registers;
 	private Word[] memory;
+	private boolean isHalted = false;
 	
 	public VirtualMachine(VirtualMachineRegisters registers, Word[] memory) {
 		this.registers = registers;
@@ -83,6 +84,10 @@ public class VirtualMachine {
 			Realmachine.JS(address);
 		break;
 		}
+		
+		/*
+		 * When halt is reached: isHalted = true;
+		 */
 	}
 	
 	public void run() {
@@ -92,5 +97,10 @@ public class VirtualMachine {
 	public void step() {
 		
 	}
+
+	public boolean isHalted() {
+		return isHalted;
+	}
+
 	
 }
