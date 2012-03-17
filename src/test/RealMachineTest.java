@@ -1,5 +1,6 @@
 package test;
 
+import exception.BadFileException;
 import machine.RealMachineRegisters;
 import machine.Realmachine;
 import machine.Word;
@@ -20,7 +21,12 @@ public class RealMachineTest {
 //	}
 	
 	public static void main(String args[]) {
-		Realmachine.initVirtualMachine("././program.txt");
+		try {
+			Realmachine.initVirtualMachine("././program.txt");
+		} catch (BadFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		RealMachineRegisters.getR1().setWordHexInt(100);
 //		RealMachineRegisters.getR2().setWordHexInt(3);
 //		Realmachine.DV((byte) 0000);
