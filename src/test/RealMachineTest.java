@@ -1,9 +1,8 @@
 package test;
 
 import exception.BadFileException;
-import machine.RealMachineRegisters;
 import machine.Realmachine;
-import machine.Word;
+
 
 public class RealMachineTest {
 
