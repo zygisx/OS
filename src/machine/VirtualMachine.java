@@ -8,10 +8,12 @@ public class VirtualMachine {
 	private VirtualMachineRegisters registers;
 	private Word[] memory;
 	private boolean isHalted = false;
+	private int codeSegmentStart = 0x80;
 	
 	public VirtualMachine(VirtualMachineRegisters registers, Word[] memory) {
 		this.registers = registers;
 		this.memory = memory;
+		registers.setIC(codeSegmentStart);
 		
 	}
 	
@@ -105,8 +107,6 @@ public class VirtualMachine {
 	}
 	
 	public void run() {
-		int i = 0x80;
-		registers.setIC(i);
 		String command = null;
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
@@ -119,7 +119,15 @@ public class VirtualMachine {
 	}
 	
 	public void step() {
-		
+		String command = null;
+		if(!isHalted) {
+			command = memory[registers.getIC()].getStringValue();
+			processCommand(command);
+			Realmachine.getFrame().update();
+			if (isIcChangeAvailible(command)) {
+				registers.setIC(registers.getIC()+1);
+			}
+		}
 	}
 	
 	private boolean isIcChangeAvailible(String command) {
