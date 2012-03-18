@@ -112,7 +112,6 @@ public class VirtualMachine {
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
 			processCommand(command);
-			Realmachine.getFrame().update();
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}
@@ -124,7 +123,6 @@ public class VirtualMachine {
 		if(!isHalted) {
 			command = memory[registers.getIC()].getStringValue();
 			processCommand(command);
-			Realmachine.getFrame().update();
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}
