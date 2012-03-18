@@ -109,7 +109,7 @@ public class MainFrame extends JFrame {
 						return;
 					}    
 		        }
-		        ((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+		        MainFrame.this.update();
 				//FIXME For testing input !
 //				MainFrame.this.input();
 //				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
@@ -131,7 +131,7 @@ public class MainFrame extends JFrame {
 					return;
 				}
 				Realmachine.getActiveVM().step();
-				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				MainFrame.this.update();
 				
 			}
 		});
@@ -150,7 +150,7 @@ public class MainFrame extends JFrame {
 					return;
 				}
 				Realmachine.getActiveVM().run();
-				((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+				MainFrame.this.update();
 				
 			}
 		});
