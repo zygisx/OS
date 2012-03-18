@@ -29,6 +29,6 @@ public class RealMachineTest {
 //		RealMachineRegisters.getR1().setWordHexInt(100);
 //		RealMachineRegisters.getR2().setWordHexInt(3);
 //		Realmachine.DV((byte) 0000);
-		System.out.println(Realmachine.toString2());
+		//System.out.println(Realmachine.toString2());
 	}
 }

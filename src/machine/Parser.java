@@ -46,7 +46,8 @@ public class Parser {
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
-					String s = line.substring(3).replace(" ", "");
+					// deleted spaces removal
+					String s = line.substring(3);
 					if (s.length() > 4)
 						s = s.substring(0, 4);
 					memory[cursor].setWordString(s);

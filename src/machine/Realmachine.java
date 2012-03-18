@@ -70,6 +70,10 @@ public class Realmachine {
 		return memory[index];
 	}
 	
+	public static int getBlockNum(int realAddress) {
+		return realAddress / 16;
+	}
+	
 	public static Word[] getBlock(int blockNum) {
 		if (blockNum < (BLOCK_COUNT)) { // blockNum < 256 
 			Word[] mem = new Word[BLOCK_SIZE];
@@ -229,6 +233,20 @@ public class Realmachine {
 		if (RealMachineRegisters.getSF() == 4) {
 			RealMachineRegisters.setIC(address);
 		}	
+	}
+	
+	public static void PD(byte virtualAddress) {
+		String output = "";
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		Word[] block = getBlock(getBlockNum(realAddress));
+		for(Word word : block) {
+			if (word.getStringValue().equals("nnnn")) {
+				output += "\n";
+			} else {
+				output += word.getStringValue();
+			}
+		}
+		frame.output(output);
 	}
 	
 	/*

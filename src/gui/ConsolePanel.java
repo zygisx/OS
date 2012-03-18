@@ -28,12 +28,12 @@ public class ConsolePanel extends JPanel {
 		console.setFont(new Font("Monospaced",Font.PLAIN,15));
 		
 		setLayout(new BorderLayout(5, 10));
-		console.setText(">Welcome.\n");
+		console.setText(">Welcome.");
 		add(console, BorderLayout.CENTER);
 
 	}
 	
 	public void output(String text) {
-		console.append(">" + text);
+		console.append("\n>" + text);
 	}
 }

@@ -26,63 +26,70 @@ public class VirtualMachine {
 	public void processCommand(String command) {
 		String commandPart;
 		byte address = 0;
-		commandPart = command.substring(0, 2);
-		if (command.length() >= 4) {
-			address = Byte.parseByte(command.substring(2, 4), 16);
+		if (!command.equals("HALT")) {
+			commandPart = command.substring(0, 2);
+			if (command.length() >= 4) {
+				address = Byte.parseByte(command.substring(2, 4), 16);
+			}
+			switch (commandPart) {
+			case "AD":
+				Realmachine.AD(address);
+			break;
+			case "SB":
+				Realmachine.SB(address);
+			break;
+			case "ML":
+				Realmachine.ML(address);
+			break;
+			case "DV":
+				Realmachine.DV(address);
+			break;
+			case "CP":
+				Realmachine.CP();
+			break;
+			case "CS":
+				Realmachine.CS();
+			break;
+			case "L1":
+				Realmachine.L1(address);
+			break;
+			case "L2":
+				Realmachine.L2(address);
+			break;
+			case "S1":
+				Realmachine.S1(address);
+			break;
+			case "S2":
+				Realmachine.S2(address);
+			break;
+			case "SI":
+				Realmachine.SI(address);
+			break;
+			case "JP":
+				Realmachine.JP(address);
+			break;
+			case "JE":
+				Realmachine.JE(address);
+			break;
+			case "JM":
+				Realmachine.JM(address);
+			break;
+			case "JL":
+				Realmachine.JL(address);
+			break;
+			case "JF":
+				Realmachine.JF(address);
+			break;
+			case "JS":
+				Realmachine.JS(address);
+			break;
+			case "PD":
+				Realmachine.PD(address);
+			break;
+			}
 		}
-		
-		switch (commandPart) {
-		case "AD":
-			Realmachine.AD(address);
-		break;
-		case "SB":
-			Realmachine.SB(address);
-		break;
-		case "ML":
-			Realmachine.ML(address);
-		break;
-		case "DV":
-			Realmachine.DV(address);
-		break;
-		case "CP":
-			Realmachine.CP();
-		break;
-		case "CS":
-			Realmachine.CS();
-		break;
-		case "L1":
-			Realmachine.L1(address);
-		break;
-		case "L2":
-			Realmachine.L2(address);
-		break;
-		case "S1":
-			Realmachine.S1(address);
-		break;
-		case "S2":
-			Realmachine.S2(address);
-		break;
-		case "SI":
-			Realmachine.SI(address);
-		break;
-		case "JP":
-			Realmachine.JP(address);
-		break;
-		case "JE":
-			Realmachine.JE(address);
-		break;
-		case "JM":
-			Realmachine.JM(address);
-		break;
-		case "JL":
-			Realmachine.JL(address);
-		break;
-		case "JF":
-			Realmachine.JF(address);
-		break;
-		case "JS":
-			Realmachine.JS(address);
-		break;
+		else {
+			isHalted = true;
 		}
 		
 		/*
@@ -91,7 +98,11 @@ public class VirtualMachine {
 	}
 	
 	public void run() {
-		
+		int i = 0x81;
+		while (i < memory.length && !isHalted) {
+			processCommand(memory[i].getStringValue());
+			i++;
+		}
 	}
 	
 	public void step() {

@@ -6,7 +6,7 @@ DW 30
 $20:$
 DB Rezu
 DB ltat
-DB as:
+DB as :
 DB nnnn
 ENDDATA
 CODE
