@@ -30,7 +30,7 @@ DB rs:
 $30:$
 DB nnnn
 $40:$	# how many fibonacci numbers to print
-DW 0A  
+DW 30  
 ENDDATA
 CODE
 L107
