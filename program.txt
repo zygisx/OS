@@ -1,8 +1,8 @@
 DATA
 $00:$
-DW 10
-DW 20
-DW 30
+DW 01
+DW 02
+DW 07
 DW 04
 DW 01
 $20:$
