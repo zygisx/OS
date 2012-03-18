@@ -265,7 +265,7 @@ public class Realmachine {
 	}
 	
 	public static void GD(int virtualAddress) {
-//		System.out.println(frame.input());
+		frame.input();
 	}
 	
 	/*

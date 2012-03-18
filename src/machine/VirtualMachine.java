@@ -105,12 +105,11 @@ public class VirtualMachine {
 	}
 	
 	public void run() {
-		int i = 0x81;
+		int i = 0x80;
 		registers.setIC(i);
 		String command = null;
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
-			System.out.println(registers.getIC() + "| " + command);
 			processCommand(command);
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
