@@ -1,0 +1,63 @@
+DATA
+$00:$
+DW 00
+DW 01
+DW 02
+DW 03
+DW 04
+DW 05
+DW 06
+DW 07
+DW 08
+DW 09
+DW 0A
+DW 0B
+DW 0C
+DW 0D
+DW 0E
+DW 0F
+$10:$
+DW 00
+DW 01
+$20:$
+DB 10 f
+DB irst
+DB Fibo
+DB nacc
+DB i nu
+DB bers
+DB :   
+DB nnnn
+$30:$
+DB nnnn
+$40:$	# how many fibonacci numbers to print
+DW 0A  
+ENDDATA
+CODE
+L108
+PP20	#output 8 word from memory 0x20
+L101
+PP10	
+PP30
+PP11	
+PP30    #output first two numbers and \n after each number
+L102
+S114	# in [14] is counter 
+L110	#07 LOOP START
+L211	#load first two fibonacci numbers in R1 & R2
+AD12 	# add last to fibonacci numbers
+L111
+L212
+S111
+S210	# last fibonacci num in [10] one before last [11]
+L101
+PP10	#output fibonacci num and \n
+PP30
+L214
+AD14	# counter++
+L114
+L240
+CS		
+JS07	# check if counter <= [40] and goto 07 if true
+HALT
+ENDCODE
