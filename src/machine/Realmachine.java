@@ -253,13 +253,14 @@ public class Realmachine {
 		String output = "";
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
-		int wordsCount = RealMachineRegisters.getR1().getDecimalValue();
-		for(int i = 0; i < wordsCount; i++) {
+		int wordsCount = RealMachineRegisters.getR1().getDecimalValue(), i = 0;
+		while(i < wordsCount && i < block.length) {
 			if (block[i].getStringValue().equals("nnnn")) {
 				output += "\n";
 			} else {
 				output += block[i].getStringValue();
-			}			
+			}	
+			i++;
 		}
 		frame.output(output);
 	}

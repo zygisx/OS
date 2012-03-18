@@ -13,7 +13,6 @@ public class VirtualMachine {
 		this.registers = registers;
 		this.memory = memory;
 		registers.setIC(Realmachine.CODE_SEGMENT_START);
-		
 	}
 	
 	public VirtualMachineRegisters getRegisters() {
