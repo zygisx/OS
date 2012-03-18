@@ -212,30 +212,40 @@ public class Realmachine {
 	public static void JE(int address) {
 		if (RealMachineRegisters.getSF() == 0) {
 			RealMachineRegisters.setIC(address);
+		} else {
+			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
 		}
 	}
 		
 	public static void JM(int address) {
 		if (RealMachineRegisters.getSF() == 1) {
 			RealMachineRegisters.setIC(address);
+		} else {
+			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
 		}	
 	}
 	
 	public static void JL(int address) {
 		if (RealMachineRegisters.getSF() == 2) {
 			RealMachineRegisters.setIC(address);
+		} else {
+			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
 		}	
 	}
 	
 	public static void JF(int address) {
 		if (RealMachineRegisters.getSF() == 3) {
 			RealMachineRegisters.setIC(address);
+		} else {
+			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
 		}	
 	}
 	
 	public static void JS(int address) {
 		if (RealMachineRegisters.getSF() == 4) {
 			RealMachineRegisters.setIC(address);
+		} else {
+			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
 		}	
 	}
 	
