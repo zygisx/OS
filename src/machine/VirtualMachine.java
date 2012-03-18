@@ -68,22 +68,22 @@ public class VirtualMachine {
 				Realmachine.SI(address);
 			break;
 			case "JP":
-				Realmachine.JP(address);
+				Realmachine.JP(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "JE":
-				Realmachine.JE(address);
+				Realmachine.JE(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "JM":
-				Realmachine.JM(address);
+				Realmachine.JM(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "JL":
-				Realmachine.JL(address);
+				Realmachine.JL(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "JF":
-				Realmachine.JF(address);
+				Realmachine.JF(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "JS":
-				Realmachine.JS(address);
+				Realmachine.JS(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "PD":
 				Realmachine.PD(address);
