@@ -68,8 +68,14 @@ public class Parser {
 			
 			// read code segment
 			cursor = 0x80;
+			int commentStarts;
 			while ( (line = bufRead.readLine() )!= null && 
 					!(line.startsWith("ENDCODE")) ) {
+				commentStarts = line.indexOf("#");
+				if (commentStarts >= 0) {
+					line = line.substring(0, commentStarts);
+				}
+				line.replaceAll("\\s+", "");
 				if (line.length() < 4)
 					memory[cursor++].setWordString(line);
 				else
