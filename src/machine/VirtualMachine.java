@@ -1,5 +1,6 @@
 package machine;
 
+
 public class VirtualMachine {
 	
 	public static final int VIRTUAL_MEMORY_SIZE = 0x100;
@@ -25,11 +26,11 @@ public class VirtualMachine {
 	
 	public void processCommand(String command) {
 		String commandPart;
-		byte address = 0;
+		int address = 0;
 		if (!command.equals("HALT")) {
 			commandPart = command.substring(0, 2);
 			if (command.length() >= 4) {
-				address = Byte.parseByte(command.substring(2, 4), 16);
+				address = Integer.parseInt(command.substring(2, 4), 16);
 			}
 			switch (commandPart) {
 			case "AD":
@@ -106,14 +107,27 @@ public class VirtualMachine {
 	public void run() {
 		int i = 0x81;
 		registers.setIC(i);
+		String command = null;
 		while (registers.getIC() < memory.length && !isHalted) {
-			processCommand(memory[registers.getIC()].getStringValue());
-			registers.setIC(i++);
+			command = memory[registers.getIC()].getStringValue();
+			System.out.println(registers.getIC() + "| " + command);
+			processCommand(command);
+			if (isIcChangeAvailible(command)) {
+				registers.setIC(registers.getIC()+1);
+			}
 		}
 	}
 	
 	public void step() {
 		
+	}
+	
+	private boolean isIcChangeAvailible(String command) {
+		if (command.contains("J")) {
+			return false; 
+		} else {
+			return true;
+		}
 	}
 
 	public boolean isHalted() {

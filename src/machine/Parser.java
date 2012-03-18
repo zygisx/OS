@@ -67,7 +67,7 @@ public class Parser {
 			
 			
 			// read code segment
-			cursor = 0x81;
+			cursor = 0x80;
 			while ( (line = bufRead.readLine() )!= null && 
 					!(line.startsWith("ENDCODE")) ) {
 				memory[cursor++].setWordString(line.substring(0, 4));

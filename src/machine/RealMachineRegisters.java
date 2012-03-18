@@ -70,8 +70,9 @@ public class RealMachineRegisters {
 	public static void setR2(Word r2) {
 		R2 = r2;
 	}
-	public static void setIC(byte iC) {
-		IC = 12;
+	public static void setIC(int iC) {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) vm.getRegisters().setIC(iC);
 	}
 	public static void setPLR(byte pLR) {
 		PLR = pLR;

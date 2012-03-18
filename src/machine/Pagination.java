@@ -12,7 +12,7 @@ public class Pagination {
 	}
 	
 	/* return real address */
-	public int getRealAddress(byte virtualAddress) {
+	public int getRealAddress(int virtualAddress) {
 		byte plr = RealMachineRegisters.getPLR();
 		int block = virtualAddress / 0x10;
 		int offset = virtualAddress % 0x10;

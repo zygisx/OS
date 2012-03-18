@@ -11,7 +11,7 @@ public class Realmachine {
 	/**
 	 * shows from where starts code segment in virtual memory
 	 */
-	public static final int CODE_SEGMENT_START = 0x81;
+	public static final int CODE_SEGMENT_START = 0x80;
 	public static final int REAL_MEMORY_SIZE = 0x1000;
 	public static final int BLOCK_COUNT = 0x100;
 	public static final int BLOCK_SIZE = 0x10; // block size is 0x10 = 16 not 0xf = 15
@@ -109,19 +109,19 @@ public class Realmachine {
 	
 	// COMMANDS
 	
-	public static void AD(byte virtualAddress) {
+	public static void AD(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		int result = RealMachineRegisters.getR1().getHexValue() + RealMachineRegisters.getR2().getHexValue();
 		memory[realAddress].setWordHexInt(result);
 	}
 	
-	public static void SB(byte virtualAddress) {
+	public static void SB(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		int result = RealMachineRegisters.getR1().getHexValue() - RealMachineRegisters.getR2().getHexValue();
 		memory[realAddress].setWordHexInt(result);
 	}
 	
-	public static void ML(byte virtualAddress) {
+	public static void ML(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		int result = 0;
 		int num1 = RealMachineRegisters.getR1().getHexValue();
@@ -134,7 +134,7 @@ public class Realmachine {
 		memory[realAddress].setWordHexInt(result);
 	}
 	
-	public static void DV(byte virtualAddress) {
+	public static void DV(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		int num1 = RealMachineRegisters.getR1().getHexValue();
 		int num2 = RealMachineRegisters.getR2().getHexValue();
@@ -176,66 +176,66 @@ public class Realmachine {
 		}
 	}
 	
-	public static void L1(byte virtualAddress) {
+	public static void L1(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		RealMachineRegisters.getR1().setWordHexInt(memory[realAddress].getHexValue());
 	}
 	
-	public static void L2(byte virtualAddress) {
+	public static void L2(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		RealMachineRegisters.getR2().setWordHexInt(memory[realAddress].getHexValue());
 	}
 	
-	public static void S1(byte virtualAddress) {
+	public static void S1(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		memory[realAddress].setWordHexInt(RealMachineRegisters.getR1().getHexValue());
 	}
 	
-	public static void S2(byte virtualAddress) {
+	public static void S2(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		memory[realAddress].setWordHexInt(RealMachineRegisters.getR2().getHexValue());
 	}
 	
-	public static void SI(byte virtualAddress) {
+	public static void SI(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		memory[realAddress].setWordHexInt(RealMachineRegisters.getIC());
 	}
 	
-	public static void JP(byte address) {
+	public static void JP(int address) {
 		RealMachineRegisters.setIC(address);
 	}
 	
-	public static void JE(byte address) {
+	public static void JE(int address) {
 		if (RealMachineRegisters.getSF() == 0) {
 			RealMachineRegisters.setIC(address);
 		}
 	}
 		
-	public static void JM(byte address) {
+	public static void JM(int address) {
 		if (RealMachineRegisters.getSF() == 1) {
 			RealMachineRegisters.setIC(address);
 		}	
 	}
 	
-	public static void JL(byte address) {
+	public static void JL(int address) {
 		if (RealMachineRegisters.getSF() == 2) {
 			RealMachineRegisters.setIC(address);
 		}	
 	}
 	
-	public static void JF(byte address) {
+	public static void JF(int address) {
 		if (RealMachineRegisters.getSF() == 3) {
 			RealMachineRegisters.setIC(address);
 		}	
 	}
 	
-	public static void JS(byte address) {
+	public static void JS(int address) {
 		if (RealMachineRegisters.getSF() == 4) {
 			RealMachineRegisters.setIC(address);
 		}	
 	}
 	
-	public static void PD(byte virtualAddress) {
+	public static void PD(int virtualAddress) {
 		String output = "";
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
@@ -249,7 +249,7 @@ public class Realmachine {
 		frame.output(output);
 	}
 	
-	public static void PP(byte virtualAddress) {
+	public static void PP(int virtualAddress) {
 		String output = "";
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
@@ -264,8 +264,8 @@ public class Realmachine {
 		frame.output(output);
 	}
 	
-	public static void GD(byte virtualAddress) {
-		System.out.println(frame.input());
+	public static void GD(int virtualAddress) {
+//		System.out.println(frame.input());
 	}
 	
 	/*
