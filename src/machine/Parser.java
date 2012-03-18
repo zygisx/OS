@@ -42,7 +42,7 @@ public class Parser {
 					String s = line.substring(3).replace(" ", "");
 					if (s.length() > 4)
 						s = s.substring(0, 4);
-					System.out.println(Integer.parseInt(s, 16) + "  " + cursor);
+//					System.out.println(Integer.parseInt(s, 16) + "  " + cursor);
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
@@ -77,7 +77,7 @@ public class Parser {
 				}
 				line = line.replaceAll("\\s+", "");
 				//line = line.trim();
-				System.out.println(line);
+//				System.out.println(line);
 				if (line.length() < 4)
 					memory[cursor++].setWordString(String.format("%1$-4s", line));
 				else

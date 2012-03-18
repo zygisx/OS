@@ -30,7 +30,7 @@ public class VirtualMachine {
 		if (!command.equals("HALT")) {
 			commandPart = command.substring(0, 2);
 			command = command.replaceAll("\\s+", "");
-			System.out.println(command);
+//			System.out.println(command);
 			if (command.length() >= 4) {
 				address = Integer.parseInt(command.substring(2, 4), 16);
 			}
