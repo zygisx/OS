@@ -66,11 +66,16 @@ public class RealMachineRegisters {
 	}
 	public static void setR1(Word r1) {
 		R1 = r1;
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) vm.getRegisters().setR1(r1);
 	}
 	public static void setR2(Word r2) {
 		R2 = r2;
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) vm.getRegisters().setR2(r2);
 	}
 	public static void setIC(int iC) {
+		IC = iC;
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) vm.getRegisters().setIC(iC);
 	}
@@ -82,6 +87,8 @@ public class RealMachineRegisters {
 	}
 	public static void setSF(byte sF) {
 		SF = sF;
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) vm.getRegisters().setSF(sF);
 	}
 	public static void setTIMER(byte tIMER) {
 		TIMER = tIMER;
