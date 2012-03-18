@@ -264,6 +264,10 @@ public class Realmachine {
 		frame.output(output);
 	}
 	
+	public static void GD(byte virtualAddress) {
+		System.out.println(frame.input());
+	}
+	
 	/*
 	 * for output/input commands call frame.output(String) and String s = frame.input();
 	 */

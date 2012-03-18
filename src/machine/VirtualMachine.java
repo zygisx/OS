@@ -89,6 +89,9 @@ public class VirtualMachine {
 			case "PP":
 				Realmachine.PP(address);
 			break;
+			case "GD":
+				Realmachine.GD(address);
+			break;
 			}
 		}
 		else {
@@ -102,9 +105,10 @@ public class VirtualMachine {
 	
 	public void run() {
 		int i = 0x81;
-		while (i < memory.length && !isHalted) {
-			processCommand(memory[i].getStringValue());
-			i++;
+		registers.setIC(i);
+		while (registers.getIC() < memory.length && !isHalted) {
+			processCommand(memory[registers.getIC()].getStringValue());
+			registers.setIC(i++);
 		}
 	}
 	

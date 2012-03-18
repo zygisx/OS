@@ -3,7 +3,7 @@ package machine;
 public class VirtualMachineRegisters {
 	private Word R1;
 	private Word R2;
-	private byte IC;
+	private int IC;
 	private byte SF;
 	
 	
@@ -27,10 +27,10 @@ public class VirtualMachineRegisters {
 	public void setR2(Word r2) {
 		this.R2 = r2;
 	}
-	public byte getIC() {
+	public int getIC() {
 		return this.IC;
 	}
-	public void setIC(byte iC) {
+	public void setIC(int iC) {
 		this.IC = iC;
 	}
 	public byte getSF() {

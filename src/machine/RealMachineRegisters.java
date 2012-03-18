@@ -2,8 +2,9 @@ package machine;
 
 public class RealMachineRegisters {
 	private static Word R1, R2;	
-	private static byte IC, PLR, MODE;
+	private static byte PLR, MODE;
 	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
+	private static int IC;
 	
 	static {
 		setR1(new Word());
@@ -20,7 +21,7 @@ public class RealMachineRegisters {
 		if (vm != null) return vm.getRegisters().getR2();
 		return R2;
 	}
-	public static byte getIC() {
+	public static int getIC() {
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) return vm.getRegisters().getIC();
 		return IC;
@@ -70,7 +71,7 @@ public class RealMachineRegisters {
 		R2 = r2;
 	}
 	public static void setIC(byte iC) {
-		IC = iC;
+		IC = 12;
 	}
 	public static void setPLR(byte pLR) {
 		PLR = pLR;
@@ -109,7 +110,7 @@ public class RealMachineRegisters {
 		TI = tI;
 	}
 	
-	public String toString()
+	public static String toString2()
 	{
 		String fullString = "|R1| " + getR1().getStringValue() + "      |R2| " + getR2().getStringValue() + "      |IC| " + getIC() + "      |PLR| " + getPLR() + "      |MODE| " + getMODE() + "\n";
 		fullString += "|SF| " + getSF() + "         |TIMER| " + getTIMER() + "      |CH1| " + getCH1() + "     |CH2| " + getCH2() + "      |CH3| " + getCH3() + "\n";
