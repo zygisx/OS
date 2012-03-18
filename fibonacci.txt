@@ -22,11 +22,11 @@ DW 00
 $20:$
 DB 10 f
 DB irst
-DB Fibo
-DB nacc
-DB i nu
-DB mber
-DB s:  
+DB  Fib
+DB onac
+DB ci n
+DB umbe
+DB rs:  
 $30:$
 DB nnnn
 $40:$	# how many fibonacci numbers to print
