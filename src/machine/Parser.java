@@ -75,9 +75,11 @@ public class Parser {
 				if (commentStarts >= 0) {
 					line = line.substring(0, commentStarts);
 				}
-				line.replaceAll("\\s+", "");
+				line = line.replaceAll("\\s+", "");
+				//line = line.trim();
+				System.out.println(line);
 				if (line.length() < 4)
-					memory[cursor++].setWordString(line);
+					memory[cursor++].setWordString(String.format("%1$-4s", line));
 				else
 					memory[cursor++].setWordString(line.substring(0, 4));
 			}
