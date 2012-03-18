@@ -86,6 +86,9 @@ public class VirtualMachine {
 			case "PD":
 				Realmachine.PD(address);
 			break;
+			case "PP":
+				Realmachine.PP(address);
+			break;
 			}
 		}
 		else {

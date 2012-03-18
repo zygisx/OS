@@ -249,6 +249,21 @@ public class Realmachine {
 		frame.output(output);
 	}
 	
+	public static void PP(byte virtualAddress) {
+		String output = "";
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		Word[] block = getBlock(getBlockNum(realAddress));
+		int wordsCount = RealMachineRegisters.getR1().getDecimalValue();
+		for(int i = 0; i < wordsCount; i++) {
+			if (block[i].getStringValue().equals("nnnn")) {
+				output += "\n";
+			} else {
+				output += block[i].getStringValue();
+			}			
+		}
+		frame.output(output);
+	}
+	
 	/*
 	 * for output/input commands call frame.output(String) and String s = frame.input();
 	 */
