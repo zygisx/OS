@@ -189,5 +189,9 @@ public class MainFrame extends JFrame {
 	public JPanel getComponentsPanel() {
 		return this.componentsPanel;
 	}
+	
+	public void update() {
+		((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+	}
 
 }

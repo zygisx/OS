@@ -274,6 +274,10 @@ public class Realmachine {
 	
 	// toString
 	
+	public static MainFrame getFrame() {
+		return frame;
+	}
+	
 	public static String toString2()
 	{
 		int i = 0;
