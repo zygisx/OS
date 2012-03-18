@@ -70,7 +70,10 @@ public class Parser {
 			cursor = 0x80;
 			while ( (line = bufRead.readLine() )!= null && 
 					!(line.startsWith("ENDCODE")) ) {
-				memory[cursor++].setWordString(line.substring(0, 4));
+				if (line.length() < 4)
+					memory[cursor++].setWordString(line);
+				else
+					memory[cursor++].setWordString(line.substring(0, 4));
 			}
 			
 		
