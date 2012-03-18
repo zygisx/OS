@@ -265,13 +265,29 @@ public class Realmachine {
 	}
 	
 	public static void GD(int virtualAddress) {
-		frame.input();
+		String inputWord = null;
+		String s = frame.input();
+		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		Word[] block = getBlock(getBlockNum(realAddress));
+		int wordsCount, i = 0;
+		if(s.length() % 4 > 0) {
+			wordsCount = (s.length() / 4) + 1;
+		} else {
+			wordsCount = s.length() / 4;
+		}
+		while(i < wordsCount && i < block.length) {
+			if(s.length() >= 4){
+				inputWord = s.substring(0, 4);
+				s = s.substring(4);
+			} else {
+				inputWord = s;
+			}
+			block[i].setWordString(inputWord);
+			i++;
+		}
+
 	}
-	
-	/*
-	 * for output/input commands call frame.output(String) and String s = frame.input();
-	 */
-	
+
 	// toString
 	
 	public static MainFrame getFrame() {
