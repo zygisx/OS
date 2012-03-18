@@ -8,12 +8,11 @@ public class VirtualMachine {
 	private VirtualMachineRegisters registers;
 	private Word[] memory;
 	private boolean isHalted = false;
-	private int codeSegmentStart = 0x80;
 	
 	public VirtualMachine(VirtualMachineRegisters registers, Word[] memory) {
 		this.registers = registers;
 		this.memory = memory;
-		registers.setIC(codeSegmentStart);
+		registers.setIC(Realmachine.CODE_SEGMENT_START);
 		
 	}
 	
