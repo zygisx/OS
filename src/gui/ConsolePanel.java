@@ -2,11 +2,15 @@ package gui;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.JTextArea;
 import java.awt.Color;
+import javax.swing.JScrollBar;
 
 public class ConsolePanel extends JPanel {
 
@@ -28,8 +32,13 @@ public class ConsolePanel extends JPanel {
 		console.setFont(new Font("Monospaced",Font.PLAIN,15));
 		
 		setLayout(new BorderLayout(5, 10));
+		
+		JScrollPane scrollPane = new JScrollPane(console);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		
 		console.setText(">Welcome.");
-		add(console, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 
 	}
 	
