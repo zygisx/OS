@@ -38,4 +38,14 @@ public class Pagination {
 		}	
 		return virtualMachineMemory;
 	}
+	
+	public boolean isBlockOccupied(int block) {
+		
+		
+		return false;	
+	}
+	
+	public boolean isPagingTableBlockOccupied(int block) {
+		return false;
+	}
 }
