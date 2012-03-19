@@ -18,7 +18,6 @@ public class Pagination {
 		int block = virtualAddress / Realmachine.BLOCK_SIZE;
 		int offset = virtualAddress % Realmachine.BLOCK_SIZE;
 		int realMemoryblock = Realmachine.getWord(plr*Realmachine.BLOCK_SIZE+block).getHexValue(); // returns real memory block number
-		System.out.println(realMemoryblock*Realmachine.BLOCK_SIZE + offset);
 		return realMemoryblock*Realmachine.BLOCK_SIZE + offset;
 	}
 	
@@ -26,10 +25,8 @@ public class Pagination {
 		Word[] virtualMachineMemory = 
 				new Word[Realmachine.BLOCK_SIZE * Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE];
 		Random rand = new Random();
-		/* 
-		 * TODO allocate memory random
-		 */
-		///* possible to comment back for testing  
+
+		  
 //		int VMNum = 0; // Just for now, when only one VM needed
 //		
 //		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
@@ -62,8 +59,10 @@ public class Pagination {
 				if (++blockNum >= Realmachine.BLOCK_COUNT)
 					blockNum = Realmachine.PAGINATION_TABLE_SIZE;
 			}
-			Word[] block = Realmachine.getBlock(blockNum); //  get block from real memory
-			this.table[tableNum*0x10+i].setWordHexInt(blockNum); // set block address in paging table  
+			/* get block from real memory */
+			Word[] block = Realmachine.getBlock(blockNum);  
+			/* set block address in paging table */
+			this.table[tableNum*0x10+i].setWordHexInt(blockNum);   
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
 			}
