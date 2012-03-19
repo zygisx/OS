@@ -27,7 +27,7 @@ $30:$
 DW 1
 DW 2      		# multiplier
 $40:$
-DW 10           		 		  # sequence length
+DW 10		 		  # sequence length
 DW 0            # counter
 ENDDATA
 CODE
