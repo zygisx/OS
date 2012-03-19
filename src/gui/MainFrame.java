@@ -125,7 +125,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (Realmachine.getActiveVM() == null || Realmachine.getActiveVM().isHalted()) {
 					JOptionPane.showMessageDialog(MainFrame.this,
-						    "Not virtual machine loaded.",
+						    "No virtual machine loaded.",
 						    "VM error",
 						    JOptionPane.ERROR_MESSAGE);
 					return;
@@ -144,7 +144,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (Realmachine.getActiveVM() == null || Realmachine.getActiveVM().isHalted()) {
 					JOptionPane.showMessageDialog(MainFrame.this,
-						    "Not virtual machine loaded.",
+						    "No virtual machine loaded.",
 						    "VM error",
 						    JOptionPane.ERROR_MESSAGE);
 					return;

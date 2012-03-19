@@ -1,5 +1,5 @@
 ===========================
-Operacinës Sistemos
+OS emulator
 ===========================
 
-Operaciniø sistemø kurso projektas.
+Project for operating systems course.

@@ -30,7 +30,7 @@ public class VirtualMachine {
 		if (!command.equals("HALT")) {
 			commandPart = command.substring(0, 2);
 			command = command.replaceAll("\\s+", "");
-//			System.out.println(command);
+//			System.out.println(command);   // uncomment to see current command
 			if (command.length() >= 4) {
 				address = Integer.parseInt(command.substring(2, 4), 16);
 			}
@@ -112,7 +112,6 @@ public class VirtualMachine {
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
 			processCommand(command);
-			Realmachine.getFrame().update();
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}
@@ -124,7 +123,6 @@ public class VirtualMachine {
 		if(!isHalted) {
 			command = memory[registers.getIC()].getStringValue();
 			processCommand(command);
-			Realmachine.getFrame().update();
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}

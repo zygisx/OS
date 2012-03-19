@@ -1,0 +1,52 @@
+DATA
+$00:$
+DW 00
+DW 01
+DW 02
+DW 03
+DW 04
+DW 05
+DW 06
+DW 07
+DW 08
+DW 09
+DW 0A
+DW 0B
+DW 0C
+DW 0D
+DW 0E
+DW 0F
+$20:$
+DB Dvej
+DB eto 
+DB laip
+DB sniu
+DB  sek
+DB a:  
+$30:$
+DW 1
+DW 2      		# multiplier
+$40:$
+DW 10		 		  # sequence length
+DW 0            # counter
+ENDDATA
+CODE
+L106
+PP20
+L101   #loop start 02
+PP30
+L241
+AD41
+L130  #6  START LOOP
+L231
+ML30
+L101
+PP30
+L241
+AD41
+L141
+L240
+CS
+JS06
+HALT
+ENDCODE

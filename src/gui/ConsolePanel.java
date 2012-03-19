@@ -10,7 +10,6 @@ import java.awt.Font;
 
 import javax.swing.JTextArea;
 import java.awt.Color;
-import javax.swing.JScrollBar;
 
 public class ConsolePanel extends JPanel {
 
