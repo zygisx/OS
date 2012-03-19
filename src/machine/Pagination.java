@@ -40,12 +40,30 @@ public class Pagination {
 	}
 	
 	public boolean isBlockOccupied(int block) {
-		
-		
+		/* Iterates over all pagination table */
+		for (int i = 0; i < Realmachine.PAGINATION_TABLE_SIZE; i++) { 
+			/* check if block occupied */
+			if (this.isPagingTableBlockOccupied(i)) {
+				/* then iterates over all block and searches for block */
+				for(Word w : Realmachine.getBlock(i)) {
+					if (w.getHexValue() == block) {
+						return true;
+					}
+				}
+			}
+		}
+		/* if block not found then returns false */
 		return false;	
 	}
 	
 	public boolean isPagingTableBlockOccupied(int block) {
+		
+		/* 
+		 * if pagination tables block is occupied then its 
+		 * first word cannot be 0000 
+		 */
+		if (Realmachine.getWord(block * Realmachine.BLOCK_SIZE).getHexValue() != 0)
+			return true;
 		return false;
 	}
 }
