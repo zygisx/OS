@@ -40,16 +40,26 @@ public class Parser {
 				}
 				else if (line.startsWith("DW") || line.startsWith("dw")) { //TODO decimal! operates only hex values
 					String s = line.substring(3).replace(" ", "");
+					int commentStarts = s.indexOf("#");
+					if (commentStarts >= 0) {
+						s = s.substring(0, commentStarts);
+					}
 					if (s.length() > 4)
 						s = s.substring(0, 4);
-//					System.out.println(Integer.parseInt(s, 16) + "  " + cursor);
+					s = s.replaceAll("\\s+", "");
+					//System.out.println(Integer.parseInt(s, 16) + "  " + cursor);
 					memory[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
 					// deleted spaces removal
 					String s = line.substring(3);
+					int commentStarts = s.indexOf("#");
+					if (commentStarts >= 0) {
+						s = s.substring(0, commentStarts);
+					}
 					if (s.length() > 4)
 						s = s.substring(0, 4);
+					//s = s.replaceAll("\\s+", "");
 					memory[cursor].setWordString(s);
 				}
 				else
