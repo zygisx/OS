@@ -130,7 +130,7 @@ public class MainFrame extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				Realmachine.getActiveVM().step();
+				MainFrame.this.setCommand(Realmachine.getActiveVM().step());
 				MainFrame.this.update();
 				
 			}
@@ -167,7 +167,7 @@ public class MainFrame extends JFrame {
 	public String input()  {
 		
 		String s = (String)JOptionPane.showInputDialog(
-				this, "Enter your input", "Input", JOptionPane.OK_OPTION);
+				this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
 		while (s == null || s.equals("")) {
 			
 			if (s == null || s.equals("")) {
@@ -177,7 +177,7 @@ public class MainFrame extends JFrame {
 					    JOptionPane.ERROR_MESSAGE);
 			}
 			s = (String)JOptionPane.showInputDialog(
-					this, "Enter your input", "Input", JOptionPane.OK_OPTION);
+					this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
 		}
 		return s;
 	}
@@ -192,6 +192,9 @@ public class MainFrame extends JFrame {
 	
 	public void update() {
 		((ComponentsPanel) MainFrame.this.getComponentsPanel()).update();
+	}
+	public void setCommand(String commmand) {
+		this.console.setCommand(commmand);
 	}
 
 }

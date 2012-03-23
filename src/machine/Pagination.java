@@ -27,47 +27,47 @@ public class Pagination {
 		Random rand = new Random();
 
 		  
-//		int VMNum = 0; // Just for now, when only one VM needed
-//		
-//		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
-//			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
-//			this.table[VMNum*0x10+i].setWordHexInt(i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
-//			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
-//				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
-//			}
-//		}	
-//		return virtualMachineMemory;
+		int VMNum = 0; // Just for now, when only one VM needed
 		
-		
-		/* Choose random pagination table block */
-		
-		int tableNum = rand.nextInt(Realmachine.PAGINATION_TABLE_SIZE);
-		while (this.isPagingTableBlockOccupied(tableNum)) {
-			if (++tableNum >= Realmachine.PAGINATION_TABLE_SIZE) 
-				tableNum = 0;
-			/*FIXME NOT PROTECTED FROM THAT ALL PAGINATION TABLES BLOCKS ARE OCCUPIED */
-		}
-		/* set plr */
-		RealMachineRegisters.setPLR((byte)tableNum);
-		
-		/* Choose random memory block for each vm memory block */
 		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
-			/* get random unused block from memory */
-			int blockNum = rand.nextInt(Realmachine.BLOCK_COUNT - Realmachine.PAGINATION_TABLE_SIZE) + Realmachine.PAGINATION_TABLE_SIZE;
-			/* if it is occupied then search next free block */
-			while (this.isBlockOccupied(blockNum)) {
-				if (++blockNum >= Realmachine.BLOCK_COUNT)
-					blockNum = Realmachine.PAGINATION_TABLE_SIZE;
-			}
-			/* get block from real memory */
-			Word[] block = Realmachine.getBlock(blockNum);  
-			/* set block address in paging table */
-			this.table[tableNum*0x10+i].setWordHexInt(blockNum);   
+			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
+			this.table[VMNum*0x10+i].setWordHexInt(i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
 			}
-		}
-		return virtualMachineMemory;		
+		}	
+		return virtualMachineMemory;
+		
+		
+		/* Choose random pagination table block */
+//		
+//		int tableNum = rand.nextInt(Realmachine.PAGINATION_TABLE_SIZE);
+//		while (this.isPagingTableBlockOccupied(tableNum)) {
+//			if (++tableNum >= Realmachine.PAGINATION_TABLE_SIZE) 
+//				tableNum = 0;
+//			/*FIXME NOT PROTECTED FROM THAT ALL PAGINATION TABLES BLOCKS ARE OCCUPIED */
+//		}
+//		/* set plr */
+//		RealMachineRegisters.setPLR((byte)tableNum);
+//		
+//		/* Choose random memory block for each vm memory block */
+//		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
+//			/* get random unused block from memory */
+//			int blockNum = rand.nextInt(Realmachine.BLOCK_COUNT - Realmachine.PAGINATION_TABLE_SIZE) + Realmachine.PAGINATION_TABLE_SIZE;
+//			/* if it is occupied then search next free block */
+//			while (this.isBlockOccupied(blockNum)) {
+//				if (++blockNum >= Realmachine.BLOCK_COUNT)
+//					blockNum = Realmachine.PAGINATION_TABLE_SIZE;
+//			}
+//			/* get block from real memory */
+//			Word[] block = Realmachine.getBlock(blockNum);  
+//			/* set block address in paging table */
+//			this.table[tableNum*0x10+i].setWordHexInt(blockNum);   
+//			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
+//				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
+//			}
+//		}
+//		return virtualMachineMemory;		
 	}
 	
 	public boolean isBlockOccupied(int block) {

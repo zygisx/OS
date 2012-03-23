@@ -118,7 +118,7 @@ public class VirtualMachine {
 		}
 	}
 	
-	public void step() {
+	public String step() {
 		String command = null;
 		if(!isHalted) {
 			command = memory[registers.getIC()].getStringValue();
@@ -127,6 +127,8 @@ public class VirtualMachine {
 				registers.setIC(registers.getIC()+1);
 			}
 		}
+		return command;
+		
 	}
 	
 	private boolean isIcChangeAvailible(String command) {
