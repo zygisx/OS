@@ -1,4 +1,4 @@
-package mos;
+package os;
 
 public final class Constants {
 

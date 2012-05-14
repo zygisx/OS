@@ -1,6 +1,6 @@
 package processes;
 
-import mos.Constants;
+import os.Constants;
 
 public class StartStop extends Process {
 
