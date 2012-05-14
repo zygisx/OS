@@ -16,5 +16,13 @@ public class StartStop extends Process {
 	@Override
 	public void run() {
 		
+		// system resources initialization
+		
+		// system processes initialization
+		
+		
+		// block until MOS finishes its work	
+		
+		// destroy processes & resources
 	}
 }
