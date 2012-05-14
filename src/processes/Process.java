@@ -1,6 +1,7 @@
 package processes;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Process {
 	
@@ -14,7 +15,8 @@ public class Process {
 	protected Status status;
 	protected boolean mode;
 	protected int pID, memoryBlockNumber;
-	protected ArrayList resources, createdResources, currentList, childrenProcesses;
+	protected ArrayList resources, createdResources, childrenProcesses;
+	protected PriorityQueue<Process> currentList;
 	
 	
 	public void askResource() {
