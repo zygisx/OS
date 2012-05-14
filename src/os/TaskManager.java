@@ -1,13 +1,14 @@
 package os;
 
 import java.util.PriorityQueue;
+import processes.*;
 
 public class TaskManager {
 	
-	private PriorityQueue<Process> readyProcesses;
-	private Process currentProcess;
+	private PriorityQueue<processes.Process> readyProcesses;
+	private processes.Process currentProcess;
 	
-	public TaskManager(PriorityQueue<Process> readyProcesses) {
+	public TaskManager(PriorityQueue<processes.Process> readyProcesses) {
 		if(readyProcesses != null) {
 			this.readyProcesses = readyProcesses;
 		} else {
