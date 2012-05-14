@@ -8,4 +8,10 @@ public class JobGovernor extends Process {
 		super.isSupervisorMode = false;	// true defines that it is system process
 		
 	}
+	
+	@Override
+	public void run() {
+		
+	}
+	
 }

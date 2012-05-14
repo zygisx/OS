@@ -11,4 +11,10 @@ public class StartStop extends Process {
 		super.isSupervisorMode = true;	// true defines that it is system process
 		super.priority = Constants.MAX_PRIORITY;
 	}
+	
+	
+	@Override
+	public void run() {
+		
+	}
 }

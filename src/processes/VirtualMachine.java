@@ -8,4 +8,9 @@ public class VirtualMachine extends Process {
 		
 	}
 	
+	@Override
+	public void run() {
+		
+	}
+	
 }

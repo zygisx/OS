@@ -9,4 +9,9 @@ public class Read extends Process {
 		super.isSupervisorMode = true;	// true defines that it is system process
 		
 	}
+	
+	@Override
+	public void run() {
+		
+	}
 }

@@ -22,6 +22,8 @@ public abstract class Process {
 		this.parentProcess = parent;
 	}
 	
+	// abstract method
+	public abstract void run();
 	
 	public void askResource() {
 		

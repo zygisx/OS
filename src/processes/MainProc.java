@@ -9,5 +9,10 @@ public class MainProc extends Process{
 		super(id, parent);
 		super.isSupervisorMode = true;
 	}
+	
+	@Override
+	public void run() {
+		
+	}
 
 }
