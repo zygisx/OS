@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 public class Process {
 	
+	public enum Status {
+		READYS, READY, BLOCKEDS, BLOCKED
+	}
+	
 	// fields - descriptor of proecess
 	
-	protected String id, status, parentProcess, priority;
+	protected String id, parentProcess, priority;
+	protected Status status;
 	protected boolean mode;
 	protected int pID, memoryBlockNumber;
 	protected ArrayList resources, createdResources, currentList, childrenProcesses;
