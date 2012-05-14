@@ -3,7 +3,7 @@ package processes;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Process {
+public abstract class Process {
 	
 	public enum Status {
 		READYS, READY, BLOCKEDS, BLOCKED
