@@ -20,6 +20,10 @@ public class Resource {
 		this.parenProcess = parent;
 		this.waitingForResourceProcessList = new ArrayList<processes.Process>();
 	}
+
+	public String getId() {
+		return this.id;
+	}
 	
 	
 	

@@ -18,10 +18,13 @@ public class StartStop extends Process {
 		
 		// system resources initialization
 		
+		// initialize static resources
+		
 		// system processes initialization
 		
 		
 		// block until MOS finishes its work	
+		
 		
 		// destroy processes & resources
 	}

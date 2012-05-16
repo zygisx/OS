@@ -41,11 +41,9 @@ public abstract class Process {
 	
 	public void releaseResource() {
 		
-		
 	}
 	
 	public void createResource() {
-		
 		
 	}
 	
