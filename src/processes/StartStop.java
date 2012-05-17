@@ -7,9 +7,8 @@ public class StartStop extends Process {
 	
 	
 	public StartStop(String id) {
-		super(id, null);  // start/stop has no parents. 
+		super(id, null, Constants.MAX_PRIORITY);  // start/stop has no parents. 
 		super.isSupervisorMode = true;	// true defines that it is system process
-		super.priority = Constants.MAX_PRIORITY; 
 	}
 	
 	

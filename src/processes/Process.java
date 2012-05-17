@@ -7,10 +7,6 @@ import os.Resource;
 
 public abstract class Process implements Comparable<Process> {
 	
-	public enum Status {
-		READYS, READY, BLOCKEDS, BLOCKED
-	}
-	
 	// fields - descriptor of proecess
 	
 	protected String id, parentProcess;
@@ -21,8 +17,7 @@ public abstract class Process implements Comparable<Process> {
 	protected ArrayList<Process> currentList, childrenProcesses;
 	
 	public Process(String id, String parent) {
-		this.id = id;
-		this.parentProcess = parent;
+		this(id, parent, os.Constants.MIN_PRIORITY);
 	}
 	
 	public Process(String id, String parent, int priority) {
@@ -53,6 +48,10 @@ public abstract class Process implements Comparable<Process> {
 	 */
 	public int getPriority() {
 		return this.priority;
+	}
+	
+	public Status getStatus() {
+		return this.status;
 	}
 	
 	
