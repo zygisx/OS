@@ -17,6 +17,7 @@ public abstract class Process implements Comparable<Process> {
 	protected Status status;
 	protected boolean isSupervisorMode;
 	protected int pID, memoryBlockNumber, priority;
+	protected Resource missingResource;
 	protected ArrayList<Resource> resources, createdResources;
 	protected ArrayList<Process> currentList, childrenProcesses;
 	
@@ -46,6 +47,12 @@ public abstract class Process implements Comparable<Process> {
 		
 	}
 	
+	/**
+	 * Setters
+	 */
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 	
 	/**
 	 * Getters
@@ -56,6 +63,10 @@ public abstract class Process implements Comparable<Process> {
 	
 	public Status getStatus() {
 		return this.status;
+	}
+	
+	public Resource getMissingResource() {
+		return this.missingResource;
 	}
 	
 	
