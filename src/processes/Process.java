@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 
 import os.Resource;
 
-public abstract class Process {
+public abstract class Process implements Comparable<Process> {
 	
 	public enum Status {
 		READYS, READY, BLOCKEDS, BLOCKED
@@ -45,6 +45,24 @@ public abstract class Process {
 	
 	public void createResource() {
 		
+	}
+	
+	
+	/**
+	 * Getters
+	 */
+	public int getPriority() {
+		return this.priority;
+	}
+	
+	
+	@Override
+	public int compareTo(Process o) {
+		if (this.priority > o.getPriority())
+			return 1;
+		else if (this.priority < o.getPriority())
+			return -1;
+		else return 0;
 	}
 	
 }
