@@ -7,6 +7,10 @@ import os.Resource;
 
 public abstract class Process implements Comparable<Process> {
 	
+	public enum Status {
+		READYS, READY, BLOCKEDS, BLOCKED
+	}
+	
 	// fields - descriptor of proecess
 	
 	protected String id, parentProcess;
