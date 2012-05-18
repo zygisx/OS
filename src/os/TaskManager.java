@@ -18,8 +18,8 @@ public class TaskManager {
 	
 	
 	public TaskManager() {
-		this.readyProcesses = new PriorityQueue<>();
-		this.blockedProcesses = new PriorityQueue<>();
+		this.readyProcesses = new PriorityQueue<processes.Process>();
+		this.blockedProcesses = new PriorityQueue<processes.Process>();
 	}
 	
 	public Process getCurrentProcess() {
@@ -73,7 +73,11 @@ public class TaskManager {
 
 
 	public void createProcess(processes.Process newProcess) {
-		this.readyProcesses.add(newProcess);
+		if (newProcess.getStatus() == Status.BLOCKED)
+			this.blockedProcesses.add(newProcess);
+		else if (newProcess.getStatus() == Status.READY)
+			this.readyProcesses.add(newProcess);
+		//TODO work with stopped processes
 	}
 	
 	private void checkBlockedProcesses() {
