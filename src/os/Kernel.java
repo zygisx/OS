@@ -30,8 +30,10 @@ public class Kernel {
 	public static void RunOS() {
 		
 		// at first we start start/stop process.
-		taskManager.createProcess(new StartStop("startstop"));
+		Kernel.createProcess(new StartStop("startstop"));
 		
+		// jus for now for testing purpose
+		long time = System.currentTimeMillis();
 		while (isSystemOn) {
 			
 			// at first call resource manager which would be implemented in TaskManager class 
@@ -42,6 +44,10 @@ public class Kernel {
 			// give processor to process and return when process blocked
 			p.run(); // not yet implements
 			
+			// only for testing, program runs only 10 seconds
+			if ((time - System.currentTimeMillis()) > 10000) {
+				isSystemOn = false;
+			}
 			
 		}
 		
