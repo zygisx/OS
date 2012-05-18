@@ -45,10 +45,13 @@ public class TaskManager {
 			// if process is blocked than check if needful resource is free now
 			// if so then process is ready and resource is occupy
 			if (proc.getStatus() == Status.BLOCKED) {		
-				Resource missingRes = proc.getMissingResource();		
-				if (missingRes != null && missingRes.isAvailable()) {
-					proc.setStatus(Status.READY);
-					missingRes.occupy();
+				String missingRes = proc.getMissingResource();		
+				if (missingRes != "" && resources.isExists(missingRes)) {
+					Resource r = resources.get(missingRes);
+					if (r.isAvailable()) {
+						proc.setStatus(Status.READY);
+						r.occupy();
+					}
 				}
 			}
 			// with BLOCKEDS
