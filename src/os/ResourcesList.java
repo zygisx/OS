@@ -21,6 +21,10 @@ public class ResourcesList {
 		this.resources = new HashMap<String, Resource>();
 	}
 	
+	public boolean isExists(String id) {
+		return this.resources.containsKey(id);
+	}
+	
 	/**
 	 * add new resource to list. Key is resource r id (r.getId()), value is r; 
 	 * @param r - Resource
