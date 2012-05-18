@@ -8,7 +8,7 @@ public class Resource {
 	private String id;
 	private boolean isReusable; // kas èia ?
 	private boolean isAvailable;
-	private int parenProcess; // don't know why int..?
+	private String parenProcess; // don't know why int..? I change it to string
 	private ArrayList<processes.Process> waitingForResourceProcessList;
 	
 	// nezinau kas cia tokie
@@ -16,7 +16,7 @@ public class Resource {
 	// nuoroda á paskirstytojo objektà
 
 	
-	public Resource(String id, int parent) {
+	public Resource(String id, String parent) {
 		this.id = id;
 		this.parenProcess = parent;
 		this.waitingForResourceProcessList = new ArrayList<processes.Process>();
