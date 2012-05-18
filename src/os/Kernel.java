@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import processes.*;
+import processes.Process.Status;
 
 /**
  * main class for main loop
@@ -32,7 +33,7 @@ public class Kernel {
 		// at first we start start/stop process.
 		Kernel.createProcess(new StartStop("startstop"));
 		
-		// jus for now for testing purpose
+		// just for now for testing purpose
 		long time = System.currentTimeMillis();
 		while (isSystemOn) {
 			
@@ -41,15 +42,29 @@ public class Kernel {
 			// ask task manager for process with highest priority
 			processes.Process p = taskManager.getCurrentProcess();
 			
-			// give processor to process and return when process blocked
-			p.run(); // not yet implements
+			if (p != null) {   // p == null when no ready processes are available
+				
+				// process returns when it hasn't got needful resource 
+				// so we block it
+				p.setStatus(Status.BLOCKED);
+				
+				// give processor to process and return when process blocked
+				
+				p.run(); 
+			}
 			
-			// only for testing, program runs only 10 seconds
-			if ((time - System.currentTimeMillis()) > 10000) {
-				isSystemOn = false;
+			
+			
+			// only for testing, program runs only 5 seconds
+			
+			if ((System.currentTimeMillis() - time) > 5000) {
+				// after five seconds i create resource mosworkend and than startstop can continue
+				resourceList.create(new Resource("mosworkend", null));
+				//isSystemOn = false;
 			}
 			
 		}
+		System.out.println("Mos successfully ended work");
 		
 	}
 	
@@ -57,6 +72,10 @@ public class Kernel {
 	public static void createProcess(processes.Process newProcess) {
 		taskManager.createProcess(newProcess);
 		processes.add(newProcess);
+	}
+	
+	public static void turnOffSystem() {
+		isSystemOn = false;
 	}
 	
 	
@@ -72,6 +91,7 @@ public class Kernel {
 	public static Iterator<processes.Process> getProcessesIterator() {
 		return processes.iterator();
 	}
+	
 	
 	
 	
