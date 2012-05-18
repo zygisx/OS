@@ -25,7 +25,7 @@ public class ResourcesList {
 	 * add new resource to list. Key is resource r id (r.getId()), value is r; 
 	 * @param r - Resource
 	 */
-	public void add(Resource r) {
+	public void create(Resource r) {
 		this.resources.put(r.getId(), r);
 	}
 	
@@ -42,7 +42,7 @@ public class ResourcesList {
 	 * removes Resource from resources list
 	 * @param id - resource id
 	 */
-	public void Remove(String id) {
+	public void destroy(String id) {
 		this.resources.remove(id);
 	}
 }
