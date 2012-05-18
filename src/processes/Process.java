@@ -68,6 +68,10 @@ public abstract class Process implements Comparable<Process> {
 		return this.missingResource;
 	}
 	
+	public String getId() {
+		return this.id;
+	}
+	
 	
 	@Override
 	public int compareTo(Process o) {
