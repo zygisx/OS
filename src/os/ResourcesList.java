@@ -1,6 +1,7 @@
 package os;
 
 import java.util.HashMap;
+import java.util.Iterator;
   
 /**
  * class represents resources list. 
@@ -48,5 +49,22 @@ public class ResourcesList {
 	 */
 	public void destroy(String id) {
 		this.resources.remove(id);
+	}
+	
+	/**
+	 * method for getting for example vm program source which starts with DATA
+	 * @param start key start string
+	 * @return resource which key starts with start
+	 */
+	public Resource getStartsWith(String start) {
+		Iterator<String > i = this.resources.keySet().iterator();
+		while (i.hasNext()) {
+			String key = i.next();
+			if ( key.startsWith(start) ) {
+				return this.resources.get(key);
+			}
+		}
+		return null;
+		
 	}
 }
