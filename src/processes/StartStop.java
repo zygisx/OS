@@ -43,7 +43,7 @@ public class StartStop extends Process {
 				// destroy 
 				
 				// destroy
-				
+				Kernel.turnOffSystem();
 				return;
 			
 		}
