@@ -13,11 +13,10 @@ public abstract class Process implements Comparable<Process> {
 	
 	// fields - descriptor of proecess
 	
-	protected String id, parentProcess;
+	protected String id, parentProcess, missingResource;
 	protected Status status;
 	protected boolean isSupervisorMode;
 	protected int pID, memoryBlockNumber, priority;
-	protected Resource missingResource;
 	protected ArrayList<Resource> resources, createdResources;
 	protected ArrayList<Process> currentList, childrenProcesses;
 	
@@ -65,7 +64,7 @@ public abstract class Process implements Comparable<Process> {
 		return this.status;
 	}
 	
-	public Resource getMissingResource() {
+	public String getMissingResource() {
 		return this.missingResource;
 	}
 	
