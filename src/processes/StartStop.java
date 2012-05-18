@@ -40,9 +40,11 @@ public class StartStop extends Process {
 			case "mosworkend":
 				this.missingResource = ""; // no resource required 
 				
-				// destroy 
+				// destroy resources
 				
-				// destroy
+				// destroy processes
+				
+				// system shut down
 				Kernel.turnOffSystem();
 				return;
 			

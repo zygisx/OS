@@ -1,7 +1,6 @@
 package processes;
 
 public class Read extends Process {
-
 	
 	
 	public Read(String id, String parent, int priority) {
@@ -14,5 +13,16 @@ public class Read extends Process {
 	@Override
 	public void run() {
 		
+		switch (this.missingResource) {
+			/*
+			case inputStream:
+				
+			case supervizorinës atminties resursas
+			
+			
+			Klausimas??? Kaip jam paduoti kokius failus skaityt, per resursa ? Ar kaþkaip ?
+			
+			*/
+		}
 	}
 }
