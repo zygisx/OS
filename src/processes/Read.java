@@ -50,6 +50,7 @@ public class Read extends Process {
 						String task = this.readFile(this.filenames.remove(0));
 						
 						// create resource
+						task = "TASK" + task;
 						Kernel.getResources().create(new Resource(task, this.id));
 						
 						//create resource for JCL
@@ -67,15 +68,7 @@ public class Read extends Process {
 				else 
 					this.missingResource = "filename";
 				
-				return;
-			
-			//case supervizorinës atminties resursas:
-			
-			
-			
-			
-			
-			
+				return;	
 		}
 	}
 	
