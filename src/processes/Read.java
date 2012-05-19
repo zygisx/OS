@@ -34,7 +34,7 @@ public class Read extends Process {
 		switch (this.missingResource) {
 			
 			case "filename":
-				this.missingResource = "supervizormemory"; // need another resource
+				this.missingResource = "supmemory"; // need another resource
 				return;
 				
 			case "supmemory":
