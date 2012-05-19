@@ -54,6 +54,10 @@ public class StartStop extends Process {
 	
 	public void createResources() {
 		Kernel.getResources().create(new Resource("processor", this.id));
+		Kernel.getResources().create(new Resource("supmemory", this.id));
+		
+		// don't know better place to create it
+		if (! Kernel.isTaskQueueEmpty()) Kernel.getResources().create(new Resource("filename", this.id));
 		// and so on 
 	}
 	
