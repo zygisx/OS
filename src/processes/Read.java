@@ -63,12 +63,24 @@ public class Read extends Process {
 				}
 				
 				// if any filenames are available than only resource needed is supervizor memory
-				if (this.filenames.size() > 0) 
+				if (this.filenames.size() > 0) {
 					this.missingResource = "supmemory";
-				else 
+					// free used resource
+					Kernel.getResources().get("supmemory").free();
+				}
+				
+				else {
 					this.missingResource = "filename";
+					// destroy resource
+					Kernel.getResources().destroy("filename");
+				}
+					
 				
 				return;	
+			case "chan3devicefinised":
+				
+				
+				return;
 		}
 	}
 	
