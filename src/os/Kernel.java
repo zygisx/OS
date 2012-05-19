@@ -54,6 +54,8 @@ public class Kernel {
 				// give processor to process and return when process blocked
 				
 				p.run(); 
+				
+				System.out.println(p.getId());
 			}
 			else {
 				resourceList.create(new Resource("mosworkend", null));

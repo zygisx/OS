@@ -202,7 +202,7 @@ public class Parser {
 					String s = line.substring(2);
 					if (s.length() > 4)
 						s = s.substring(0, 4);
-					System.out.println(s + "  " + cursor);
+					//System.out.println(s + "  " + cursor);
 					mem[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
