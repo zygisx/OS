@@ -1,36 +1,32 @@
 package processes;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 import os.Kernel;
 import os.Resource;
 
 public class Read extends Process {
-	
-	/**
-	 * possible to pass many files and then read them  
-	 */
-	private ArrayList<String> filenames;
+
+
 	
 	public Read(String id, String parent, int priority) {
 		super(id, parent, priority);
 		this.isSupervisorMode = true;	// true defines that it is system process
 		this.status = Status.BLOCKED;
 		this.missingResource = "filename"; //TODO fix resource name. It don't correspond purpose
-		this.filenames = new ArrayList<String>();
 	}
 	
+	/* DEPRECATED  */
+	/*
 	public void addFileName(String fileName) {
 		this.filenames.add(fileName); // add to the end of list
 	}
+	*/
 	
 	@Override
 	public void run() {
@@ -43,11 +39,11 @@ public class Read extends Process {
 				
 			case "supmemory":
 				
-				if (this.filenames.size() > 0) {
+				if (! Kernel.isTaskQueueEmpty()) {
 					try {
 						
 						// read task from file
-						String task = this.readFile(this.filenames.remove(0));
+						String task = this.readFile(Kernel.useTask());
 						
 						// create resource
 						task = "TASK" + task;
@@ -63,7 +59,7 @@ public class Read extends Process {
 				}
 				
 				// if any filenames are available than only resource needed is supervizor memory
-				if (this.filenames.size() > 0) {
+				if (! Kernel.isTaskQueueEmpty()) {
 					this.missingResource = "supmemory";
 					// free used resource
 					Kernel.getResources().get("supmemory").free();

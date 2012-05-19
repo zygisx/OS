@@ -2,6 +2,8 @@ package os;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import processes.*;
 import processes.Process.Status;
@@ -26,11 +28,12 @@ public class Kernel {
 	private static TaskManager taskManager = new TaskManager(); //FIXME
 	
 	private static boolean isSystemOn = true; 
-	
+	private static Queue<String> tasks = new LinkedList<String>();
 	
 	public static void RunOS() {
 		
 		// at first we start start/stop process.
+		
 		Kernel.createProcess(new StartStop("startstop"));
 		
 		// just for now for testing purpose
@@ -52,6 +55,9 @@ public class Kernel {
 				
 				p.run(); 
 			}
+			else {
+				resourceList.create(new Resource("mosworkend", null));
+			}
 			
 			
 			
@@ -66,6 +72,18 @@ public class Kernel {
 		}
 		System.out.println("Mos successfully ended work");
 		
+	}
+	
+	public static void addTask(String task) {
+		tasks.add(task);
+	}
+	
+	public static String useTask() {
+		return tasks.poll();
+	}
+	
+	public static boolean isTaskQueueEmpty() {
+		return tasks.isEmpty();
 	}
 	
 	
