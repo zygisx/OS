@@ -12,6 +12,8 @@ import java.nio.charset.Charset;
 import exception.BadFileException;
 
 import machine.Parser;
+import machine.Realmachine;
+import machine.Word;
 
 public class IOTest {
 
@@ -23,10 +25,18 @@ public class IOTest {
 		try {
 			String task = readFile("././fibonacci.txt");
 			task = "TASK" + task;
-			String[] s = Parser.validateTask(task.substring(5));
+			String[] s = Parser.validateTask(task.substring(4));
 			System.out.println(s[0]);
 			System.out.println(s[1]);
 			
+			Word[] mem = Realmachine.getVirtualMachineMemory();
+			Parser.loadData(s[0], mem);
+			Parser.loadCode(s[1], mem);
+			
+			for (Word w : mem) {
+				System.out.println(w);
+			}
+			//System.out.println(mem);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

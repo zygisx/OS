@@ -144,12 +144,13 @@ public class Parser {
 					data += s + "\n";
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
-					int commentStarts = line.indexOf("#");
+					String s = line.replace(" ", "");
+					int commentStarts = s.indexOf("#");
 					if (commentStarts >= 0) {
-						line = line.substring(0, commentStarts);
+						s = s.substring(0, commentStarts);
 					}
 					
-					data += line + "\n";
+					data += s + "\n";
 				}
 				
 			}
@@ -198,14 +199,14 @@ public class Parser {
 					continue;
 				}
 				else if (line.startsWith("DW") || line.startsWith("dw")) { //TODO decimal! operates only hex values
-					String s = line.substring(3);
+					String s = line.substring(2);
 					if (s.length() > 4)
 						s = s.substring(0, 4);
-					//System.out.println(Integer.parseInt(s, 16) + "  " + cursor);
-					mem[cursor].setWordHexInt(Integer.parseInt(line, 16));
+					System.out.println(s + "  " + cursor);
+					mem[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
-					String s = line.substring(3);
+					String s = line.substring(2);
 					if (s.length() > 4)
 						s = s.substring(0, 4);
 					//s = s.replaceAll("\\s+", "");
