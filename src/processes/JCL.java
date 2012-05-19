@@ -54,7 +54,7 @@ public class JCL extends Process {
 				}
 				
 				else {
-					// WTF?!?
+					Kernel.getResources().create(new Resource("jclerror", this.id));
 					return;
 				}
 		}
