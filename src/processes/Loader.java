@@ -35,6 +35,8 @@ public class Loader extends Process{
 		
 		// create resource 
 		Kernel.getResources().create(new Resource("loaderfinish", this.id));
+		Kernel.getResources().create(new Resource("taskinmemory_true", this.id));
+		Kernel.getResources().create(new Resource("taskinmemory_false", this.id));
 		
 		//destroy resource loaderstart
 		Kernel.getResources().destroy("loaderstart");

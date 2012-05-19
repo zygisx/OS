@@ -56,6 +56,7 @@ public class Kernel {
 				p.run(); 
 				
 				System.out.println(p.getId());
+				
 			}
 			else {
 				resourceList.create(new Resource("mosworkend", null));
