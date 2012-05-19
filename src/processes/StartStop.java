@@ -56,7 +56,7 @@ public class StartStop extends Process {
 		Kernel.getResources().create(new Resource("processor", this.id));
 		Kernel.getResources().create(new Resource("supmemory", this.id));
 		
-		// don't know better place to create it
+		// don't know better place to create it. For now we cannot add task interactive
 		if (! Kernel.isTaskQueueEmpty()) Kernel.getResources().create(new Resource("filename", this.id));
 		// and so on 
 	}

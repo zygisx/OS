@@ -39,6 +39,7 @@ public class TaskManager {
 	private void resourceManager() {
 		ResourcesList resources = Kernel.getResources();
 		
+		
 		Iterator<processes.Process> i = Kernel.getProcessesIterator();
 		while (i.hasNext()) {								// iterate through all processes
 			processes.Process proc = i.next();
