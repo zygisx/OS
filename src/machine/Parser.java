@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 
 import exception.BadFileException;
 
@@ -103,6 +104,85 @@ public class Parser {
 			e.printStackTrace();
 		}
 		return memory;
-		
 	}
+	
+	/**
+	 * method validates task and return separated data and code segments
+	 * @param task
+	 * @return
+	 * @throws BadFileException
+	 */
+	public static String[] validateTask(String task)  throws BadFileException {
+		
+		BufferedReader bf = new BufferedReader(new StringReader(task));
+		String data = "";
+		String code = "";
+		
+		try {
+			String line = bf.readLine();
+			if (! line.startsWith("DATA")) {
+				//Kernel.getResources().create(new Resource("jclerror File must start with DATA", this.id));
+				return null;
+			}
+			
+			while ( (line = bf.readLine() )!= null && 
+					!(line.startsWith("ENDDATA")) ) {
+				if (line.matches("\\$[0-9A-Fa-f]{2}:\\$.*$")) {
+					data += line.substring(0, 4) + "\n";
+				}
+				else if (line.startsWith("DW") || line.startsWith("dw")) {
+					String s = line.replace(" ", "");
+					
+					int commentStarts = s.indexOf("#");
+					if (commentStarts >= 0) {
+						s = s.substring(0, commentStarts);
+					}
+					
+					data += s + "\n";
+				}
+				else if (line.startsWith("DB") || line.startsWith("db")) {
+					int commentStarts = line.indexOf("#");
+					if (commentStarts >= 0) {
+						line = line.substring(0, commentStarts);
+					}
+					
+					data += line + "\n";
+				}
+				
+			}
+			
+			if (line == null) {
+				throw new BadFileException("Bad file. No code segment.");
+			}
+			
+			line = bf.readLine();
+			if (! line.startsWith("CODE")) {
+				throw new BadFileException("Bad file. Code segment must start with CODE.");
+			}
+			
+			while ( (line = bf.readLine() )!= null && 
+					!(line.startsWith("ENDCODE")) ) {
+				int commentStarts = line.indexOf("#");
+				if (commentStarts >= 0) {
+					line = line.substring(0, commentStarts);
+				}
+				line = line.replaceAll("\\s+", "");
+
+				if (line.length() < 4)
+					code += String.format("%1$-4s", line) + "\n";
+				else
+					code += line.substring(0, 4) + "\n";
+			}
+		}
+		catch (IOException ex) {
+			throw new BadFileException(ex.getMessage());
+		}
+		String[] result = {
+				data, code
+		};
+		return result;
+			
+
+	}
+	
 }
