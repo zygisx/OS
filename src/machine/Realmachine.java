@@ -100,6 +100,10 @@ public class Realmachine {
 		virtualMachines.add(vm);
 	}
 	
+	public static Word[] getVirtualMachineMemory() {
+		return paginationMechanism.getVirtualMachineMemory();
+	}
+	
 	public static VirtualMachine initVirtualMachine(String fileName) 
 			throws BadFileException { 
 		Word[] mem = paginationMechanism.getVirtualMachineMemory();  // get allocated memory
@@ -107,7 +111,8 @@ public class Realmachine {
 		VirtualMachine vm = 
 				new VirtualMachine(new VirtualMachineRegisters(), mem); // create vm
 		addVirtualMachine(vm);
-		setActiveVirtualMachine(vm);
+		// no need to set active vm
+		//setActiveVirtualMachine(vm);
 		return vm;
 	}
 	
