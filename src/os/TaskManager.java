@@ -81,6 +81,26 @@ public class TaskManager {
 		//TODO work with stopped processes
 	}
 	
+	public void removeProcess(String id) {
+		Iterator<processes.Process> i = this.blockedProcesses.iterator();
+		while (i.hasNext()) {
+			processes.Process p = i.next();
+			if (p.getId().equals(id)) {
+				this.blockedProcesses.remove(p);
+			}
+		}
+		
+		i = this.readyProcesses.iterator();
+		while (i.hasNext()) {
+			processes.Process p = i.next();
+			if (p.getId().equals(id)) {
+				this.readyProcesses.remove(p);
+			}
+		}
+		
+		
+	}
+	
 	private void checkBlockedProcesses() {
 		// not effective but 100% without bugs TODO 
 		ArrayList<processes.Process> tmpList = new ArrayList<processes.Process>(this.blockedProcesses);

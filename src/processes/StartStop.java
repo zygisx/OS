@@ -55,10 +55,10 @@ public class StartStop extends Process {
 	public void createResources() {
 		Kernel.getResources().create(new Resource("processor", this.id));
 		Kernel.getResources().create(new Resource("supmemory", this.id));
-		Kernel.getResources().create(new Resource("vmemory1", this.id, "1"));
-		Kernel.getResources().create(new Resource("vmemory2", this.id, "2"));
-		Kernel.getResources().create(new Resource("vmemory3", this.id, "3"));
-		Kernel.getResources().create(new Resource("vmemory4", this.id, "4"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "1"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "2"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "3"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "4"));
 		
 		
 		// don't know better place to create it. For now we cannot add task interactive

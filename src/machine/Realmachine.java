@@ -104,6 +104,10 @@ public class Realmachine {
 		return paginationMechanism.getVirtualMachineMemory();
 	}
 	
+	public static Word[] getVirtualMachineMemory(int num) {
+		return paginationMechanism.getVirtualMachineMemory(num);
+	}
+	
 	public static VirtualMachine initVirtualMachine(String fileName) 
 			throws BadFileException { 
 		Word[] mem = paginationMechanism.getVirtualMachineMemory();  // get allocated memory
@@ -331,5 +335,7 @@ public class Realmachine {
 		return fullString;
 		
 	}
+
+	
 	
 }

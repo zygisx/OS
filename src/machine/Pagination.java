@@ -70,6 +70,25 @@ public class Pagination {
 //		return virtualMachineMemory;		
 	}
 	
+	//FIXME
+	public Word[] getVirtualMachineMemory(int num) {
+		Word[] virtualMachineMemory = 
+				new Word[Realmachine.BLOCK_SIZE * Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE];
+		Random rand = new Random();
+
+		  
+		int VMNum = num-1; // Just for now, when only one VM needed
+		
+		for (int i = VMNum; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
+			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
+			this.table[VMNum*0x10+i].setWordHexInt(i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
+			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
+				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
+			}
+		}	
+		return virtualMachineMemory;
+	}
+	
 	public boolean isBlockOccupied(int block) {
 		/* Iterates over all pagination table */
 		for (int i = 0; i < Realmachine.PAGINATION_TABLE_SIZE; i++) { 

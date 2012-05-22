@@ -24,7 +24,7 @@ public class Kernel {
 	 * object that holds all resources list
 	 */
 	private static ResourcesList resourceList = new ResourcesList();
-	private static ArrayList<processes.Process> processes = new ArrayList<>(); 
+	private static ArrayList<processes.Process> processes = new ArrayList<processes.Process>(); 
 	private static TaskManager taskManager = new TaskManager(); //FIXME
 	
 	private static boolean isSystemOn = true; 
@@ -93,6 +93,19 @@ public class Kernel {
 	public static void createProcess(processes.Process newProcess) {
 		taskManager.createProcess(newProcess);
 		processes.add(newProcess);
+	}
+	
+	public static void removeProcess(String id) {
+		taskManager.removeProcess(id);
+		
+		/* remove process */
+		Iterator<processes.Process> i = processes.iterator();
+		while (i.hasNext()) {
+			processes.Process p = i.next();
+			if (p.getId().equals(id)) {
+				processes.remove(p);
+			}
+		}
 	}
 	
 	public static void turnOffSystem() {

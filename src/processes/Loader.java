@@ -21,11 +21,13 @@ public class Loader extends Process{
 			
 		case "loaderstart":
 			
+			
+			Kernel.getResources().destroy("loaderstart");
 			this.missingResource = "vmemory";
 			
 		case "vmemory":
 			
-			Resource memoryRes = Kernel.getResources().getStartsWith("vmemory");
+			Resource memoryRes = Kernel.getResources().get("vmemory");
 			
 			
 			// get memory from realMachine
@@ -46,14 +48,15 @@ public class Loader extends Process{
 			
 			// create resource 
 			Kernel.getResources().create(new Resource("loaderfinish", this.id));
-			Kernel.getResources().create(new Resource("taskinmemory_true", this.id));
-			
-			//destroy resource loaderstart
-			Kernel.getResources().destroy("loaderstart");
+			Kernel.getResources().create(new Resource("taskinmemory", this.id));
+			Kernel.getResources().create(new Resource("taskinmemory_true", this.id, memoryRes.getInfo()));
+	
 			
 			//destroy data and code resources
 			Kernel.getResources().destroy(dataRes.getId());
 			Kernel.getResources().destroy(codeRes.getId());
+			
+			this.missingResource = "loaderstart";
 			
 		}
 	}
