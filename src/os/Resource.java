@@ -10,6 +10,7 @@ public class Resource {
 	private boolean isAvailable;
 	private String parenProcess; // don't know why int..? I change it to string
 	private ArrayList<processes.Process> waitingForResourceProcessList;
+	private String info;
 	
 	// nezinau kas cia tokie
 	// nuoroda á prieinamumo sàraðà
@@ -21,6 +22,7 @@ public class Resource {
 		this.parenProcess = parent;
 		this.waitingForResourceProcessList = new ArrayList<processes.Process>();
 		this.isAvailable = true;
+		this.info = "";
 	}
 	
 	public void free() {
@@ -37,6 +39,11 @@ public class Resource {
 
 	public String getId() {
 		return this.id;
+	}
+
+	public String getInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
