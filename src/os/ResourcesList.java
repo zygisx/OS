@@ -1,7 +1,7 @@
 package os;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
   
 /**
  * class represents resources list. 
@@ -13,17 +13,22 @@ import java.util.Iterator;
 public class ResourcesList {
 
 	
-	private HashMap<String, Resource> resources;
+	private LinkedList<Resource> resources;
 	
 	/**
 	 * constructor that initializes resources hashmap
 	 */
 	public ResourcesList() {
-		this.resources = new HashMap<String, Resource>();
+		this.resources = new LinkedList<Resource>();
 	}
 	
 	public boolean isExists(String id) {
-		return this.resources.containsKey(id);
+		for (Resource r : this.resources) {
+			if (r.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -31,7 +36,7 @@ public class ResourcesList {
 	 * @param r - Resource
 	 */
 	public void create(Resource r) {
-		this.resources.put(r.getId(), r);
+		this.resources.add(r);
 	}
 	
 	/**
@@ -40,7 +45,12 @@ public class ResourcesList {
 	 * @return Resource object where its id value equals param id
 	 */
 	public Resource get(String id) {
-		return this.resources.get(id);
+		for (Resource r : this.resources) {
+			if (r.getId().equals(id)) {
+				return r;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -48,7 +58,14 @@ public class ResourcesList {
 	 * @param id - resource id
 	 */
 	public void destroy(String id) {
-		this.resources.remove(id);
+
+		Iterator<Resource> i = this.resources.iterator();
+		while (i.hasNext()) {
+			Resource r = i.next();
+			if (r.getId().equals(id)) {
+				this.resources.remove(r);
+			}
+		}
 	}
 	
 	/**
@@ -57,11 +74,11 @@ public class ResourcesList {
 	 * @return resource which key starts with start
 	 */
 	public Resource getStartsWith(String start) {
-		Iterator<String > i = this.resources.keySet().iterator();
+		Iterator<Resource> i = this.resources.iterator();
 		while (i.hasNext()) {
-			String key = i.next();
-			if ( key.startsWith(start) ) {
-				return this.resources.get(key);
+			Resource r = i.next();
+			if ( r.getId().startsWith(start) ) {
+				return r;
 			}
 		}
 		return null;
