@@ -18,11 +18,15 @@ public class Resource {
 
 	
 	public Resource(String id, String parent) {
+		this(id, parent, "");
+	}
+	
+	public Resource(String id, String parent, String info) {
 		this.id = id;
 		this.parenProcess = parent;
 		this.waitingForResourceProcessList = new ArrayList<processes.Process>();
 		this.isAvailable = true;
-		this.info = "";
+		this.info = info;
 	}
 	
 	public void free() {
