@@ -47,13 +47,15 @@ public class Kernel {
 			
 			if (p != null) {   // p == null when no ready processes are available
 				
-				// process returns when it hasn't got needful resource 
-				// so we block it
-				p.setStatus(Status.BLOCKED);
+				
 				
 				// give processor to process and return when process blocked
 				
 				p.run(); 
+				
+				// process returns when it hasn't got needful resource 
+				// so we block it
+				p.setStatus(Status.BLOCKED);
 				
 				System.out.println(p.getId());
 				
@@ -65,13 +67,14 @@ public class Kernel {
 			
 			
 			// only for testing, program runs only 5 seconds
-			
+			/*
 			if ((System.currentTimeMillis() - time) > 5000) {
 				// after five seconds i create resource mosworkend and than startstop can continue
 				resourceList.create(new Resource("mosworkend", null));
+				System.out.println("PABAIGA");
 				//isSystemOn = false;
 			}
-			
+			*/
 		}
 		System.out.println("Mos successfully ended work");
 		

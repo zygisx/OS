@@ -68,7 +68,7 @@ public class StartStop extends Process {
 	
 	public void createProcesses() {
 		Kernel.createProcess(new Read("read", this.id, Constants.MAX_PRIORITY - 1));
-		Kernel.createProcess(new Read("chan3device", this.id, Constants.MAX_PRIORITY - 2));
+		Kernel.createProcess(new Chan3Device("chan3device", this.id, Constants.MAX_PRIORITY - 2));
 		Kernel.createProcess(new JCL("jcl", this.id, Constants.MAX_PRIORITY - 3));
 		Kernel.createProcess(new Loader("loader", this.id, Constants.MAX_PRIORITY - 4));
 		Kernel.createProcess(new Loader("interrupt", this.id, Constants.MAX_PRIORITY - 5));

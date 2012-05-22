@@ -46,8 +46,7 @@ public class Resource {
 	}
 
 	public String getInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.info;
 	}
 	
 	

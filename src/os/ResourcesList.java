@@ -1,5 +1,6 @@
 package os;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
   
@@ -7,19 +8,18 @@ import java.util.LinkedList;
  * class represents resources list. 
  * For better performance recourses keeping in HashMao
  * for fast finding
- * @author zee
  *
  */
 public class ResourcesList {
 
 	
-	private LinkedList<Resource> resources;
+	private ArrayList<Resource> resources;
 	
 	/**
 	 * constructor that initializes resources hashmap
 	 */
 	public ResourcesList() {
-		this.resources = new LinkedList<Resource>();
+		this.resources = new ArrayList<Resource>();
 	}
 	
 	public boolean isExists(String id) {
@@ -53,6 +53,15 @@ public class ResourcesList {
 		return null;
 	}
 	
+	public Resource getAvailable(String id) {
+		for (Resource r : this.resources) {
+			if (r.getId().equals(id) && r.isAvailable()) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * removes Resource from resources list
 	 * @param id - resource id
@@ -63,7 +72,8 @@ public class ResourcesList {
 		while (i.hasNext()) {
 			Resource r = i.next();
 			if (r.getId().equals(id)) {
-				this.resources.remove(r);
+				i.remove();
+				return;
 			}
 		}
 	}

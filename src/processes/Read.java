@@ -62,6 +62,8 @@ public class Read extends Process {
 				if (! Kernel.isTaskQueueEmpty()) {
 					this.missingResource = "supmemory";
 					// free used resource
+					
+					
 					Kernel.getResources().get("supmemory").free();
 				}
 				

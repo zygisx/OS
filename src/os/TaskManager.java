@@ -48,10 +48,13 @@ public class TaskManager {
 			if (proc.getStatus() == Status.BLOCKED) {		
 				String missingRes = proc.getMissingResource();		
 				if (missingRes != "" && resources.isExists(missingRes)) {
-					Resource r = resources.get(missingRes);
-					if (r.isAvailable()) {
+					Resource r = resources.getAvailable(missingRes);
+					if (r != null) {
 						proc.setStatus(Status.READY);
 						r.occupy();
+						if (r.getId().equals("vmemory")) {
+							System.out.println(r.isAvailable());
+						}
 					}
 				}
 			}
@@ -102,27 +105,16 @@ public class TaskManager {
 	}
 	
 	private void checkBlockedProcesses() {
-		// not effective but 100% without bugs TODO 
-		ArrayList<processes.Process> tmpList = new ArrayList<processes.Process>(this.blockedProcesses);
-		this.blockedProcesses.clear();
+
+		Iterator<processes.Process> i = this.blockedProcesses.iterator();
 		
-		for (Process proc : tmpList) {
-			switch (proc.getStatus()) {
-				
-				case BLOCKED:
-					this.blockedProcesses.add(proc);
-					break;
-				case READY:
-					this.readyProcesses.add(proc);
-					break;
-				case BLOCKEDS:
-									// don't know exactly what to do with stopped processes
-					break;
-				case READYS:
-					
-					break;				
+		while (i.hasNext()) {
+			processes.Process proc = i.next();
+			if (proc.getStatus() == Status.READY) {
+				this.readyProcesses.add(proc);
+				i.remove();
 			}
-					
+			//TODO add BLOCKEDS
 		}
 		//FIXME chenge to smth like checkReadyProcesses()
 	}

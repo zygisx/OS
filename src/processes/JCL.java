@@ -44,9 +44,8 @@ public class JCL extends Process {
 						
 						// destroy task resource 
 						Kernel.getResources().destroy(res.getId());
+						Kernel.getResources().destroy("taskinsupmemory");
 						
-						
-						//FIXME Just for test
 						Kernel.getResources().create(new Resource("loaderstart", this.id));
 						
 					} catch (BadFileException e) {

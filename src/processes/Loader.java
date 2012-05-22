@@ -27,11 +27,12 @@ public class Loader extends Process{
 			
 		case "vmemory":
 			
-			Resource memoryRes = Kernel.getResources().get("vmemory");
-			
+			Resource memoryRes = Kernel.getResources().getAvailable("vmemory");
+			System.out.println(memoryRes.getId() + memoryRes.getInfo());
 			
 			// get memory from realMachine
 			Word[] mem = Realmachine.getVirtualMachineMemory(Integer.parseInt(memoryRes.getInfo()));
+			
 			
 			// get data and code from resources list
 			Resource dataRes = Kernel.getResources().getStartsWith("DATA");
