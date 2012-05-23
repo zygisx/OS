@@ -38,6 +38,8 @@ public class Pagination {
 		}	
 		return virtualMachineMemory;
 		
+		//return getVirtualMachineMemory(5);
+		
 		
 		/* Choose random pagination table block */
 //		
@@ -77,10 +79,10 @@ public class Pagination {
 		Random rand = new Random();
 
 		  
-		int VMNum = num-1; // Just for now, when only one VM needed
+		int VMNum = num;
 		
-		for (int i = VMNum; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
-			Word[] block = Realmachine.getBlock(i + Realmachine.PAGINATION_TABLE_SIZE); //  get block from real memory
+		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
+			Word[] block = Realmachine.getBlock((VMNum * 0x10) + (i + Realmachine.PAGINATION_TABLE_SIZE)); //  get block from real memory
 			this.table[VMNum*0x10+i].setWordHexInt(i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];

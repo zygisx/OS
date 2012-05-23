@@ -24,11 +24,11 @@ public class Loader extends Process{
 			
 			Kernel.getResources().destroy("loaderstart");
 			this.missingResource = "vmemory";
+			return;
 			
 		case "vmemory":
 			
 			Resource memoryRes = Kernel.getResources().getAvailable("vmemory");
-			System.out.println(memoryRes.getId() + memoryRes.getInfo());
 			
 			// get memory from realMachine
 			Word[] mem = Realmachine.getVirtualMachineMemory(Integer.parseInt(memoryRes.getInfo()));
@@ -42,7 +42,7 @@ public class Loader extends Process{
 			String code = codeRes.getId().substring(4);
 			
 			
-			
+			if (mem[0] == null) System.out.println("mem nullas");
 			// load data and code to memory
 			Parser.loadData(data, mem);
 			Parser.loadCode(code, mem);
@@ -58,6 +58,8 @@ public class Loader extends Process{
 			Kernel.getResources().destroy(codeRes.getId());
 			
 			this.missingResource = "loaderstart";
+			
+			return;
 			
 		}
 	}

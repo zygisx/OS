@@ -52,20 +52,15 @@ public class TaskManager {
 					if (r != null) {
 						proc.setStatus(Status.READY);
 						r.occupy();
-						if (r.getId().equals("vmemory")) {
-							System.out.println(r.isAvailable());
-						}
 					}
 				}
 			}
 			// with BLOCKEDS
 			//else if (proc.getStatus() == Status.BLOCKEDS) {		
 			
-			
-			
 		}
-
 	}
+
 
 	/* not sure that method is necessary */
 	public void run() {
