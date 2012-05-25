@@ -73,6 +73,7 @@ public class Read extends Process {
 					this.missingResource = "filename";
 					// destroy resource
 					Kernel.getResources().destroy("filename");
+					Kernel.getResources().get("supmemory").free();
 				}
 					
 				
