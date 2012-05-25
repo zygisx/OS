@@ -28,7 +28,7 @@ public class JobGovernor extends Process {
 	public void run() throws ProcessException{
 		
 		if (this.missingResource.equals(this.firstMissingRes)) {
-			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.JOG_GOVERNER_PRIORITY - 1));
+			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.USER_PROCESS_PRIORITY));
 			Realmachine.addVirtualMachine(
 					new VirtualMachine(
 							new VirtualMachineRegisters(), 
