@@ -54,10 +54,6 @@ public class Kernel {
 				// give processor to process and return when process blocked
 				System.out.println("PROCESS " + p.getId().toUpperCase() + " RUNNING");
 				
-				if (p.getId().toUpperCase().equals("INTERRUPT")) {
-					System.gc();
-				}
-				
 				try {
 					p.run();
 				}
@@ -80,14 +76,14 @@ public class Kernel {
 			
 			
 			// only for testing, program runs only 5 seconds
-			/*
-			if ((System.currentTimeMillis() - time) > 5000) {
+			
+			if ((System.currentTimeMillis() - time) > 150) {
 				// after five seconds i create resource mosworkend and than startstop can continue
 				resourceList.create(new Resource("mosworkend", null));
 				System.out.println("PABAIGA");
 				//isSystemOn = false;
 			}
-			*/
+			
 		}
 		System.out.println("Mos successfully ended work");
 		
@@ -122,7 +118,7 @@ public class Kernel {
 		while (i.hasNext()) {
 			processes.Process p = i.next();
 			if (p.getId().equals(id)) {
-				processes.remove(p);
+				i.remove();
 			}
 		}
 	}
