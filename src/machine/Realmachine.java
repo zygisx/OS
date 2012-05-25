@@ -1,7 +1,7 @@
 package machine;
 
 import exception.BadFileException;
-import gui.MainFrame;
+import gui.vm.MainFrame;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;

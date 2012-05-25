@@ -1,7 +1,7 @@
 package os;
 
-import gui.MainFrame;
 import gui.OsFrame;
+import gui.vm.MainFrame;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
