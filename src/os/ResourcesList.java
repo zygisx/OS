@@ -13,13 +13,13 @@ import java.util.LinkedList;
 public class ResourcesList {
 
 	
-	private ArrayList<Resource> resources;
+	private LinkedList<Resource> resources;
 	
 	/**
 	 * constructor that initializes resources hashmap
 	 */
 	public ResourcesList() {
-		this.resources = new ArrayList<Resource>();
+		this.resources = new LinkedList<Resource>();
 	}
 	
 	public boolean isExists(String id) {
