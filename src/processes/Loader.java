@@ -42,7 +42,6 @@ public class Loader extends Process{
 			String code = codeRes.getId().substring(4);
 			
 			
-			if (mem[0] == null) System.out.println("mem nullas");
 			// load data and code to memory
 			Parser.loadData(data, mem);
 			Parser.loadCode(code, mem);
