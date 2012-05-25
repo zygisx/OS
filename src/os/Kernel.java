@@ -1,5 +1,9 @@
 package os;
 
+import gui.MainFrame;
+import gui.OsFrame;
+
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -30,7 +34,11 @@ public class Kernel {
 	private static boolean isSystemOn = true; 
 	private static Queue<String> tasks = new LinkedList<String>();
 	
+	private static OsFrame osFrame;
+	
 	public static void RunOS() {
+		
+		Kernel.launchOsFrame();
 		
 		// at first we start start/stop process.
 		
@@ -127,6 +135,19 @@ public class Kernel {
 	
 	public static Iterator<processes.Process> getProcessesIterator() {
 		return processes.iterator();
+	}
+	
+	private static void launchOsFrame() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					osFrame = new OsFrame();
+					osFrame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	
