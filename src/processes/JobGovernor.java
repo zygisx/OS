@@ -6,6 +6,7 @@ import machine.VirtualMachine;
 import machine.VirtualMachineRegisters;
 import os.Constants;
 import os.Kernel;
+import os.Resource;
 
 public class JobGovernor extends Process {
 
@@ -38,7 +39,7 @@ public class JobGovernor extends Process {
 			
 			Kernel.getResources().destroy(this.firstMissingRes);
 			
-			this.missingResource = "interrupt" + this.jobNum;
+			this.missingResource = "jbinterrupt" + this.jobNum;
 		}
 		else if (this.missingResource.equals("jbinterrupt" + this.jobNum)) {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
@@ -51,8 +52,16 @@ public class JobGovernor extends Process {
 					
 				case "pi":	
 				case "si":
-					
+					Kernel.removeProcess("VM" + this.jobNum);
+					Resource[] memoryResources = Kernel.getResources().getAll("vmmemory");
+					for (Resource r : memoryResources) {
+						if (r != null && Integer.parseInt(r.getId()) == this.jobNum) {
+							r.free();
+							break;
+						}
+					}
 					//TODO create resource for interrupt process 
+					
 					
 					return;
 				case "ti":
