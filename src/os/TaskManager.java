@@ -24,12 +24,17 @@ public class TaskManager {
 	
 	public Process getCurrentProcess() {
 		
+		// check all ready processes
+		this.checkReadyProcesses();
 		// run resource manager. To check if some of processes get resource they needed.
 		this.resourceManager();
 		// check all blocked processes
 		this.checkBlockedProcesses();
+		
 		// check all ready processes
-		this.checkReadyProcesses();
+		
+		//FIXME leave this for testing purpose
+		this.checkReadyProcesses1();
 		
 		return this.readyProcesses.peek();
 	}
@@ -40,7 +45,7 @@ public class TaskManager {
 		ResourcesList resources = Kernel.getResources();
 		
 		
-		Iterator<processes.Process> i = Kernel.getProcessesIterator();
+		Iterator<processes.Process> i = this.blockedProcesses.iterator();
 		while (i.hasNext()) {								// iterate through all processes
 			processes.Process proc = i.next();
 			// if process is blocked than check if needful resource is free now
@@ -75,7 +80,7 @@ public class TaskManager {
 		while (i.hasNext()) {
 			processes.Process p = i.next();
 			if (p.getId().equals(id)) {
-				this.blockedProcesses.remove(p);
+				i.remove();
 			}
 		}
 		
@@ -83,7 +88,7 @@ public class TaskManager {
 		while (i.hasNext()) {
 			processes.Process p = i.next();
 			if (p.getId().equals(id)) {
-				this.readyProcesses.remove(p);
+				i.remove();
 			}
 		}
 		
@@ -116,6 +121,22 @@ public class TaskManager {
 			if (proc.getStatus() == Status.BLOCKED) {
 				this.blockedProcesses.add(proc);
 				i.remove();
+			}
+			//TODO add BLOCKEDS
+		}
+	}
+	
+	private void checkReadyProcesses1() {
+		// TODO Auto-generated method stub
+		
+		Iterator<processes.Process> i = this.readyProcesses.iterator();
+		
+		while (i.hasNext()) {
+			processes.Process proc = i.next();
+			if (proc.getStatus() == Status.BLOCKED) {
+				this.blockedProcesses.add(proc);
+				i.remove();
+				System.out.println("BUNA IR TAIP KARTAIS");
 			}
 			//TODO add BLOCKEDS
 		}
