@@ -21,6 +21,9 @@ public class Timer {
 		this.time += Constants.IO_STORKE_TIME;
 	}
 	
+	/**
+	 * if interrupt, than timer resets automatically
+	 */
 	public boolean isInterupt() {
 		if (this.time >= Constants.TIMER_LIMIT) {
 			this.time = 0;
