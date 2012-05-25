@@ -6,8 +6,8 @@ import os.Resource;
 public class Interrupt extends Process {
 
 	
-	public Interrupt(String id, String parent) {
-		super(id, parent);
+	public Interrupt(String id, String parent, int priority) {
+		super(id, parent, priority);
 		super.isSupervisorMode = true;	// true defines that it is system process
 		this.status = Status.BLOCKED;
 		this.missingResource = "interrupt";
