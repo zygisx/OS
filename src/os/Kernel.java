@@ -40,6 +40,9 @@ public class Kernel {
 		
 		// just for now for testing purpose
 		long time = System.currentTimeMillis();
+		
+		boolean tempFlagForDinamicTask = false;
+		
 		while (isSystemOn) {
 			
 			// at first call resource manager which would be implemented in TaskManager class 
@@ -61,7 +64,7 @@ public class Kernel {
 					System.out.println(ex.getMessage());
 				}
 				
-				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINESHED");
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINISHED");
 				// process returns when it hasn't got needful resource 
 				// so we block it
 				p.setStatus(Status.BLOCKED);
@@ -76,13 +79,20 @@ public class Kernel {
 			
 			
 			// only for testing, program runs only 5 seconds
-			
-			if ((System.currentTimeMillis() - time) > 100) {
-				// after five seconds i create resource mosworkend and than startstop can continue
-				resourceList.create(new Resource("mosworkend", null));
-				System.out.println("PABAIGA");
-				//isSystemOn = false;
-			}
+//			if (! tempFlagForDinamicTask && (System.currentTimeMillis() - time) > 100) {
+//				
+//				Kernel.addTask("././CountTo10.txt");
+//				Kernel.addTask("././InfiniteLoop.txt");
+//				Kernel.addTask("././InfiniteLoop.txt");
+//				resourceList.create(new Resource("filename", null));
+//				tempFlagForDinamicTask = true;
+//			}
+//			if ((System.currentTimeMillis() - time) > 250) {
+//				// after five seconds i create resource mosworkend and than startstop can continue
+//				resourceList.create(new Resource("mosworkend", null));
+//				System.out.println("PABAIGA");
+//				//isSystemOn = false;
+//			}
 			
 		}
 		System.out.println("Mos successfully ended work");
