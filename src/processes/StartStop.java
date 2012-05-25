@@ -60,6 +60,10 @@ public class StartStop extends Process {
 		Kernel.getResources().create(new Resource("vmemory", this.id, "2"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "3"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "4"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "5"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "6"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "7"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "8"));
 		
 		Kernel.getResources().create(new Resource("vmrun", this.id));	// always free resource
 		
