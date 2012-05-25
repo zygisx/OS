@@ -62,15 +62,6 @@ public class TaskManager {
 	}
 
 
-	/* not sure that method is necessary */
-	public void run() {
-		while (readyProcesses.size() > 0) {
-			currentProcess = readyProcesses.poll();
-			currentProcess.run();
-		}
-	}
-
-
 	public void createProcess(processes.Process newProcess) {
 		if (newProcess.getStatus() == Status.BLOCKED)
 			this.blockedProcesses.add(newProcess);
