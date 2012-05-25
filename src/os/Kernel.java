@@ -46,15 +46,10 @@ public class Kernel {
 		
 		Kernel.launchOsFrame();
 		
-<<<<<<< HEAD
-		
 		boolean tempFlagForDinamicTask = false;
 
 		if(stepMode) {
-=======
-		if(stepMode) {
->>>>>>> origin/master
-			
+
 			//waitForStep();
 		
 			// at first we start start/stop process.
@@ -64,21 +59,12 @@ public class Kernel {
 			// just for now for testing purpose
 			long time = System.currentTimeMillis();
 			while (isSystemOn) {
-<<<<<<< HEAD
 				
 				// at first call resource manager which would be implemented in TaskManager class 
 				
 				// ask task manager for process with highest priority
 				processes.Process p = taskManager.getCurrentProcess();
 				
-=======
-				
-				// at first call resource manager which would be implemented in TaskManager class 
-				
-				// ask task manager for process with highest priority
-				processes.Process p = taskManager.getCurrentProcess();
-				
->>>>>>> origin/master
 				if (p != null) {   // p == null when no ready processes are available
 					
 					
@@ -106,16 +92,13 @@ public class Kernel {
 				else {
 					resourceList.create(new Resource("mosworkend", null));
 				}
-<<<<<<< HEAD
 
 				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINISHED");
 				// process returns when it hasn't got needful resource 
 				// so we block it
 				p.setStatus(Status.BLOCKED);
 
-=======
-				
->>>>>>> origin/master
+
 				
 				
 				// only for testing, program runs only 5 seconds
@@ -127,40 +110,29 @@ public class Kernel {
 					//isSystemOn = false;
 				}
 				
-<<<<<<< HEAD
 				
-				if ((System.currentTimeMillis() - time) > 1000 * 60) {
-					// after five seconds i create resource mosworkend and than startstop can continue
-					resourceList.create(new Resource("mosworkend", null));
-					System.out.println("PABAIGA");
-					//isSystemOn = false;
-				}
+
+				// only for testing, program runs only 5 seconds
+//				if (! tempFlagForDinamicTask && (System.currentTimeMillis() - time) > 100) {
+//					
+//					Kernel.addTask("././CountTo10.txt");
+//					Kernel.addTask("././InfiniteLoop.txt");
+//					Kernel.addTask("././InfiniteLoop.txt");
+//					resourceList.create(new Resource("filename", null));
+//					tempFlagForDinamicTask = true;
+//				}
+//				if ((System.currentTimeMillis() - time) > 250) {
+//					// after five seconds i create resource mosworkend and than startstop can continue
+//					resourceList.create(new Resource("mosworkend", null));
+//					System.out.println("PABAIGA");
+//					//isSystemOn = false;
+//				}
+
 				
 			}
-			
-			
-			
-			// only for testing, program runs only 5 seconds
-//			if (! tempFlagForDinamicTask && (System.currentTimeMillis() - time) > 100) {
-//				
-//				Kernel.addTask("././CountTo10.txt");
-//				Kernel.addTask("././InfiniteLoop.txt");
-//				Kernel.addTask("././InfiniteLoop.txt");
-//				resourceList.create(new Resource("filename", null));
-//				tempFlagForDinamicTask = true;
-//			}
-//			if ((System.currentTimeMillis() - time) > 250) {
-//				// after five seconds i create resource mosworkend and than startstop can continue
-//				resourceList.create(new Resource("mosworkend", null));
-//				System.out.println("PABAIGA");
-//				//isSystemOn = false;
-//			}
 
 			
-=======
-			}
-			
->>>>>>> origin/master
+
 			System.out.println("Mos successfully ended work");
 		
 		}
@@ -230,8 +202,8 @@ public class Kernel {
 	public static int getProcessesCount() {
 		return processes.size();
 	}
-<<<<<<< HEAD
-	
+
+
 	public static String getProcessesListValue(int row, int col) {
 		String result = null;
 		
@@ -261,40 +233,7 @@ public class Kernel {
 		
 		return result;
 	}
-	
-=======
-	
-	public static String getProcessesListValue(int row, int col) {
-		String result = null;
-		
-		Process process = processes.get(row);
-		
-		switch(col) {
-		
-			case 0:
-				result = process.getId();
-				break;
-			case 1:
-				result = process.getParent();
-				break;
-			case 2:
-				result = process.getMissingResource();
-				break;
-			case 3:
-				result = process.getStatus().toString();
-				break;
-			case 4:
-				result = Boolean.toString(process.getSuperVisorValue());
-				break;
-			case 5:
-				result = Integer.toString(process.getPriority());
-				break;
-		}
-		
-		return result;
-	}
-	
->>>>>>> origin/master
+
 	public static void waitForStep() {
 		
 		while(!nextStep) {
