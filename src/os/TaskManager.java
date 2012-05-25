@@ -131,7 +131,9 @@ public class TaskManager {
 	}
 
 	
-	
+	public int getReadyProcessesCount() {
+		return readyProcesses.size();
+	}
 
 	
 }

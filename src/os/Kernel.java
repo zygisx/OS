@@ -151,7 +151,8 @@ public class Kernel {
 	}
 	
 	
-	
-	
+	public static TaskManager getTaskManager() {
+		return Kernel.taskManager;
+	}
 	
 }
