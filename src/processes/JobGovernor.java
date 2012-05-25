@@ -1,5 +1,8 @@
 package processes;
 
+import machine.Realmachine;
+import machine.VirtualMachine;
+import machine.VirtualMachineRegisters;
 import os.Constants;
 import os.Kernel;
 
@@ -24,6 +27,13 @@ public class JobGovernor extends Process {
 		
 		if (this.missingResource.equals(this.firstMissingRes)) {
 			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.JOG_GOVERNER_PRIORITY - 1));
+			Realmachine.addVirtualMachine(
+					new VirtualMachine(
+							new VirtualMachineRegisters(), 
+							Realmachine.getVirtualMachineMemory(this.jobNum)
+							), 
+					this.jobNum);
+			
 			
 			Kernel.getResources().destroy(this.firstMissingRes);
 			
@@ -33,7 +43,7 @@ public class JobGovernor extends Process {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
 				case "io":
 					
-					//TODO intup output. 
+					//TODO input output. 
 					
 					
 					return;
