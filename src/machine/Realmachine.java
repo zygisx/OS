@@ -104,7 +104,7 @@ public class Realmachine {
 		virtualMachines[num] = vm;
 	}
 	
-	/* deprecated */
+	/** Deprecated */
 	public static void addVirtualMachine(VirtualMachine vm) {
 		int i = 0;
 		while (i < TOTAL_VIRTUAL_MACHINES && virtualMachines[i] != null)
@@ -113,7 +113,7 @@ public class Realmachine {
 			virtualMachines[i] = vm;
 	}
 	
-	/* Deprecated */
+	/** Deprecated */
 	public static Word[] getVirtualMachineMemory() {
 		return paginationMechanism.getVirtualMachineMemory();
 	}
@@ -122,6 +122,7 @@ public class Realmachine {
 		return paginationMechanism.getVirtualMachineMemory(num);
 	}
 	
+	/** Deprecated */
 	public static VirtualMachine initVirtualMachine(String fileName) 
 			throws BadFileException { 
 		Word[] mem = paginationMechanism.getVirtualMachineMemory();  // get allocated memory
@@ -327,8 +328,8 @@ public class Realmachine {
 
 	}
 
-	// toString
 	
+	/** Deprecated */
 	public static MainFrame getFrame() {
 		return frame;
 	}
