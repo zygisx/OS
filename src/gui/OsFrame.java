@@ -9,17 +9,20 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class OsFrame extends JFrame {
 	
 	private JPanel contentPanel;
 	private JTabbedPane tabsPanel;
-	private JPanel readyProcessesPanel;
+	private ProcessesPanel processesPanel;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private UtilitiesPanel utilitiesPanel;
+	
 	
 	/**
 	 *  Create frame
@@ -39,7 +42,7 @@ public class OsFrame extends JFrame {
 		setTitle("Operating System Emulator");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 950, 520);
+		setBounds(100, 100, 950, 600);
 		
 		//set content panel
 		
@@ -57,9 +60,20 @@ public class OsFrame extends JFrame {
 		
 		contentPanel.add(tabsPanel);
 		
-		readyProcessesPanel = new ReadyProcessesPanel();
-		tabsPanel.addTab("ReadyProcesses", null, readyProcessesPanel, null);
+		processesPanel = new ProcessesPanel();
+		tabsPanel.addTab("Processes", null, processesPanel, null);
+		
+		utilitiesPanel = new UtilitiesPanel();
+		contentPanel.add(utilitiesPanel, BorderLayout.SOUTH);
 		
 
+	}
+	
+	public ProcessesPanel getProcessesPanel() {
+		return (ProcessesPanel) this.processesPanel;
+	}
+	
+	public void update() {
+		this.processesPanel.update();
 	}
 }

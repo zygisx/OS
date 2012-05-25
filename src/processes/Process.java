@@ -83,5 +83,13 @@ public abstract class Process implements Comparable<Process> {
 			return 1;
 		else return 0;
 	}
+
+	public String getParent() {
+		return this.parentProcess;
+	}
+	
+	public boolean getSuperVisorValue() {
+		return this.isSupervisorMode;
+	}
 	
 }
