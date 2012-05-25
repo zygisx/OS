@@ -60,6 +60,8 @@ public class StartStop extends Process {
 		Kernel.getResources().create(new Resource("vmemory", this.id, "3"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "4"));
 		
+		Kernel.getResources().create(new Resource("vmrun", this.id));	// always free resource
+		
 		
 		// don't know better place to create it. For now we cannot add task interactive
 		if (! Kernel.isTaskQueueEmpty()) Kernel.getResources().create(new Resource("filename", this.id));
