@@ -2,6 +2,8 @@ package processes;
 
 import exception.ProcessException;
 import machine.Realmachine;
+import os.Kernel;
+import os.Resource;
 import os.Timer;
 
 public class VirtualMachine extends Process {
@@ -22,6 +24,8 @@ public class VirtualMachine extends Process {
 	@Override
 	public void run() throws ProcessException {
 		
+		Kernel.getResources().get("vmrun").free();	// vmrun resource is always available
+		
 		machine.VirtualMachine vm = Realmachine.getVirtualMachine(VMNum);
 		String command = "";
 		if (vm == null) {
@@ -31,17 +35,26 @@ public class VirtualMachine extends Process {
 			
 			
 			command = vm.step();
+			if (command == null) {
+				// Program is halted.
+				
+				//TODO create interrupt resource 
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "si");
+				
+				Kernel.getResources().create(r);
+				
+
+				return;
+			}
+			
 			if (command.equals("gd") && command.equals("pd")) {
 				timer.IOStroke();
-				
 				//TODO implement interrupt
 			}
 			else {
 				timer.stroke();
 			}
 		}
-		
-		
 	}
 	
 }
