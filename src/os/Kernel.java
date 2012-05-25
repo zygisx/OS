@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import exception.ProcessException;
+
 import processes.*;
 import processes.Process.Status;
 
@@ -58,14 +60,21 @@ public class Kernel {
 				
 				
 				// give processor to process and return when process blocked
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " RUNNING");
 				
-				p.run(); 
+				try {
+					p.run();
+				}
+				catch (ProcessException ex) {
+					System.out.println(ex.getMessage());
+				}
 				
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINESHED");
 				// process returns when it hasn't got needful resource 
 				// so we block it
 				p.setStatus(Status.BLOCKED);
 				
-				System.out.println(p.getId());
+				
 				
 			}
 			else {
@@ -75,14 +84,14 @@ public class Kernel {
 			
 			
 			// only for testing, program runs only 5 seconds
-			/*
-			if ((System.currentTimeMillis() - time) > 5000) {
+			
+			if ((System.currentTimeMillis() - time) > 100) {
 				// after five seconds i create resource mosworkend and than startstop can continue
 				resourceList.create(new Resource("mosworkend", null));
 				System.out.println("PABAIGA");
 				//isSystemOn = false;
 			}
-			*/
+			
 		}
 		System.out.println("Mos successfully ended work");
 		
@@ -102,6 +111,9 @@ public class Kernel {
 	
 	
 	public static void createProcess(processes.Process newProcess) {
+		
+		System.out.println("\tProcess " + newProcess.getId() + " created");
+		
 		taskManager.createProcess(newProcess);
 		processes.add(newProcess);
 	}
@@ -114,7 +126,7 @@ public class Kernel {
 		while (i.hasNext()) {
 			processes.Process p = i.next();
 			if (p.getId().equals(id)) {
-				processes.remove(p);
+				i.remove();
 			}
 		}
 	}

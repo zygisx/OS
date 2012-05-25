@@ -13,13 +13,13 @@ import java.util.LinkedList;
 public class ResourcesList {
 
 	
-	private ArrayList<Resource> resources;
+	private LinkedList<Resource> resources;
 	
 	/**
 	 * constructor that initializes resources hashmap
 	 */
 	public ResourcesList() {
-		this.resources = new ArrayList<Resource>();
+		this.resources = new LinkedList<Resource>();
 	}
 	
 	public boolean isExists(String id) {
@@ -36,6 +36,10 @@ public class ResourcesList {
 	 * @param r - Resource
 	 */
 	public void create(Resource r) {
+		
+		//FIXME
+		System.out.println("\tResource " + r.getId().substring(0, (r.getId().length() > 10 ? 10 : r.getId().length() ))  + " created");
+		
 		this.resources.add(r);
 	}
 	
@@ -62,12 +66,26 @@ public class ResourcesList {
 		return null;
 	}
 	
+	public Resource[] getAll(String id) {
+		Resource[] resources = new Resource[20];
+		int i = 0;
+		for (Resource r : this.resources) {
+			if (r.getId().equals(id)) {
+				resources[i++] = r;
+			}
+		}
+		return resources;
+	}
+	
 	/**
 	 * removes Resource from resources list
 	 * @param id - resource id
 	 */
 	public void destroy(String id) {
-
+		
+		//FIXME  
+		System.out.println("\tResource " + id.substring(0, (id.length() > 10 ? 10 : id.length() ))  + " destroyed");
+		
 		Iterator<Resource> i = this.resources.iterator();
 		while (i.hasNext()) {
 			Resource r = i.next();

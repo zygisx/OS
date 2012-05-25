@@ -3,6 +3,8 @@ package processes;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import exception.ProcessException;
+
 import os.Resource;
 
 public abstract class Process implements Comparable<Process> {
@@ -32,7 +34,7 @@ public abstract class Process implements Comparable<Process> {
 	
 	
 	// abstract method
-	public abstract void run();
+	public abstract void run() throws ProcessException;
 	
 	public void askResource() {
 		

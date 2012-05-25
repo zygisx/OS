@@ -1,5 +1,6 @@
 package processes;
 
+import exception.ProcessException;
 import os.Constants;
 import os.Kernel;
 import os.Resource;
@@ -17,7 +18,7 @@ public class StartStop extends Process {
 	
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException{
 		
 		/*
 		 * switch to now in wich stage of process we are, in first stage sprocess do not require any resource
@@ -59,6 +60,8 @@ public class StartStop extends Process {
 		Kernel.getResources().create(new Resource("vmemory", this.id, "2"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "3"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "4"));
+		
+		Kernel.getResources().create(new Resource("vmrun", this.id));	// always free resource
 		
 		
 		// don't know better place to create it. For now we cannot add task interactive

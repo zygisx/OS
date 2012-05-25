@@ -1,5 +1,7 @@
 package processes;
 
+import exception.ProcessException;
+
 public class Print extends Process {
 
 	
@@ -9,7 +11,7 @@ public class Print extends Process {
 	}
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException{
 		
 	}
 }

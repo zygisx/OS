@@ -121,7 +121,12 @@ public class VirtualMachine {
 	public String step() {
 		String command = null;
 		if(!isHalted) {
-			command = memory[registers.getIC()].getStringValue();
+			command = memory[registers.getIC()].getStringValue().toUpperCase();
+			// new lines for interrupts with IO operations
+			String prefix = command.substring(0, 2);
+			if (prefix.equals("GD") || prefix.equals("PD") || prefix.equals("PP")) {
+				return command;
+			}
 			processCommand(command);
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);

@@ -1,7 +1,12 @@
 package processes;
 
+import exception.ProcessException;
+import machine.Realmachine;
+import machine.VirtualMachine;
+import machine.VirtualMachineRegisters;
 import os.Constants;
 import os.Kernel;
+import os.Resource;
 
 public class JobGovernor extends Process {
 
@@ -20,31 +25,49 @@ public class JobGovernor extends Process {
 	}
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException{
 		
 		if (this.missingResource.equals(this.firstMissingRes)) {
 			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.JOG_GOVERNER_PRIORITY - 1));
+			Realmachine.addVirtualMachine(
+					new VirtualMachine(
+							new VirtualMachineRegisters(), 
+							Realmachine.getVirtualMachineMemory(this.jobNum)
+							), 
+					this.jobNum);
+			
 			
 			Kernel.getResources().destroy(this.firstMissingRes);
 			
-			this.missingResource = "interrupt" + this.jobNum;
+			this.missingResource = "jbinterrupt" + this.jobNum;
 		}
 		else if (this.missingResource.equals("jbinterrupt" + this.jobNum)) {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
-				case "io":
+				case "IO":
 					
-					//TODO intup output. 
+					//TODO input output. 
 					
 					
 					return;
 					
-				case "pi":	
-				case "si":
-					
+				case "PI":	
+				case "SI":
+					Kernel.removeProcess("VM" + this.jobNum);
+					Resource[] memoryResources = Kernel.getResources().getAll("vmmemory");
+					for (Resource r : memoryResources) {
+						if (r != null && Integer.parseInt(r.getId()) == this.jobNum) {
+							r.free();
+							break;
+						}
+					}
 					//TODO create resource for interrupt process 
 					
+					//remove used resource
+					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
+					
+					
 					return;
-				case "ti":
+				case "TI":
 					return ;
 					
 					

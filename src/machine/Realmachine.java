@@ -17,11 +17,12 @@ public class Realmachine {
 	public static final int BLOCK_SIZE = 0x10; // block size is 0x10 = 16 not 0xf = 15
 	public static final int PAGINATION_TABLE_SIZE = 0x10; //table consist of 16 blocks
 	public static final int VIRTUAL_MACHINE_MEMORY_SIZE = 0x10;
+	public static final int TOTAL_VIRTUAL_MACHINES = BLOCK_SIZE*PAGINATION_TABLE_SIZE;
 	
 	private static Word[] memory;
 	private static VirtualMachine activeVirtualMachine;
 	private static RealMachineRegisters registers;
-	private static ArrayList<VirtualMachine> virtualMachines;
+	private static VirtualMachine[] virtualMachines;
 	private static Pagination paginationMechanism;
 	
 	private static MainFrame frame;
@@ -34,7 +35,10 @@ public class Realmachine {
 		}
 		activeVirtualMachine = null;
 		registers = new RealMachineRegisters();
-		virtualMachines = new ArrayList<VirtualMachine>();
+		virtualMachines = new VirtualMachine[TOTAL_VIRTUAL_MACHINES];
+		for (int i = 0; i < TOTAL_VIRTUAL_MACHINES; i++) {
+			virtualMachines[i] = null;	//FIXME
+		}
 		// create pagination table and fill it with first 256 bytes from memory
 		Word[] paginationTable = new Word[BLOCK_SIZE*PAGINATION_TABLE_SIZE];
 		for (int i = 0; i < PAGINATION_TABLE_SIZE; i++) {
@@ -92,22 +96,40 @@ public class Realmachine {
 		return null;
 	}
 	
-	public static VirtualMachine getActiveVM() {
-		return activeVirtualMachine;
-	}
 	
-	public static void addVirtualMachine(VirtualMachine vm) {
-		virtualMachines.add(vm);
-	}
 	
-	public static Word[] getVirtualMachineMemory() {
-		return paginationMechanism.getVirtualMachineMemory();
+	public static void addVirtualMachine(VirtualMachine vm, int num) {
+		virtualMachines[num] = vm;
 	}
 	
 	public static Word[] getVirtualMachineMemory(int num) {
 		return paginationMechanism.getVirtualMachineMemory(num);
 	}
 	
+	public static VirtualMachine getVirtualMachine(int num) {
+		return virtualMachines[num];
+	}
+	
+	/** Deprecated */
+	public static VirtualMachine getActiveVM() {
+		return activeVirtualMachine;
+	}
+	
+	/** Deprecated */
+	public static void addVirtualMachine(VirtualMachine vm) {
+		int i = 0;
+		while (i < TOTAL_VIRTUAL_MACHINES && virtualMachines[i] != null)
+			i++;
+		if (i < TOTAL_VIRTUAL_MACHINES)
+			virtualMachines[i] = vm;
+	}
+	
+	/** Deprecated */
+	public static Word[] getVirtualMachineMemory() {
+		return paginationMechanism.getVirtualMachineMemory();
+	}
+	
+	/** Deprecated */
 	public static VirtualMachine initVirtualMachine(String fileName) 
 			throws BadFileException { 
 		Word[] mem = paginationMechanism.getVirtualMachineMemory();  // get allocated memory
@@ -313,8 +335,8 @@ public class Realmachine {
 
 	}
 
-	// toString
 	
+	/** Deprecated */
 	public static MainFrame getFrame() {
 		return frame;
 	}

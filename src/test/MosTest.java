@@ -8,9 +8,10 @@ public class MosTest {
 	public static void main(String args[]) {
 		try {
 			System.out.println("System start work.");
-			Kernel.addTask("././program.txt");
-			Kernel.addTask("././program.txt");
-			Kernel.addTask("././fibonacci.txt");
+			Kernel.addTask("././CountTo10.txt");
+			Kernel.addTask("././CountTo10.txt");
+			Kernel.addTask("././InfiniteLoop.txt");
+			
 			
 			Kernel.RunOS();
 			
