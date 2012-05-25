@@ -1,5 +1,10 @@
 package os;
 
+import gui.OsFrame;
+import gui.ProcessesPanel;
+import gui.vm.MainFrame;
+
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,6 +13,7 @@ import java.util.Queue;
 import exception.ProcessException;
 
 import processes.*;
+import processes.Process;
 import processes.Process.Status;
 
 /**
@@ -32,48 +38,78 @@ public class Kernel {
 	private static boolean isSystemOn = true; 
 	private static Queue<String> tasks = new LinkedList<String>();
 	
+	private static OsFrame osFrame;
+	private static boolean stepMode = true;
+	private static boolean nextStep = false;
+	
 	public static void RunOS() {
 		
-		// at first we start start/stop process.
+		Kernel.launchOsFrame();
 		
-		Kernel.createProcess(new StartStop("startstop"));
-		
-		// just for now for testing purpose
-		long time = System.currentTimeMillis();
 		
 		boolean tempFlagForDinamicTask = false;
+
+		if(stepMode) {
+			
+			//waitForStep();
 		
-		while (isSystemOn) {
+			// at first we start start/stop process.
 			
-			// at first call resource manager which would be implemented in TaskManager class 
+			Kernel.createProcess(new StartStop("startstop"));
 			
-			// ask task manager for process with highest priority
-			processes.Process p = taskManager.getCurrentProcess();
-			
-			if (p != null) {   // p == null when no ready processes are available
+			// just for now for testing purpose
+			long time = System.currentTimeMillis();
+			while (isSystemOn) {
 				
+				// at first call resource manager which would be implemented in TaskManager class 
 				
+				// ask task manager for process with highest priority
+				processes.Process p = taskManager.getCurrentProcess();
 				
-				// give processor to process and return when process blocked
-				System.out.println("PROCESS " + p.getId().toUpperCase() + " RUNNING");
-				
-				try {
-					p.run();
+				if (p != null) {   // p == null when no ready processes are available
+					
+					
+					
+					// give processor to process and return when process blocked
+					System.out.println("PROCESS " + p.getId().toUpperCase() + " RUNNING");
+					
+					try {
+						waitForStep();
+						p.run();
+						
+					}
+					catch (ProcessException ex) {
+						System.out.println(ex.getMessage());
+					}
+					
+					System.out.println("PROCESS " + p.getId().toUpperCase() + " FINESHED");
+					// process returns when it hasn't got needful resource 
+					// so we block it
+					p.setStatus(Status.BLOCKED);
+					
+					
+					
 				}
-				catch (ProcessException ex) {
-					System.out.println(ex.getMessage());
+				else {
+					resourceList.create(new Resource("mosworkend", null));
 				}
-				
+
 				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINISHED");
 				// process returns when it hasn't got needful resource 
 				// so we block it
 				p.setStatus(Status.BLOCKED);
+
 				
 				
 				
-			}
-			else {
-				resourceList.create(new Resource("mosworkend", null));
+				
+				if ((System.currentTimeMillis() - time) > 1000 * 60) {
+					// after five seconds i create resource mosworkend and than startstop can continue
+					resourceList.create(new Resource("mosworkend", null));
+					System.out.println("PABAIGA");
+					//isSystemOn = false;
+				}
+				
 			}
 			
 			
@@ -93,9 +129,11 @@ public class Kernel {
 //				System.out.println("PABAIGA");
 //				//isSystemOn = false;
 //			}
+
 			
+			System.out.println("Mos successfully ended work");
+		
 		}
-		System.out.println("Mos successfully ended work");
 		
 	}
 	
@@ -113,6 +151,8 @@ public class Kernel {
 	
 	
 	public static void createProcess(processes.Process newProcess) {
+		
+		waitForStep();
 		
 		System.out.println("\tProcess " + newProcess.getId() + " created");
 		
@@ -151,8 +191,63 @@ public class Kernel {
 		return processes.iterator();
 	}
 	
+	private static void launchOsFrame() {
+		osFrame = new OsFrame();
+		osFrame.setVisible(true);
+	}
 	
 	
+	public static int getProcessesCount() {
+		return processes.size();
+	}
 	
+	public static String getProcessesListValue(int row, int col) {
+		String result = null;
+		
+		Process process = processes.get(row);
+		
+		switch(col) {
+		
+			case 0:
+				result = process.getId();
+				break;
+			case 1:
+				result = process.getParent();
+				break;
+			case 2:
+				result = process.getMissingResource();
+				break;
+			case 3:
+				result = process.getStatus().toString();
+				break;
+			case 4:
+				result = Boolean.toString(process.getSuperVisorValue());
+				break;
+			case 5:
+				result = Integer.toString(process.getPriority());
+				break;
+		}
+		
+		return result;
+	}
+	
+	public static void waitForStep() {
+		
+		while(!nextStep) {
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		Kernel.nextStep = false;
+		Kernel.osFrame.update();
+	}
+	
+	public static void setNextStep(boolean value) {
+		Kernel.nextStep = value;
+	}
 	
 }
