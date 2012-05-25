@@ -43,15 +43,15 @@ public class JobGovernor extends Process {
 		}
 		else if (this.missingResource.equals("jbinterrupt" + this.jobNum)) {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
-				case "io":
+				case "IO":
 					
 					//TODO input output. 
 					
 					
 					return;
 					
-				case "pi":	
-				case "si":
+				case "PI":	
+				case "SI":
 					Kernel.removeProcess("VM" + this.jobNum);
 					Resource[] memoryResources = Kernel.getResources().getAll("vmmemory");
 					for (Resource r : memoryResources) {
@@ -62,9 +62,12 @@ public class JobGovernor extends Process {
 					}
 					//TODO create resource for interrupt process 
 					
+					//remove used resource
+					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
+					
 					
 					return;
-				case "ti":
+				case "TI":
 					return ;
 					
 					
