@@ -1,5 +1,6 @@
 package processes;
 
+import exception.ProcessException;
 import os.Kernel;
 import os.Resource;
 import machine.*;
@@ -15,7 +16,7 @@ public class Loader extends Process{
 	}
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException {
 		
 		switch (this.missingResource) {
 			

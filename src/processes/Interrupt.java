@@ -1,5 +1,6 @@
 package processes;
 
+import exception.ProcessException;
 import os.Kernel;
 import os.Resource;
 
@@ -14,7 +15,7 @@ public class Interrupt extends Process {
 	}
 	
 	@Override
-	public void run() {
+	public void run()  throws ProcessException {
 		switch(this.missingResource) {
 			case "interrupt":
 				

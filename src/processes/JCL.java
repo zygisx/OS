@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import exception.BadFileException;
+import exception.ProcessException;
 
 import machine.Parser;
 
@@ -23,7 +24,7 @@ public class JCL extends Process {
 	}
 
 	@Override
-	public void run() {
+	public void run() throws ProcessException {
 		
 		switch (this.missingResource) {
 		

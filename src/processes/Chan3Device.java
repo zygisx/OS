@@ -1,5 +1,7 @@
 package processes;
 
+import exception.ProcessException;
+
 public class Chan3Device extends Process {
 
 	
@@ -11,7 +13,7 @@ public class Chan3Device extends Process {
 	}
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException {
 		
 	}
 }

@@ -1,5 +1,6 @@
 package processes;
 
+import exception.ProcessException;
 import machine.Realmachine;
 import machine.VirtualMachine;
 import machine.VirtualMachineRegisters;
@@ -23,7 +24,7 @@ public class JobGovernor extends Process {
 	}
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException{
 		
 		if (this.missingResource.equals(this.firstMissingRes)) {
 			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.JOG_GOVERNER_PRIORITY - 1));

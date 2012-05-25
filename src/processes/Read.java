@@ -7,6 +7,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+import exception.ProcessException;
+
 import os.Kernel;
 import os.Resource;
 
@@ -29,7 +31,7 @@ public class Read extends Process {
 	*/
 	
 	@Override
-	public void run() {
+	public void run() throws ProcessException{
 		
 		switch (this.missingResource) {
 			
