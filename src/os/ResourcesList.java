@@ -66,6 +66,17 @@ public class ResourcesList {
 		return null;
 	}
 	
+	public Resource[] getAll(String id) {
+		Resource[] resources = new Resource[20];
+		int i = 0;
+		for (Resource r : this.resources) {
+			if (r.getId().equals(id)) {
+				resources[i++] = r;
+			}
+		}
+		return resources;
+	}
+	
 	/**
 	 * removes Resource from resources list
 	 * @param id - resource id
