@@ -50,14 +50,19 @@ public class Kernel {
 				
 				
 				// give processor to process and return when process blocked
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " RUNNING");
 				
+				if (p.getId().toUpperCase().equals("INTERRUPT")) {
+					System.gc();
+				}
 				p.run(); 
 				
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINESHED");
 				// process returns when it hasn't got needful resource 
 				// so we block it
 				p.setStatus(Status.BLOCKED);
 				
-				System.out.println(p.getId());
+				
 				
 			}
 			else {
@@ -94,6 +99,9 @@ public class Kernel {
 	
 	
 	public static void createProcess(processes.Process newProcess) {
+		
+		System.out.println("\tProcess " + newProcess.getId() + " created");
+		
 		taskManager.createProcess(newProcess);
 		processes.add(newProcess);
 	}

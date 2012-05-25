@@ -36,6 +36,10 @@ public class ResourcesList {
 	 * @param r - Resource
 	 */
 	public void create(Resource r) {
+		
+		//FIXME
+		System.out.println("\tResource " + r.getId().substring(0, (r.getId().length() > 10 ? 10 : r.getId().length() ))  + " created");
+		
 		this.resources.add(r);
 	}
 	
@@ -67,7 +71,10 @@ public class ResourcesList {
 	 * @param id - resource id
 	 */
 	public void destroy(String id) {
-
+		
+		//FIXME  
+		System.out.println("\tResource " + id.substring(0, (id.length() > 10 ? 10 : id.length() ))  + " destroyed");
+		
 		Iterator<Resource> i = this.resources.iterator();
 		while (i.hasNext()) {
 			Resource r = i.next();
