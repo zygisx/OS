@@ -96,12 +96,23 @@ public class Realmachine {
 		return null;
 	}
 	
-	public static VirtualMachine getActiveVM() {
-		return activeVirtualMachine;
-	}
+	
 	
 	public static void addVirtualMachine(VirtualMachine vm, int num) {
 		virtualMachines[num] = vm;
+	}
+	
+	public static Word[] getVirtualMachineMemory(int num) {
+		return paginationMechanism.getVirtualMachineMemory(num);
+	}
+	
+	public static VirtualMachine getVirtualMachine(int num) {
+		return virtualMachines[num];
+	}
+	
+	/** Deprecated */
+	public static VirtualMachine getActiveVM() {
+		return activeVirtualMachine;
 	}
 	
 	/** Deprecated */
@@ -116,10 +127,6 @@ public class Realmachine {
 	/** Deprecated */
 	public static Word[] getVirtualMachineMemory() {
 		return paginationMechanism.getVirtualMachineMemory();
-	}
-	
-	public static Word[] getVirtualMachineMemory(int num) {
-		return paginationMechanism.getVirtualMachineMemory(num);
 	}
 	
 	/** Deprecated */
