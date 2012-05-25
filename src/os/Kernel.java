@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import exception.ProcessException;
+
 import processes.*;
 import processes.Process.Status;
 
@@ -55,7 +57,13 @@ public class Kernel {
 				if (p.getId().toUpperCase().equals("INTERRUPT")) {
 					System.gc();
 				}
-				p.run(); 
+				
+				try {
+					p.run();
+				}
+				catch (ProcessException ex) {
+					System.out.println(ex.getMessage());
+				}
 				
 				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINESHED");
 				// process returns when it hasn't got needful resource 
