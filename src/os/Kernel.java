@@ -77,7 +77,7 @@ public class Kernel {
 			
 			// only for testing, program runs only 5 seconds
 			
-			if ((System.currentTimeMillis() - time) > 150) {
+			if ((System.currentTimeMillis() - time) > 100) {
 				// after five seconds i create resource mosworkend and than startstop can continue
 				resourceList.create(new Resource("mosworkend", null));
 				System.out.println("PABAIGA");

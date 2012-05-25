@@ -39,17 +39,23 @@ public class VirtualMachine extends Process {
 				// Program is halted.
 				
 				//TODO create interrupt resource 
-				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "si");
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "SI");
 				
 				Kernel.getResources().create(r);
 				
 
 				return;
 			}
-			
-			if (command.equals("gd") && command.equals("pd")) {
+			String prefix = command.substring(0, 2);
+			if (prefix.equals("GD") && prefix.equals("PD") && prefix.equals("PP")) {
 				timer.IOStroke();
 				//TODO implement interrupt
+				
+				/* if command is related with IO then we create resource for JobGovernor to process it
+				 * and create resource info. Info pattern: [IO XXXX], where XXXX is command. First two chars is /(GD|PD|PP)/
+				 */
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "IO " + command);
+				Kernel.getResources().create(r);
 			}
 			else {
 				timer.stroke();
