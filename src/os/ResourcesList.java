@@ -41,6 +41,8 @@ public class ResourcesList {
 		System.out.println("\tResource " + r.getId().substring(0, (r.getId().length() > 10 ? 10 : r.getId().length() ))  + " created");
 		
 		this.resources.add(r);
+		
+		Kernel.waitForStep();
 	}
 	
 	/**
@@ -111,5 +113,13 @@ public class ResourcesList {
 		}
 		return null;
 		
+	}
+	
+	public Resource get(int num) {
+		return resources.get(num);
+	}
+	
+	public int getCount() {
+		return resources.size();
 	}
 }

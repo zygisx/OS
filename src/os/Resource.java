@@ -8,7 +8,7 @@ public class Resource {
 	private String id;
 	private boolean isReusable; // kas èia ?
 	private boolean isAvailable;
-	private String parenProcess; // don't know why int..? I change it to string
+	private String parentProcess; // don't know why int..? I change it to string
 	private ArrayList<processes.Process> waitingForResourceProcessList;
 	private String info;
 	
@@ -23,7 +23,7 @@ public class Resource {
 	
 	public Resource(String id, String parent, String info) {
 		this.id = id;
-		this.parenProcess = parent;
+		this.parentProcess = parent;
 		this.waitingForResourceProcessList = new ArrayList<processes.Process>();
 		this.isAvailable = true;
 		this.info = info;
@@ -58,7 +58,25 @@ public class Resource {
 	}
 	
 	
+	public String getParent() {
+		return this.parentProcess;
+	}
 	
+	public String getWaitingProcessesString() {
+		String result = null;
+		
+		for (processes.Process process : waitingForResourceProcessList) {
+			
+			result += process.getId() + "\n";
+			
+		}
+		
+		return result;
+	}
+	
+	public String getAvailability() {
+		return Boolean.toString(isAvailable);
+	}
 	
 	
 }

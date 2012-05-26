@@ -16,6 +16,7 @@ public class OsFrame extends JFrame {
 	private JPanel contentPanel;
 	private JTabbedPane tabsPanel;
 	private ProcessesPanel processesPanel;
+	private ResourcesPanel resourcesPanel;
 
 	/**
 	 * 
@@ -63,6 +64,11 @@ public class OsFrame extends JFrame {
 		processesPanel = new ProcessesPanel();
 		tabsPanel.addTab("Processes", null, processesPanel, null);
 		
+		resourcesPanel = new ResourcesPanel();
+		tabsPanel.addTab("Resources", null, resourcesPanel, null);
+		
+		
+		
 		utilitiesPanel = new UtilitiesPanel();
 		contentPanel.add(utilitiesPanel, BorderLayout.SOUTH);
 		
@@ -75,5 +81,6 @@ public class OsFrame extends JFrame {
 	
 	public void update() {
 		this.processesPanel.update();
+		this.resourcesPanel.update();
 	}
 }

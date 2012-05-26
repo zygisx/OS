@@ -155,6 +155,7 @@ public class Kernel {
 	}
 	
 	public static void removeProcess(String id) {
+		
 		taskManager.removeProcess(id);
 		
 		/* remove process */
@@ -224,6 +225,46 @@ public class Kernel {
 		}
 		
 		return result;
+	}
+	
+	public static String getResourcesListValue(int row, int col) {
+		String result = null;
+	
+		if (row <= (resourceList.getCount() -1)) {
+		
+			Resource resource = resourceList.get(row);
+			
+			switch(col) {
+			
+				case 0:
+					result = resource.getId();
+					break;
+					
+				case 1:
+					result = resource.getParent();
+					break;
+					
+				case 2:
+					result = resource.getWaitingProcessesString();
+					break;
+				
+				case 3:
+					result = resource.getAvailability();
+					break;
+					
+				case 4:
+					result = resource.getInfo();
+					break;
+			
+			}
+		
+		}
+		
+		return result;
+	}
+	
+	public static int getResourcesCount() {
+		return resourceList.getCount();
 	}
 
 	public static void waitForStep() {
