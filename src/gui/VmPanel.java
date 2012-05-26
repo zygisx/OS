@@ -51,7 +51,7 @@ public class VmPanel extends JPanel {
 		
 		JPanel memPanel = new JPanel();
 		memPanel.setBackground(Color.WHITE);
-		table = new JTable(new MemoryTableModel());
+		table = new JTable(new MemoryTableModel(id));
 		table.setPreferredSize(new Dimension(575, 300));
 		
 		
@@ -217,12 +217,14 @@ class MemoryTableModel extends AbstractTableModel {
 		"No.", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
 	};
 	private Word[] memory;
+	private int id;
 	
-	public MemoryTableModel() {
+	public MemoryTableModel(int id) {
 		this.memory = new Word[Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE];
 		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
 			this.memory[i] = new Word(Integer.toString(i));
 		}
+		this.id = id;
 	}
 	
 	@Override
@@ -238,7 +240,7 @@ class MemoryTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int arg0, int arg1) {
 		if (arg1 == 0) return Integer.toHexString(arg0).toUpperCase();
-		return Realmachine.getBlock(arg0)[arg1-1];
+		return Realmachine.getVirtualMachine(id).getWord(arg0*0x10 + arg1);
 	}
 	
 	public String getColumnName(int col) {
