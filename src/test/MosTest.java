@@ -9,8 +9,8 @@ public class MosTest {
 		try {
 			System.out.println("System start work.");
 			Kernel.addTask("././CountTo10.txt");
-			Kernel.addTask("././CountTo10.txt");
-			Kernel.addTask("././InfiniteLoop.txt");
+//			Kernel.addTask("././CountTo10.txt");
+//			Kernel.addTask("././InfiniteLoop.txt");
 			
 			Kernel.RunOS();
 			

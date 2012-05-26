@@ -109,6 +109,10 @@ public class OsFrame extends JFrame {
 	public void update() {
 		this.processesPanel.update();
 		this.resourcesPanel.update();
+		
+		for (VmPanel vmPanel : vmPanelsList) {
+			vmPanel.update();
+		}
 	}
 	
 	public void addVmTab(int id) {
