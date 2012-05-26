@@ -28,7 +28,7 @@ public class ProcessesPanel extends JPanel {
 		
 		table = new JTable();
 		table.setFillsViewportHeight(true);
-		table.setPreferredScrollableViewportSize(new Dimension(900, 350));
+		table.setPreferredScrollableViewportSize(new Dimension(900, 380));
 		table.setAlignmentY(Component.TOP_ALIGNMENT);
 		table.setAlignmentX(Component.LEFT_ALIGNMENT);
 		table.setModel(new ProcessesTableModel());
@@ -44,8 +44,7 @@ public class ProcessesPanel extends JPanel {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		table.setPreferredSize(new Dimension(900, 380));
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setBackground(Color.WHITE);
 		
 	}

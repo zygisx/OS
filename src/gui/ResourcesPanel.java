@@ -28,7 +28,6 @@ public class ResourcesPanel extends JPanel {
 		setBackground(Color.WHITE);
 		
 		table = new JTable();
-		table.setPreferredSize(new Dimension(900, 380));
 		table.setFillsViewportHeight(true);
 		table.setPreferredScrollableViewportSize(new Dimension(900, 380));
 		table.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -46,7 +45,7 @@ public class ResourcesPanel extends JPanel {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setBackground(Color.WHITE);
 		
 	}
