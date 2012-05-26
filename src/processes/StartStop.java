@@ -42,7 +42,7 @@ public class StartStop extends Process {
 				this.missingResource = ""; // no resource required 
 				
 				// destroy resources
-				
+				this.destroyResources();
 				// destroy processes
 				
 				// system shut down
@@ -53,7 +53,22 @@ public class StartStop extends Process {
 	}
 	
 	
-	public void createResources() {
+	private void destroyResources() {
+		Kernel.getResources().destroy("processor");
+		Kernel.getResources().destroy("supmemory");
+		
+		Resource r = Kernel.getResources().get("vmemory");
+		while (r != null) {
+			Kernel.getResources().destroy(r.getId());
+			r = Kernel.getResources().get("vmemory");
+		}
+		
+		Kernel.getResources().destroy("vmrun");
+		
+	}
+
+
+	private void createResources() {
 		Kernel.getResources().create(new Resource("processor", this.id));
 		Kernel.getResources().create(new Resource("supmemory", this.id));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "1"));
@@ -64,6 +79,11 @@ public class StartStop extends Process {
 		Kernel.getResources().create(new Resource("vmemory", this.id, "6"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "7"));
 		Kernel.getResources().create(new Resource("vmemory", this.id, "8"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "9"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "10"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "11"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "12"));
+		Kernel.getResources().create(new Resource("vmemory", this.id, "13"));
 		
 		Kernel.getResources().create(new Resource("vmrun", this.id));	// always free resource
 		
@@ -73,15 +93,13 @@ public class StartStop extends Process {
 		// and so on 
 	}
 	
-	public void createProcesses() {
+	private void createProcesses() {
 		Kernel.createProcess(new Read("read", this.id, Constants.MAX_PRIORITY - 1));
 		Kernel.createProcess(new Chan3Device("chan3device", this.id, Constants.MAX_PRIORITY - 2));
 		Kernel.createProcess(new JCL("jcl", this.id, Constants.MAX_PRIORITY - 3));
 		Kernel.createProcess(new Loader("loader", this.id, Constants.MAX_PRIORITY - 4));
 		Kernel.createProcess(new Interrupt("interrupt", this.id, Constants.MAX_PRIORITY - 5));
 		Kernel.createProcess(new MainProc("mainproc", this.id, Constants.MAX_PRIORITY - 6));
-		
-		// and others
 	}
 
 
