@@ -61,6 +61,8 @@ public class VirtualMachine extends Process {
 			if (command == null) {
 				// Program is halted.
 				
+				Kernel.getOsFrame().removeVmTab(this.VMNum);
+				
 				//TODO create interrupt resource 
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "SI");
 				

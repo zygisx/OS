@@ -18,6 +18,7 @@ import os.Kernel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.ArrayList;
 
 public class OsFrame extends JFrame {
 	
@@ -25,6 +26,8 @@ public class OsFrame extends JFrame {
 	private JTabbedPane tabsPanel;
 	private ProcessesPanel processesPanel;
 	private ResourcesPanel resourcesPanel;
+	
+	private ArrayList<VmPanel> vmPanelsList = new ArrayList<VmPanel>();
 
 	/**
 	 * 
@@ -106,5 +109,26 @@ public class OsFrame extends JFrame {
 	public void update() {
 		this.processesPanel.update();
 		this.resourcesPanel.update();
+	}
+	
+	public void addVmTab(int id) {
+		VmPanel vmPanel = new VmPanel(id);
+		vmPanelsList.add(vmPanel);
+		
+		tabsPanel.addTab("VM " + id, null, vmPanel, null);
+	}
+	
+	public void removeVmTab(int id) {
+		
+		VmPanel vmPanelToRemove = null;
+		
+		for (VmPanel vmPanel : vmPanelsList) {
+			if (vmPanel.getId() == id) {
+				vmPanelToRemove = vmPanel;
+			}
+		}
+		
+		tabsPanel.remove(vmPanelToRemove);
+		vmPanelsList.remove(vmPanelToRemove);
 	}
 }

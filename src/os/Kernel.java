@@ -299,4 +299,8 @@ public class Kernel {
 		Kernel.nextStep = value;
 	}
 	
+	public static OsFrame getOsFrame() {
+		return osFrame;
+	}
+	
 }

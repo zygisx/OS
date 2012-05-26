@@ -38,6 +38,8 @@ public class JobGovernor extends Process {
 							), 
 					this.jobNum);
 			
+			Kernel.getOsFrame().addVmTab(jobNum);
+			
 			
 			Kernel.getResources().destroy(this.firstMissingRes);
 			
