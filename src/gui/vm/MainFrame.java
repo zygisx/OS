@@ -16,6 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import exception.BadFileException;
+import exception.VirtualMachineProgramException;
 
 import machine.Realmachine;
 
@@ -130,7 +131,11 @@ public class MainFrame extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				MainFrame.this.setCommand(Realmachine.getActiveVM().step());
+				try {
+					MainFrame.this.setCommand(Realmachine.getActiveVM().step());
+				} catch (VirtualMachineProgramException e1) {
+					e1.printStackTrace();
+				}
 				MainFrame.this.update();
 				
 			}
@@ -149,7 +154,11 @@ public class MainFrame extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				Realmachine.getActiveVM().run();
+				try {
+					Realmachine.getActiveVM().run();
+				} catch (VirtualMachineProgramException e1) {
+					e1.printStackTrace();
+				}
 				MainFrame.this.update();
 				
 			}

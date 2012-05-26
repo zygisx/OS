@@ -138,7 +138,7 @@ public class Realmachine {
 				new VirtualMachine(new VirtualMachineRegisters(), mem); // create vm
 		addVirtualMachine(vm);
 		// no need to set active vm
-		//setActiveVirtualMachine(vm);
+		setActiveVirtualMachine(vm);
 		return vm;
 	}
 	
