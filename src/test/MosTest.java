@@ -11,6 +11,9 @@ public class MosTest {
 			Kernel.addTask("././CountTo10.txt");
 			Kernel.addTask("././CountTo10.txt");
 			Kernel.addTask("././InfiniteLoop.txt");
+			Kernel.addTask("././CountTo10.txt");
+			Kernel.addTask("././CountTo10.txt");
+			Kernel.addTask("././CountTo10.txt");
 			
 			
 			Kernel.RunOS();
