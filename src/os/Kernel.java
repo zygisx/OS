@@ -43,11 +43,10 @@ public class Kernel {
 	private static boolean nextStep = false;
 	
 	public static void RunOS() {
-		
 		Kernel.launchOsFrame();
 		
 		boolean tempFlagForDinamicTask = false;
-
+		
 		if(stepMode) {
 
 //			waitForStep();
@@ -55,7 +54,6 @@ public class Kernel {
 			// at first we start start/stop process.
 			
 			Kernel.createProcess(new StartStop("startstop"));
-			
 			// just for now for testing purpose
 			long time = System.currentTimeMillis();
 			while (isSystemOn) {
@@ -110,7 +108,6 @@ public class Kernel {
 //					Kernel.addTask("././CountTo10.txt");
 //					Kernel.addTask("././InfiniteLoop.txt");
 //					Kernel.addTask("././InfiniteLoop.txt");
-//					resourceList.create(new Resource("filename", null));
 //					tempFlagForDinamicTask = true;
 //				}
 //				if ((System.currentTimeMillis() - time) > 250) {
@@ -131,9 +128,25 @@ public class Kernel {
 		
 	}
 	
+	
+	/**
+	 * for adding tasks in run time
+	 * Danger! not work if you add tasks with this method on system start.
+	 */
+	public static void addTaskDynamically(String task) {
+		tasks.add(task);
+		if (getResources().get("filename") == null) {
+			getResources().create(new Resource("filename", null));
+		}
+	}
+	/**
+	 * For adding task on system start.
+	 */
 	public static void addTask(String task) {
 		tasks.add(task);
+		System.out.println("VISKAS");
 	}
+	
 	
 	public static String useTask() {
 		return tasks.poll();
