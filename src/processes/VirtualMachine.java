@@ -59,9 +59,9 @@ public class VirtualMachine extends Process {
 			}
 			
 			if (command == null) {
-				
 				// Program is halted.
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "SI");
+				Kernel.getOsFrame().removeVmTab(VMNum);
 				Kernel.getResources().create(r);
 				
 
