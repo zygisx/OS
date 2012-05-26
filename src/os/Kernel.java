@@ -46,8 +46,10 @@ public class Kernel {
 		
 		Kernel.launchOsFrame();
 		
+		boolean tempFlagForDinamicTask = false;
+
 		if(stepMode) {
-			
+
 			//waitForStep();
 		
 			// at first we start start/stop process.
@@ -90,7 +92,13 @@ public class Kernel {
 				else {
 					resourceList.create(new Resource("mosworkend", null));
 				}
-				
+
+				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINISHED");
+				// process returns when it hasn't got needful resource 
+				// so we block it
+				p.setStatus(Status.BLOCKED);
+
+
 				
 				
 				// only for testing, program runs only 5 seconds
@@ -102,8 +110,29 @@ public class Kernel {
 					//isSystemOn = false;
 				}
 				
+				
+
+				// only for testing, program runs only 5 seconds
+//				if (! tempFlagForDinamicTask && (System.currentTimeMillis() - time) > 100) {
+//					
+//					Kernel.addTask("././CountTo10.txt");
+//					Kernel.addTask("././InfiniteLoop.txt");
+//					Kernel.addTask("././InfiniteLoop.txt");
+//					resourceList.create(new Resource("filename", null));
+//					tempFlagForDinamicTask = true;
+//				}
+//				if ((System.currentTimeMillis() - time) > 250) {
+//					// after five seconds i create resource mosworkend and than startstop can continue
+//					resourceList.create(new Resource("mosworkend", null));
+//					System.out.println("PABAIGA");
+//					//isSystemOn = false;
+//				}
+
+				
 			}
+
 			
+
 			System.out.println("Mos successfully ended work");
 		
 		}
@@ -173,7 +202,8 @@ public class Kernel {
 	public static int getProcessesCount() {
 		return processes.size();
 	}
-	
+
+
 	public static String getProcessesListValue(int row, int col) {
 		String result = null;
 		
@@ -203,7 +233,7 @@ public class Kernel {
 		
 		return result;
 	}
-	
+
 	public static void waitForStep() {
 		
 		while(!nextStep) {

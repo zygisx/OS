@@ -75,13 +75,15 @@ public abstract class Process implements Comparable<Process> {
 	}
 	
 	
-	@Override
 	public int compareTo(Process o) {
-		if (this.priority > o.getPriority())
-			return -1;
-		else if (this.priority < o.getPriority())
-			return 1;
-		else return 0;
+		//Process p = ((Process) o);
+//		if (this.priority > o.getPriority())
+//			return 1;
+//		else if (this.priority < o.getPriority())
+//			return -1;
+//		else return 0;
+		
+		return  o.priority - this.priority;
 	}
 
 	public String getParent() {

@@ -45,11 +45,12 @@ public class TaskManager {
 		ResourcesList resources = Kernel.getResources();
 		
 		
-		Iterator<processes.Process> i = this.blockedProcesses.iterator();
-		while (i.hasNext()) {								// iterate through all processes
-			processes.Process proc = i.next();
-			// if process is blocked than check if needful resource is free now
-			// if so then process is ready and resource is occupy
+		
+		
+		PriorityQueue<processes.Process> newQueue = new PriorityQueue<processes.Process>();
+		int size = this.blockedProcesses.size();
+		for (int j = 0; j < size; j++) {
+			processes.Process proc = this.blockedProcesses.remove();
 			if (proc.getStatus() == Status.BLOCKED) {		
 				String missingRes = proc.getMissingResource();		
 				if (missingRes != "" && resources.isExists(missingRes)) {
@@ -60,10 +61,36 @@ public class TaskManager {
 					}
 				}
 			}
-			// with BLOCKEDS
-			//else if (proc.getStatus() == Status.BLOCKEDS) {		
-			
+			newQueue.add(proc);
 		}
+		this.blockedProcesses = newQueue;
+		
+		/** 
+		 * Buggy version. The iterator does not return the elements in 
+		 * any particular order in PriorityQueue. 
+		 * Take time time find out that....
+		 * 
+		 */
+		//TODO delete this
+//		Iterator<processes.Process> i = this.blockedProcesses.iterator();
+//		while (i.hasNext()) {								// iterate through all processes
+//			processes.Process proc = i.next();
+//			// if process is blocked than check if needful resource is free now
+//			// if so then process is ready and resource is occupy
+//			if (proc.getStatus() == Status.BLOCKED) {		
+//				String missingRes = proc.getMissingResource();		
+//				if (missingRes != "" && resources.isExists(missingRes)) {
+//					Resource r = resources.getAvailable(missingRes);
+//					if (r != null) {
+//						proc.setStatus(Status.READY);
+//						r.occupy();
+//					}
+//				}
+//			}
+//			// with BLOCKEDS
+//			//else if (proc.getStatus() == Status.BLOCKEDS) {		
+//			
+//		}
 	}
 
 
@@ -105,9 +132,7 @@ public class TaskManager {
 				this.readyProcesses.add(proc);
 				i.remove();
 			}
-			//TODO add BLOCKEDS
 		}
-		//FIXME chenge to smth like checkReadyProcesses()
 	}
 	
 
