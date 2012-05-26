@@ -30,10 +30,18 @@ public class Resource {
 	}
 	
 	public void free() {
+		
+		//FIXME
+		System.out.println("\t" + this.id + " released.");
+		
 		this.isAvailable = true;
 	}
 	
 	public void occupy() {
+		
+		//FIXME
+		System.out.println("\t" + this.id + " occupied.");
+		
 		this.isAvailable = false;
 	}
 	

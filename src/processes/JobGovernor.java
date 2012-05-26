@@ -1,5 +1,7 @@
 package processes;
 
+import java.util.Iterator;
+
 import exception.ProcessException;
 import machine.Realmachine;
 import machine.VirtualMachine;
@@ -52,6 +54,12 @@ public class JobGovernor extends Process {
 					
 				case "PI":	
 				case "SI":
+					
+					// possible that vm which going to be destroyd is ready and holds processor resource, 
+					// so we have to release it
+					if (this.checkIfVMReady()) {
+						Kernel.getResources().get("vmrun").free();
+					}
 					Kernel.removeProcess("VM" + this.jobNum);
 					Resource[] memoryResources = Kernel.getResources().getAll("vmmemory");
 					for (Resource r : memoryResources) {
@@ -80,6 +88,19 @@ public class JobGovernor extends Process {
 		// case jobgovstart
 		
 		
+	}
+	
+	
+	public boolean checkIfVMReady() {
+		Iterator<processes.Process> i = Kernel.getProcessesIterator();
+		while (i.hasNext()) {
+			processes.Process proc = i.next();
+			if (proc.getId().equals("VM" + this.jobNum) && proc.getStatus() == Status.READY) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }
