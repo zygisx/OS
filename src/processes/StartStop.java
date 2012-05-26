@@ -44,29 +44,13 @@ public class StartStop extends Process {
 				// destroy resources
 				this.destroyResources();
 				// destroy processes
-				
+				this.destroyProcesses();
 				// system shut down
 				Kernel.turnOffSystem();
 				return;
 			
 		}
 	}
-	
-	
-	private void destroyResources() {
-		Kernel.getResources().destroy("processor");
-		Kernel.getResources().destroy("supmemory");
-		
-		Resource r = Kernel.getResources().get("vmemory");
-		while (r != null) {
-			Kernel.getResources().destroy(r.getId());
-			r = Kernel.getResources().get("vmemory");
-		}
-		
-		Kernel.getResources().destroy("vmrun");
-		
-	}
-
 
 	private void createResources() {
 		Kernel.getResources().create(new Resource("processor", this.id));
@@ -100,6 +84,29 @@ public class StartStop extends Process {
 		Kernel.createProcess(new Loader("loader", this.id, Constants.MAX_PRIORITY - 4));
 		Kernel.createProcess(new Interrupt("interrupt", this.id, Constants.MAX_PRIORITY - 5));
 		Kernel.createProcess(new MainProc("mainproc", this.id, Constants.MAX_PRIORITY - 6));
+	}
+	
+	private void destroyResources() {
+		Kernel.getResources().destroy("processor");
+		Kernel.getResources().destroy("supmemory");
+		
+		Resource r = Kernel.getResources().get("vmemory");
+		while (r != null) {
+			Kernel.getResources().destroy(r.getId());
+			r = Kernel.getResources().get("vmemory");
+		}
+		
+		Kernel.getResources().destroy("vmrun");
+		
+	}
+	
+	private void destroyProcesses() {
+		Kernel.removeProcess("read");
+		Kernel.removeProcess("chan3device");
+		Kernel.removeProcess("jcl");
+		Kernel.removeProcess("loader");
+		Kernel.removeProcess("interrupt");
+		Kernel.removeProcess("mainproc");
 	}
 
 

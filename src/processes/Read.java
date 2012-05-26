@@ -55,7 +55,7 @@ public class Read extends Process {
 			case "chan3devicefinised":
 				
 				Kernel.getResources().create(new Resource("taskinsupmemory", this.id));
-				
+				Kernel.getResources().destroy("chan3devicefinised");
 				// if any filenames are available than only resource needed is supervizor memory
 				if (! Kernel.isTaskQueueEmpty()) {
 					this.missingResource = "supmemory";
