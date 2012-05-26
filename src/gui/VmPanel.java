@@ -238,9 +238,10 @@ class MemoryTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		if (arg1 == 0) return Integer.toHexString(arg0).toUpperCase();
-		return Realmachine.getVirtualMachine(id).getWord(arg0*0x10 + arg1);
+	public Object getValueAt(int row, int col) {
+		if (col == 0) return Integer.toHexString(row).toUpperCase();
+		System.out.println((row)*0x10 + col-1);
+		return Realmachine.getVirtualMachine(id).getWord((row)*0x10 + col-1);
 	}
 	
 	public String getColumnName(int col) {

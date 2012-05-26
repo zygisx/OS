@@ -59,13 +59,9 @@ public class VirtualMachine extends Process {
 			}
 			
 			if (command == null) {
+				
 				// Program is halted.
-				
-				Kernel.getOsFrame().removeVmTab(this.VMNum);
-				
-				//TODO create interrupt resource 
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "SI");
-				
 				Kernel.getResources().create(r);
 				
 
@@ -88,6 +84,11 @@ public class VirtualMachine extends Process {
 				timer.stroke();
 			}
 		}
+		
+		
+		Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "TI");
+		Kernel.getResources().create(r);
+		
 	}
 	
 }
