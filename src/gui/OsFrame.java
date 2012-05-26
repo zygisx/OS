@@ -12,8 +12,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
+
+import os.Kernel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class OsFrame extends JFrame {
 	
@@ -78,25 +82,19 @@ public class OsFrame extends JFrame {
 		
 		JButton btnLoadTask = new JButton("Load task");
 		btnLoadTask.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fc = new JFileChooser("././");
-				int returnVal = fc.showOpenDialog(this);
+				int returnVal = fc.showOpenDialog(OsFrame.this);
 
-//		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//		            File file = fc.getSelectedFile();
-//		            try {
-//		            	Realmachine.initVirtualMachine(file.getName());
-//		            } catch (BadFileException ex) {
-//		            	JOptionPane.showMessageDialog(MainFrame.this,
-//							    ex.getMessage(),
-//							    "Bad file exception",
-//							    JOptionPane.ERROR_MESSAGE);
-//						return;
-//					}    
-//		        }
-//		        MainFrame.this.update();
+		        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		            File file = fc.getSelectedFile();
+		            Kernel.addTaskDynamically(file.getName());
+		        }
 			}
 		});
+		
 		btnLoadTask.setBounds(10, 73, 89, 23);
 		utilitiesPanel.add(btnLoadTask);	
 	}
