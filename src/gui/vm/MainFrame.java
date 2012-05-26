@@ -154,7 +154,11 @@ public class MainFrame extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				Realmachine.getActiveVM().run();
+				try {
+					Realmachine.getActiveVM().run();
+				} catch (VirtualMachineProgramException e1) {
+					e1.printStackTrace();
+				}
 				MainFrame.this.update();
 				
 			}
