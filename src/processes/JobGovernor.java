@@ -75,10 +75,12 @@ public class JobGovernor extends Process {
 					
 					//remove used resource
 					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
-					
-					
 					return;
 				case "TI":
+					
+					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
+					
+					
 					return ;
 					
 					
