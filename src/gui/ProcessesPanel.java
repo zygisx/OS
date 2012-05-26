@@ -44,7 +44,7 @@ public class ProcessesPanel extends JPanel {
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		table.setPreferredSize(new Dimension(900, 0));
+		table.setPreferredSize(new Dimension(900, 380));
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setBackground(Color.WHITE);
 		
