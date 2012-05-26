@@ -1,6 +1,9 @@
 package processes;
 
+import exception.AddressOutOfBoundsException;
+import exception.IncorrectCommandException;
 import exception.ProcessException;
+import exception.VirtualMachineProgramException;
 import machine.Realmachine;
 import os.Kernel;
 import os.Resource;
@@ -34,7 +37,24 @@ public class VirtualMachine extends Process {
 		while (! this.timer.isInterupt()) {
 			
 			
-			command = vm.step();
+			try {
+				command = vm.step();
+			} catch (AddressOutOfBoundsException ex) {
+				// 1 in jbinterrupt means wrong address interrupt 
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "PI 1");
+				Kernel.getResources().create(r);
+				
+			} catch (IncorrectCommandException ex) {
+				// 2 in jbinterrupt means wrong command interrupt 
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "PI 2");
+				Kernel.getResources().create(r);
+				
+			} catch (VirtualMachineProgramException e) {
+				// 2 in jbinterrupt means unknown PI 
+				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "PI 3");
+				Kernel.getResources().create(r);
+			}
+			
 			if (command == null) {
 				// Program is halted.
 				

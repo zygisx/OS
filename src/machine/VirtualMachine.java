@@ -1,5 +1,9 @@
 package machine;
 
+import exception.AddressOutOfBoundsException;
+import exception.IncorrectCommandException;
+import exception.VirtualMachineProgramException;
+
 
 public class VirtualMachine {
 	
@@ -24,15 +28,22 @@ public class VirtualMachine {
 	}
 	
 	
-	public void processCommand(String command) {
+	public void processCommand(String command) throws VirtualMachineProgramException {
 		String commandPart;
-		int address = 0;
+		int address = -1;
 		if (!command.equals("HALT")) {
 			commandPart = command.substring(0, 2);
 			command = command.replaceAll("\\s+", "");
 //			System.out.println(command);   // uncomment to see current command
 			if (command.length() >= 4) {
-				address = Integer.parseInt(command.substring(2, 4), 16);
+				try {
+					address = Integer.parseInt(command.substring(2, 4), 16);
+				} catch (Exception ex) {
+					throw new AddressOutOfBoundsException("Wrong address. " + ex.getMessage());
+				}
+				if (address < 0 || address > (Realmachine.CODE_SEGMENT_START - 1)) {
+					throw new AddressOutOfBoundsException("Wrong address. " + address + " is forbidden");
+				}
 			}
 			
 			switch (commandPart) {
@@ -96,7 +107,10 @@ public class VirtualMachine {
 			case "GD":
 				Realmachine.GD(address);
 			break;
+			default:
+				throw new IncorrectCommandException("Incorrect command in " + this.getRegisters().getIC());
 			}
+			
 		}
 		else {
 			isHalted = true;
@@ -107,7 +121,7 @@ public class VirtualMachine {
 		 */
 	}
 	
-	public void run() {
+	public void run() throws VirtualMachineProgramException {
 		String command = null;
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
@@ -118,7 +132,7 @@ public class VirtualMachine {
 		}
 	}
 	
-	public String step() {
+	public String step() throws VirtualMachineProgramException {
 		String command = null;
 		if(!isHalted) {
 			command = memory[registers.getIC()].getStringValue().toUpperCase();
