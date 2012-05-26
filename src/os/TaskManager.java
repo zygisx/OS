@@ -171,15 +171,19 @@ public class TaskManager {
 	public String getWaitingListString(String id) {
 		String result = "";
 		
-		for(Process process : blockedProcesses) {
-			if (process.getMissingResource().equals(id)) {
-				result += process.getId() + " ";
+		Iterator<processes.Process> i = blockedProcesses.iterator();
+		while (i.hasNext()) {
+			processes.Process p = i.next();
+			if (p.getMissingResource().equals(id)) {
+				result += p.getMissingResource() + " ";
 			}
 		}
 		
-		for(Process process : readyProcesses) {
-			if (process.getMissingResource().equals(id)) {
-				result += process.getId() + " ";
+		Iterator<processes.Process> iR = readyProcesses.iterator();
+		while (iR.hasNext()) {
+			processes.Process p = iR.next();
+			if (p.getMissingResource().equals(id)) {
+				result += p.getMissingResource() + " ";
 			}
 		}
 		
