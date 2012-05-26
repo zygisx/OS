@@ -175,7 +175,7 @@ public class TaskManager {
 		while (i.hasNext()) {
 			processes.Process p = i.next();
 			if (p.getMissingResource().equals(id)) {
-				result += p.getMissingResource() + " ";
+				result += p.getId() + " ";
 			}
 		}
 		
@@ -183,7 +183,7 @@ public class TaskManager {
 		while (iR.hasNext()) {
 			processes.Process p = iR.next();
 			if (p.getMissingResource().equals(id)) {
-				result += p.getMissingResource() + " ";
+				result += p.getId() + " ";
 			}
 		}
 		
