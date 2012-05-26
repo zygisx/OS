@@ -42,30 +42,23 @@ public class Read extends Process {
 			case "supmemory":
 				
 				if (! Kernel.isTaskQueueEmpty()) {
-					try {
-						
-						// read task from file
-						String task = this.readFile(Kernel.useTask());
-						
-						// create resource
-						task = "TASK" + task;
-						Kernel.getResources().create(new Resource(task, this.id));
-						
-						//create resource for JCL
-						Kernel.getResources().create(new Resource("taskinsupmemory", this.id));
-					}
-					catch (IOException ex) {
-						// something went bad
-					}
+					
+					Kernel.getResources().create(new Resource("chan3devicestart", this.getId()));
+					this.missingResource = "chan3devicefinised";
 					
 				}
+				
+				
+					
+				
+				return;	
+			case "chan3devicefinised":
+				
+				Kernel.getResources().create(new Resource("taskinsupmemory", this.id));
 				
 				// if any filenames are available than only resource needed is supervizor memory
 				if (! Kernel.isTaskQueueEmpty()) {
 					this.missingResource = "supmemory";
-					// free used resource
-					
-					
 					Kernel.getResources().get("supmemory").free();
 				}
 				
@@ -75,33 +68,8 @@ public class Read extends Process {
 					Kernel.getResources().destroy("filename");
 					Kernel.getResources().get("supmemory").free();
 				}
-					
-				
-				return;	
-			case "chan3devicefinised":
-				
 				
 				return;
 		}
-	}
-	
-	
-	/**
-	 * efficient way to read entire file to string 
-	 * code taken from:
-	 * http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
-	 */
-	//TODO move that functionality to chan3device method
-	private String readFile(String path) throws IOException {
-		  FileInputStream stream = new FileInputStream(new File(path));
-		  try {
-		    FileChannel fc = stream.getChannel();
-		    MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-		    /* Instead of using default, pass in a decoder. */
-		    return Charset.defaultCharset().decode(bb).toString();
-		  }
-		  finally {
-		    stream.close();
-		  }
 	}
 }

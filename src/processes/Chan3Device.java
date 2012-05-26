@@ -1,5 +1,15 @@
 package processes;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+
+import os.Kernel;
+import os.Resource;
+
 import exception.ProcessException;
 
 public class Chan3Device extends Process {
@@ -15,5 +25,42 @@ public class Chan3Device extends Process {
 	@Override
 	public void run() throws ProcessException {
 		
+		String task;
+		try {
+			task = this.readFile(Kernel.useTask());
+		
+		
+			// create resource
+			task = "TASK" + task;
+			Kernel.getResources().create(new Resource(task, this.id));
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Kernel.getResources().destroy("chan3devicestart");
+		Kernel.getResources().create(new Resource("chan3devicefinised", this.getId()));
+		
+	}
+	
+	
+	/**
+	 * efficient way to read entire file to string 
+	 * code taken from:
+	 * http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
+	 */
+	private String readFile(String path) throws IOException {
+		  FileInputStream stream = new FileInputStream(new File(path));
+		  try {
+		    FileChannel fc = stream.getChannel();
+		    MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+		    /* Instead of using default, pass in a decoder. */
+		    return Charset.defaultCharset().decode(bb).toString();
+		  }
+		  finally {
+		    stream.close();
+		  }
 	}
 }
