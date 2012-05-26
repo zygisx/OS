@@ -50,7 +50,7 @@ public class Kernel {
 
 		if(stepMode) {
 
-			//waitForStep();
+//			waitForStep();
 		
 			// at first we start start/stop process.
 			
@@ -93,15 +93,7 @@ public class Kernel {
 					resourceList.create(new Resource("mosworkend", null));
 				}
 
-				System.out.println("PROCESS " + p.getId().toUpperCase() + " FINISHED");
-				// process returns when it hasn't got needful resource 
-				// so we block it
-				p.setStatus(Status.BLOCKED);
 
-
-				
-				
-				// only for testing, program runs only 5 seconds
 				
 				if ((System.currentTimeMillis() - time) > 1000 * 60) {
 					// after five seconds i create resource mosworkend and than startstop can continue
