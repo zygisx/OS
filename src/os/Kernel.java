@@ -95,12 +95,12 @@ public class Kernel {
 
 
 				
-				if ((System.currentTimeMillis() - time) > 1000 * 60) {
-					// after five seconds i create resource mosworkend and than startstop can continue
-					resourceList.create(new Resource("mosworkend", null));
-					System.out.println("PABAIGA");
-					//isSystemOn = false;
-				}
+//				if ((System.currentTimeMillis() - time) > 1000 * 60) {
+//					// after five seconds i create resource mosworkend and than startstop can continue
+//					resourceList.create(new Resource("mosworkend", null));
+//					System.out.println("PABAIGA");
+//					//isSystemOn = false;
+//				}
 				
 				
 
@@ -245,7 +245,7 @@ public class Kernel {
 					break;
 					
 				case 2:
-					result = resource.getWaitingProcessesString();
+					result = taskManager.getWaitingListString(resource.getId());
 					break;
 				
 				case 3:

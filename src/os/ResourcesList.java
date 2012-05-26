@@ -42,7 +42,6 @@ public class ResourcesList {
 		
 		this.resources.add(r);
 		
-		Kernel.waitForStep();
 	}
 	
 	/**

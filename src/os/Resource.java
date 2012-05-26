@@ -62,20 +62,6 @@ public class Resource {
 		return this.parentProcess;
 	}
 	
-	public String getWaitingProcessesString() {
-		String result = "";
-		
-		//System.out.println(waitingForResourceProcessList.size());
-		
-		for (processes.Process process : waitingForResourceProcessList) {
-			
-			result += process.getId() + "\n";
-			
-		}
-		
-		return result;
-	}
-	
 	public String getAvailability() {
 		return Boolean.toString(isAvailable);
 	}
