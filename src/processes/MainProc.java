@@ -46,10 +46,11 @@ public class MainProc extends Process{
 					
 				}
 				
-				Resource resFalse = Kernel.getResources().getStartsWith("taskinmemory_false");
+				Resource resFalse = Kernel.getResources().get("taskinmemory_false");
 				
 				if (resFalse != null) {
-					Kernel.removeProcess(resFalse.getId());
+					Kernel.removeProcess("jobgoverner" + resFalse.getInfo());
+					
 					Kernel.getResources().destroy("taskinmemory");
 					Kernel.getResources().destroy("taskinmemory_false");
 				}

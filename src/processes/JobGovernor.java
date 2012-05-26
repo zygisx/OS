@@ -55,7 +55,7 @@ public class JobGovernor extends Process {
 				case "PI":	
 				case "SI":
 					
-					// possible that vm which going to be destroyd is ready and holds processor resource, 
+					// possible that vm which going to be destroyed is ready and holds processor resource, 
 					// so we have to release it
 					if (this.checkIfVMReady()) {
 						Kernel.getResources().get("vmrun").free();
@@ -69,6 +69,7 @@ public class JobGovernor extends Process {
 						}
 					}
 					//TODO create resource for interrupt process 
+					Kernel.getResources().create(new Resource("interrupt", this.id, "" + this.jobNum));
 					
 					//remove used resource
 					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);

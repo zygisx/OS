@@ -20,17 +20,20 @@ public class Interrupt extends Process {
 			case "interrupt":
 				
 				//get interrupt resource
-				Resource interuptResource = Kernel.getResources().getStartsWith("INTERRUPT");
+				Resource interruptResource = Kernel.getResources().get("interrupt");
+				 
 				
-				//ignore "INTERRUPT" in resource ID
-				String resourceForJobGovernor = interuptResource.getId().substring(9);
-				
-				//create new INTERRUPT resource for Job Governor process. That resource's ID contains type and virtual machine identification
-				Kernel.getResources().create(new Resource("JOBGOVERNOR_INTERRUPT" + resourceForJobGovernor, this.id));
+				// Create message for MainProc to destroy job governor
+				Kernel.getResources().create(new Resource("taskinmemory", this.getId()));
+				Kernel.getResources().create(new Resource(
+						"taskinmemory_false", 
+						this.id, 
+						""+ interruptResource.getInfo()
+						)
+				);
 				
 				//destroy interrupt resource
-				
-				Kernel.getResources().destroy(interuptResource.getId());
+				Kernel.getResources().destroy(interruptResource.getId());
 		}
 	}
 	
