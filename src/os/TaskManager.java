@@ -168,4 +168,22 @@ public class TaskManager {
 	}
 
 	
+	public String getWaitingListString(String id) {
+		String result = "";
+		
+		for(Process process : blockedProcesses) {
+			if (process.getMissingResource().equals(id)) {
+				result += process.getId() + " ";
+			}
+		}
+		
+		for(Process process : readyProcesses) {
+			if (process.getMissingResource().equals(id)) {
+				result += process.getId() + " ";
+			}
+		}
+		
+		return result;
+	}
+	
 }
