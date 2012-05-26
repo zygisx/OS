@@ -37,7 +37,7 @@ public class ProcessesPanel extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBorder(null);
-		scrollPane.setPreferredSize(new Dimension(900, 382));
+		scrollPane.setPreferredSize(new Dimension(900, 380));
 		scrollPane.setAlignmentY(Component.TOP_ALIGNMENT);
 		scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(scrollPane);

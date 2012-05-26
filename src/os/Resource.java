@@ -63,7 +63,9 @@ public class Resource {
 	}
 	
 	public String getWaitingProcessesString() {
-		String result = null;
+		String result = "";
+		
+		//System.out.println(waitingForResourceProcessList.size());
 		
 		for (processes.Process process : waitingForResourceProcessList) {
 			
