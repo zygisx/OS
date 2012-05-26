@@ -48,7 +48,7 @@ public class Loader extends Process{
 			Parser.loadCode(code, mem);
 			
 			// create resource 
-			Kernel.getResources().create(new Resource("loaderfinish", this.id));
+			//Kernel.getResources().create(new Resource("loaderfinish", this.id));
 			Kernel.getResources().create(new Resource("taskinmemory", this.id));
 			Kernel.getResources().create(new Resource("taskinmemory_true", this.id, memoryRes.getInfo()));
 	
