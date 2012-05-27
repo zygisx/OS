@@ -50,7 +50,9 @@ public class JobGovernor extends Process {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
 				case "IO":
 					
-					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(2);
+					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(2);			
+					Realmachine.setActiveVirtualMachine(this.jobNum); // to avoid bugs
+					
 					Realmachine.getActiveVM().processCommand(command, this.jobNum);
 					Realmachine.getActiveVM().increaseIc();
 					
