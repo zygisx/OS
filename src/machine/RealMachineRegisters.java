@@ -1,10 +1,13 @@
 package machine;
 
+import os.Timer;
+
 public class RealMachineRegisters {
 	private static Word R1, R2;	
 	private static byte MODE;
-	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
+	private static byte SF, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
 	private static int IC, PLR;
+	private static Timer TIMER;
 	
 	static {
 		setR1(new Word());
@@ -40,8 +43,8 @@ public class RealMachineRegisters {
 		if (vm != null) return vm.getRegisters().getPLR();
 		return PLR;
 	}
-	public static byte getTIMER() {
-		return TIMER;
+	public static int getTIMER() {
+		return TIMER.getTime();
 	}
 	public static byte getCH1() {
 		return CH1;
@@ -99,7 +102,7 @@ public class RealMachineRegisters {
 	}
 	
 	public static void setTIMER(byte tIMER) {
-		TIMER = tIMER;
+		TIMER.reset();
 	}
 	public static void setCH1(byte cH1) {
 		CH1 = cH1;
