@@ -1,6 +1,5 @@
 package os;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
@@ -16,9 +15,8 @@ public class TaskManager {
 	
 	
 	public TaskManager() {
-		Comparator<processes.Process> comparator = new PriorityComparator();
-		this.readyProcesses = new PriorityQueue<processes.Process>(10, comparator);
-		this.blockedProcesses = new PriorityQueue<processes.Process>(10, comparator);
+		this.readyProcesses = new PriorityQueue<processes.Process>();
+		this.blockedProcesses = new PriorityQueue<processes.Process>();
 	}
 	
 	public Process getCurrentProcess() {
