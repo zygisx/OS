@@ -135,4 +135,13 @@ public class OsFrame extends JFrame {
 		tabsPanel.remove(vmPanelToRemove);
 		vmPanelsList.remove(vmPanelToRemove);
 	}
+	
+	public VmPanel getVmTab(int id) {
+		for (VmPanel vmPanel : vmPanelsList) {
+			if (vmPanel.getId() == id) {
+				return vmPanel;
+			}
+		}
+		return null;
+	}
 }

@@ -38,7 +38,7 @@ public class VirtualMachine extends Process {
 			
 			
 			try {
-				command = vm.step();
+				command = vm.step(this.VMNum);
 			} catch (AddressOutOfBoundsException ex) {
 				// 1 in jbinterrupt means wrong address interrupt 
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "PI 1");

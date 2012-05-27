@@ -1,5 +1,6 @@
 package machine;
 
+import os.Kernel;
 import exception.AddressOutOfBoundsException;
 import exception.IncorrectCommandException;
 import exception.VirtualMachineProgramException;
@@ -28,13 +29,14 @@ public class VirtualMachine {
 	}
 	
 	
-	public void processCommand(String command) throws VirtualMachineProgramException {
+	public void processCommand(String command, int num) throws VirtualMachineProgramException {
 		String commandPart;
 		int address = -1;
 		if (!command.equals("HALT")) {
 			commandPart = command.substring(0, 2);
 			command = command.replaceAll("\\s+", "");
 //			System.out.println(command);   // uncomment to see current command
+			Kernel.getOsFrame().getVmTab(num).setCommand(commandPart);
 			if (command.length() >= 4) {
 				try {
 					address = Integer.parseInt(command.substring(2, 4), 16);
@@ -125,23 +127,25 @@ public class VirtualMachine {
 		String command = null;
 		while (registers.getIC() < memory.length && !isHalted) {
 			command = memory[registers.getIC()].getStringValue();
-			processCommand(command);
+			processCommand(command, 0);
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}
 		}
 	}
 	
-	public String step() throws VirtualMachineProgramException {
+	public String step(int num) throws VirtualMachineProgramException {
 		String command = null;
 		if(!isHalted) {
+			Kernel.waitForStep();
+			System.out.println("step");
 			command = memory[registers.getIC()].getStringValue().toUpperCase();
 			// new lines for interrupts with IO operations
 			String prefix = command.substring(0, 2);
 			if (prefix.equals("GD") || prefix.equals("PD") || prefix.equals("PP")) {
 				return command;
 			}
-			processCommand(command);
+			processCommand(command, num);
 			if (isIcChangeAvailible(command)) {
 				registers.setIC(registers.getIC()+1);
 			}
