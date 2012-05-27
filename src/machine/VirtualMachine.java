@@ -138,7 +138,6 @@ public class VirtualMachine {
 		String command = null;
 		if(!isHalted) {
 			Kernel.waitForStep();
-			System.out.println("step");
 			command = memory[registers.getIC()].getStringValue().toUpperCase();
 			// new lines for interrupts with IO operations
 			String prefix = command.substring(0, 2);
