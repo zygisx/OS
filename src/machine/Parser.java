@@ -123,6 +123,7 @@ public class Parser {
 		
 		try {
 			String line = bf.readLine();
+			
 			if (! line.startsWith("DATA")) {
 				//Kernel.getResources().create(new Resource("jclerror File must start with DATA", this.id));
 				return null;
@@ -131,7 +132,7 @@ public class Parser {
 			while ( (line = bf.readLine() )!= null && 
 					!(line.startsWith("ENDDATA")) ) {
 				if (line.matches("\\$[0-9A-Fa-f]{2}:\\$.*$")) {
-					data += line.substring(0, 4) + "\n";
+					data += line.substring(0, 5) + "\n";
 				}
 				else if (line.startsWith("DW") || line.startsWith("dw")) {
 					String s = line.replace(" ", "");
@@ -196,7 +197,6 @@ public class Parser {
 			while ( (line = bf.readLine() )!= null) {
 				if (line.matches("\\$[0-9A-Fa-f]{2}:\\$.*$")) {
 					cursor = Integer.parseInt(line.substring(1, 3), 16);
-					System.out.println(cursor);
 					continue;
 				}
 				else if (line.startsWith("DW") || line.startsWith("dw")) { //TODO decimal! operates only hex values
