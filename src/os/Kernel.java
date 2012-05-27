@@ -45,8 +45,6 @@ public class Kernel {
 	public static void RunOS() {
 		Kernel.launchOsFrame();
 		
-		boolean tempFlagForDinamicTask = false;
-		
 		if(stepMode) {
 
 //			waitForStep();
@@ -98,26 +96,7 @@ public class Kernel {
 //					resourceList.create(new Resource("mosworkend", null));
 //					System.out.println("PABAIGA");
 //					//isSystemOn = false;
-//				}
-				
-				
-
-				// only for testing, program runs only 5 seconds
-//				if (! tempFlagForDinamicTask && (System.currentTimeMillis() - time) > 100) {
-//					
-//					Kernel.addTask("././CountTo10.txt");
-//					Kernel.addTask("././InfiniteLoop.txt");
-//					Kernel.addTask("././InfiniteLoop.txt");
-//					tempFlagForDinamicTask = true;
-//				}
-//				if ((System.currentTimeMillis() - time) > 250) {
-//					// after five seconds i create resource mosworkend and than startstop can continue
-//					resourceList.create(new Resource("mosworkend", null));
-//					System.out.println("PABAIGA");
-//					//isSystemOn = false;
-//				}
-
-				
+//				}			
 			}
 
 			
@@ -137,6 +116,9 @@ public class Kernel {
 		tasks.add(task);
 		if (getResources().get("filename") == null) {
 			getResources().create(new Resource("filename", null));
+		}
+		else if (! getResources().get("filename").isAvailable() ) {
+			getResources().get("filename").free();
 		}
 	}
 	/**
@@ -213,7 +195,17 @@ public class Kernel {
 	public static String getProcessesListValue(int row, int col) {
 		String result = null;
 		
-		Process process = processes.get(row);
+		/* added protection for big&fat exceptions */
+		Process process = null;
+		if (row < processes.size()) {
+			process = processes.get(row);
+		}
+		
+		// Few times i get exception.
+		// Need to find more elegant to process it
+		if (process == null) {
+			return "";
+		}
 		
 		switch(col) {
 		
@@ -286,7 +278,6 @@ public class Kernel {
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
