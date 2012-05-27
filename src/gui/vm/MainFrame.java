@@ -132,7 +132,7 @@ public class MainFrame extends JFrame {
 					return;
 				}
 				try {
-					MainFrame.this.setCommand(Realmachine.getActiveVM().step());
+					MainFrame.this.setCommand(Realmachine.getActiveVM().step(1)); //only 1 vm exists :P
 				} catch (VirtualMachineProgramException e1) {
 					e1.printStackTrace();
 				}
