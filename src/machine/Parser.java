@@ -145,7 +145,7 @@ public class Parser {
 					data += s + "\n";
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
-					String s = line.replace(" ", "");
+					String s = line;
 					int commentStarts = s.indexOf("#");
 					if (commentStarts >= 0) {
 						s = s.substring(0, commentStarts);
@@ -207,7 +207,7 @@ public class Parser {
 					mem[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
-					String s = line.substring(2);
+					String s = line.substring(3);
 					if (s.length() > 4)
 						s = s.substring(0, 4);
 					//s = s.replaceAll("\\s+", "");

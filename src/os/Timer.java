@@ -31,4 +31,12 @@ public class Timer {
 		}
 		return false;
 	}
+	
+	public void reset() {
+		this.time = 0;
+	}
+	
+	public int getTime() {
+		return this.time;
+	}
 }
