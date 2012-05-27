@@ -184,6 +184,7 @@ public class Kernel {
 	private static void launchOsFrame() {
 		osFrame = new OsFrame();
 		osFrame.setVisible(true);
+		osFrame.addVmTab(0);
 	}
 	
 	

@@ -14,7 +14,6 @@ public class MosTest {
 			Kernel.addTask("././CountTo10.txt");
 			Kernel.addTask("././CountTo10.txt");
 			
-			
 			Kernel.RunOS();
 			
 			System.out.println("System OFF.");
