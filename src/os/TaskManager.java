@@ -57,6 +57,7 @@ public class TaskManager {
 						
 						proc.setStatus(Status.READY);
 						r.occupy();
+						proc.setReceivesResource(r);
 					}
 				}
 			}

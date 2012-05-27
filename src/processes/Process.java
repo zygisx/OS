@@ -24,6 +24,7 @@ public abstract class Process implements Comparable<Process> {
 	protected int pID, memoryBlockNumber, priority;
 	protected ArrayList<Resource> resources, createdResources;
 	protected ArrayList<Process> currentList, childrenProcesses;
+	protected Resource receivedResource;
 	
 	public Process(String id, String parent) {
 		this(id, parent, os.Constants.MIN_PRIORITY);
@@ -77,6 +78,9 @@ public abstract class Process implements Comparable<Process> {
 		return this.id;
 	}
 	
+	public void setReceivesResource(Resource r) {
+		this.receivedResource = r;
+	}
 	
 	public int compareTo(Process o) {
 		//Process p = ((Process) o);

@@ -29,10 +29,8 @@ public class Loader extends Process{
 			
 		case "vmemory":
 			
-			Resource memoryRes = Kernel.getResources().getAvailable("vmemory");
-			
-			// get memory from realMachine
-			Word[] mem = Realmachine.getVirtualMachineMemory(Integer.parseInt(memoryRes.getInfo()));
+			// get memory from realMachine			
+			Word[] mem = Realmachine.getVirtualMachineMemory(Integer.parseInt(this.receivedResource.getInfo()));
 			
 			
 			// get data and code from resources list
@@ -50,7 +48,7 @@ public class Loader extends Process{
 			// create resource 
 			//Kernel.getResources().create(new Resource("loaderfinish", this.id));
 			Kernel.getResources().create(new Resource("taskinmemory", this.id));
-			Kernel.getResources().create(new Resource("taskinmemory_true", this.id, memoryRes.getInfo()));
+			Kernel.getResources().create(new Resource("taskinmemory_true", this.id, this.receivedResource.getInfo()));
 	
 			
 			//destroy data and code resources

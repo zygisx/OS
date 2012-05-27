@@ -73,9 +73,9 @@ public class JobGovernor extends Process {
 						Kernel.getResources().get("vmrun").free();
 					}
 					Kernel.removeProcess("VM" + this.jobNum);
-					Resource[] memoryResources = Kernel.getResources().getAll("vmmemory");
+					Resource[] memoryResources = Kernel.getResources().getAll("vmemory");
 					for (Resource r : memoryResources) {
-						if (r != null && Integer.parseInt(r.getId()) == this.jobNum) {
+						if (r != null && Integer.parseInt(r.getInfo()) == this.jobNum) {
 							r.free();
 							break;
 						}
