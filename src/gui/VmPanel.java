@@ -208,7 +208,7 @@ public class VmPanel extends JPanel {
 	
 	public void update() {
 		((AbstractTableModel) this.table.getModel()).fireTableDataChanged();
-		
+		System.out.println("keicia");
 		this.labelR1.setText(RealMachineRegisters.getR1().getStringValue());
 		this.labelR2.setText(RealMachineRegisters.getR2().getStringValue());
 		this.labelIC.setText(Integer.toString(RealMachineRegisters.getIC()));

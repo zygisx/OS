@@ -26,6 +26,7 @@ public class OsFrame extends JFrame {
 	private JTabbedPane tabsPanel;
 	private ProcessesPanel processesPanel;
 	private ResourcesPanel resourcesPanel;
+	private RealMachinePanel realMachinePanel;
 	
 	private ArrayList<VmPanel> vmPanelsList = new ArrayList<VmPanel>();
 
@@ -78,6 +79,9 @@ public class OsFrame extends JFrame {
 		resourcesPanel = new ResourcesPanel();
 		tabsPanel.addTab("Resources", null, resourcesPanel, null);
 		
+		realMachinePanel = new RealMachinePanel();
+		tabsPanel.addTab("Real Machine", null, realMachinePanel, null);
+		
 		
 		
 		utilitiesPanel = new UtilitiesPanel();
@@ -109,6 +113,7 @@ public class OsFrame extends JFrame {
 	public void update() {
 		this.processesPanel.update();
 		this.resourcesPanel.update();
+		this.realMachinePanel.update();
 		
 		for (VmPanel vmPanel : vmPanelsList) {
 			vmPanel.update();
