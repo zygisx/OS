@@ -50,7 +50,7 @@ public class JobGovernor extends Process {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
 				case "IO":
 					
-					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(2);			
+					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(3);			
 					Realmachine.setActiveVirtualMachine(this.jobNum); // to avoid bugs
 					
 					Realmachine.getActiveVM().processCommand(command, this.jobNum);
@@ -61,6 +61,9 @@ public class JobGovernor extends Process {
 					
 				case "PI":	
 				case "SI":
+					
+					
+					Kernel.getOsFrame().removeVmTab(this.jobNum);
 					
 					// possible that vm which going to be destroyed is ready and holds processor resource, 
 					// so we have to release it
