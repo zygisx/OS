@@ -83,7 +83,9 @@ public class StartStop extends Process {
 		Kernel.createProcess(new JCL("jcl", this.id, Constants.MAX_PRIORITY - 3));
 		Kernel.createProcess(new Loader("loader", this.id, Constants.MAX_PRIORITY - 4));
 		Kernel.createProcess(new Interrupt("interrupt", this.id, Constants.MAX_PRIORITY - 5));
-		Kernel.createProcess(new MainProc("mainproc", this.id, Constants.MAX_PRIORITY - 6));
+		Kernel.createProcess(new Print("print", this.id, Constants.MAX_PRIORITY - 6));
+		Kernel.createProcess(new Input("input", this.id, Constants.MAX_PRIORITY - 6));
+		Kernel.createProcess(new MainProc("mainproc", this.id, Constants.MAX_PRIORITY - 7));
 	}
 	
 	private void destroyResources() {

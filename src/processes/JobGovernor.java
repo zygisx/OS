@@ -51,10 +51,12 @@ public class JobGovernor extends Process {
 				case "IO":
 					
 					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(3);			
-					Realmachine.setActiveVirtualMachine(this.jobNum); // to avoid bugs
-					
-					Realmachine.getActiveVM().processCommand(command, this.jobNum);
-					Realmachine.getActiveVM().increaseIc();
+					if (command.substring(0, 2).equalsIgnoreCase("GD") ) {
+						Kernel.getResources().create(new Resource("inputstart", this.getId(), this.jobNum + " " + command));
+					}
+					else {
+						Kernel.getResources().create(new Resource("printstart", this.getId(), this.jobNum + " " + command));
+					}
 					
 					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
 					return;
