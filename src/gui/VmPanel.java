@@ -19,6 +19,8 @@ import machine.VirtualMachine;
 import machine.Word;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Rectangle;
 
 public class VmPanel extends JPanel {
 	
@@ -43,6 +45,8 @@ public class VmPanel extends JPanel {
 	private JLabel labelPI;
 	private JLabel labelIOI;
 	private JLabel labelTI;
+	
+	private ConsolePanel consolePanel;
 
 	VmPanel(int id) {
 		setBackground(Color.WHITE);
@@ -66,10 +70,18 @@ public class VmPanel extends JPanel {
 		memPanel.add(scrollPane);
 		add(memPanel, BorderLayout.WEST);
 		
-		JPanel registersPanel = new JPanel();
-		registersPanel.setBackground(Color.WHITE);
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(575, 100));
+		panel.setBackground(Color.WHITE);
+		add(panel, BorderLayout.SOUTH);
+		panel.setLayout(null);
 		
-		add(registersPanel, BorderLayout.SOUTH);
+		JPanel registersPanel = new JPanel();
+		registersPanel.setBounds(new Rectangle(10, 10, 575, 80));
+		panel.add(registersPanel);
+		//registersPanel.setSize(new Dimension(575, 100));
+		registersPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		registersPanel.setBackground(Color.WHITE);
 		registersPanel.setLayout(new GridLayout(4, 8));
 		
 		
@@ -179,6 +191,9 @@ public class VmPanel extends JPanel {
 		this.labelTI = new JLabel("");
 		registersPanel.add(labelTI);
 		
+		consolePanel = new ConsolePanel();
+		add(consolePanel, BorderLayout.EAST);
+		
 		
 	}
 	
@@ -240,8 +255,9 @@ class MemoryTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 		if (col == 0) return Integer.toHexString(row).toUpperCase();
-		System.out.println((row)*0x10 + col-1);
-		return Realmachine.getVirtualMachine(id).getWord((row)*0x10 + col-1);
+		//System.out.println((row)*0x10 + col-1);
+		//return Realmachine.getVirtualMachine(id).getWord((row)*0x10 + col-1);
+		return 0;
 	}
 	
 	public String getColumnName(int col) {
