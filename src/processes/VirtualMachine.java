@@ -86,8 +86,8 @@ public class VirtualMachine extends Process {
 		}
 		
 		
-		Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "TI");
-		Kernel.getResources().create(r);
+//		Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "TI");
+//		Kernel.getResources().create(r);
 		
 	}
 	
