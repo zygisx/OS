@@ -48,7 +48,7 @@ public class Read extends Process {
 					
 				}
 				
-				
+				Kernel.getResources().get("supmemory").free();
 					
 				
 				return;	
@@ -59,15 +59,15 @@ public class Read extends Process {
 				// if any filenames are available than only resource needed is supervizor memory
 				if (! Kernel.isTaskQueueEmpty()) {
 					this.missingResource = "supmemory";
-					Kernel.getResources().get("supmemory").free();
+					
 				}
 				
 				else {
 					this.missingResource = "filename";
 					// destroy resource
 					Kernel.getResources().destroy("filename");
-					Kernel.getResources().get("supmemory").free();
 				}
+				Kernel.getResources().get("supmemory").free();
 				
 				return;
 		}
