@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 import exception.ProcessException;
+import java.util.Random;
 
 import os.Resource;
 
@@ -82,8 +83,14 @@ public abstract class Process implements Comparable<Process> {
 //		else if (this.priority < o.getPriority())
 //			return -1;
 //		else return 0;
-		
-		return  o.priority - this.priority;
+		int cmpResult = o.getPriority() - this.getPriority();
+		if (cmpResult == 0) {
+			Random rand = new Random();
+			boolean b = rand.nextBoolean();
+			if (b) cmpResult = 1;
+			else cmpResult = -1;
+		}
+		return  cmpResult;
 	}
 
 	public String getParent() {
