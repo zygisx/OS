@@ -11,6 +11,7 @@ import javax.swing.table.AbstractTableModel;
 
 import machine.Realmachine;
 import machine.Word;
+import java.awt.Color;
 
 public class RealMachinePanel extends JPanel {
 
@@ -24,23 +25,26 @@ public class RealMachinePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public RealMachinePanel() {
+		setBackground(Color.WHITE);
 
 		
 		
 		JPanel memPanel = new JPanel();
+		memPanel.setBackground(Color.WHITE);
 		table = new JTable(new RealMachineMemoryTableModel());
-		table.setPreferredSize(new Dimension(575, 4100));
+		table.setPreferredSize(new Dimension(0, 4100));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(595, 300));
+		scrollPane.setViewportBorder(null);
+		scrollPane.setPreferredSize(new Dimension(900, 379));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		table.setShowVerticalLines(false);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		
 		memPanel.add(scrollPane);
 		
-		memPanel.setBorder(BorderFactory.createTitledBorder("Memory"));
+		memPanel.setBorder(null);
 		add(memPanel);
 		
 		

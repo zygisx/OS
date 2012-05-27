@@ -213,6 +213,7 @@ public class Realmachine {
 	
 	public static void L1(int virtualAddress) {
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+		System.out.println(RealMachineRegisters.getR1().getStringValue() + " " + memory[realAddress].getHexValue());
 		RealMachineRegisters.getR1().setWordHexInt(memory[realAddress].getHexValue());
 	}
 	
