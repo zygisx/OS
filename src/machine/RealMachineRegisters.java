@@ -2,9 +2,9 @@ package machine;
 
 public class RealMachineRegisters {
 	private static Word R1, R2;	
-	private static byte PLR, MODE;
+	private static byte MODE;
 	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
-	private static int IC;
+	private static int IC, PLR;
 	
 	static {
 		setR1(new Word());
@@ -26,9 +26,7 @@ public class RealMachineRegisters {
 		if (vm != null) return vm.getRegisters().getIC();
 		return IC;
 	}
-	public static byte getPLR() {
-		return PLR;
-	}
+
 	public static byte getMODE() {
 		return MODE;
 	}
@@ -36,6 +34,11 @@ public class RealMachineRegisters {
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) return vm.getRegisters().getSF();
 		return SF;
+	}
+	public static int getPLR() {
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) return vm.getRegisters().getPLR();
+		return PLR;
 	}
 	public static byte getTIMER() {
 		return TIMER;
@@ -79,9 +82,7 @@ public class RealMachineRegisters {
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) vm.getRegisters().setIC(iC);
 	}
-	public static void setPLR(byte pLR) {
-		PLR = pLR;
-	}
+	
 	public static void setMODE(byte mODE) {
 		MODE = mODE;
 	}
@@ -90,6 +91,13 @@ public class RealMachineRegisters {
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) vm.getRegisters().setSF(sF);
 	}
+	
+	public static void setPLR(byte pLR) {
+		PLR = pLR;
+		VirtualMachine vm = Realmachine.getActiveVM();
+		if (vm != null) vm.getRegisters().setPLR(pLR);
+	}
+	
 	public static void setTIMER(byte tIMER) {
 		TIMER = tIMER;
 	}
