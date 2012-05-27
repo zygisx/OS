@@ -69,7 +69,7 @@ public class VirtualMachine extends Process {
 				return;
 			}
 			String prefix = command.substring(0, 2);
-			if (prefix.equals("GD") && prefix.equals("PD") && prefix.equals("PP")) {
+			if (prefix.equals("GD") || prefix.equals("PD") || prefix.equals("PP")) {
 				timer.IOStroke();
 				//TODO implement interrupt
 				
@@ -78,7 +78,6 @@ public class VirtualMachine extends Process {
 				 */
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "IO " + command);
 				Kernel.getResources().create(r);
-				
 				return;
 			}
 			else {

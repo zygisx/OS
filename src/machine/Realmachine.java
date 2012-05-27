@@ -1,10 +1,13 @@
 package machine;
 
 import exception.BadFileException;
+import gui.OsFrame;
 import gui.vm.MainFrame;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+
+import os.Kernel;
 
 public class Realmachine {
 
@@ -25,7 +28,7 @@ public class Realmachine {
 	private static VirtualMachine[] virtualMachines;
 	private static Pagination paginationMechanism;
 	
-	private static MainFrame frame;
+	private static OsFrame frame = Kernel.getOsFrame();
 	
 	static {
 		memory = new Word[REAL_MEMORY_SIZE];
@@ -53,18 +56,18 @@ public class Realmachine {
 	/*
 	 * main method
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					frame = new MainFrame();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	
 	public static void setActiveVirtualMachine(int num) {
 		activeVirtualMachine = virtualMachines[num];
@@ -281,7 +284,7 @@ public class Realmachine {
 		}	
 	}
 	
-	public static void PD(int virtualAddress) {
+	public static void PD(int virtualAddress, int num) {
 		String output = "";
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
@@ -292,10 +295,10 @@ public class Realmachine {
 				output += word.getStringValue();
 			}
 		}
-		frame.output(output);
+		frame.output(output, num);
 	}
 	
-	public static void PP(int virtualAddress) {
+	public static void PP(int virtualAddress, int num) {
 		String output = "";
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
@@ -309,10 +312,10 @@ public class Realmachine {
 			}	
 			i++;
 		}
-		frame.output(output);
+		frame.output(output, num);
 	}
 	
-	public static void GD(int virtualAddress) {
+	public static void GD(int virtualAddress, int num) {
 		String inputWord = null;
 		String s = frame.input();
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
@@ -338,9 +341,9 @@ public class Realmachine {
 
 	
 	/** Deprecated */
-	public static MainFrame getFrame() {
-		return frame;
-	}
+//	public static MainFrame getFrame() {
+//		return frame;
+//	}
 	
 	public static String toString2()
 	{
