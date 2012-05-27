@@ -158,9 +158,21 @@ public class OsFrame extends JFrame {
 		}
 	}
 	
-	public String input() {
-		String result = null;
+	public String input()  {
 		
-		return result;
+		String s = (String)JOptionPane.showInputDialog(
+				this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
+		while (s == null || s.equals("")) {
+			
+			if (s == null || s.equals("")) {
+				JOptionPane.showMessageDialog(this,
+					    "Not valid input.",
+					    "Input error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+			s = (String)JOptionPane.showInputDialog(
+					this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
+		}
+		return s;
 	}
 }

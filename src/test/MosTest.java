@@ -8,7 +8,7 @@ public class MosTest {
 	public static void main(String args[]) {
 		try {
 			System.out.println("System start work.");
-			Kernel.addTask("././program.txt");
+			Kernel.addTask("././program2.txt");
 //			Kernel.addTask("././InfiniteLoop.txt");
 //			Kernel.addTask("././memorytest.txt");
 //			Kernel.addTask("././memorytest.txt");
