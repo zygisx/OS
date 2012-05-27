@@ -12,7 +12,7 @@ public class MosTest {
 //			Kernel.addTask("././InfiniteLoop.txt");
 //			Kernel.addTask("././memorytest.txt");
 //			Kernel.addTask("././memorytest.txt");
-//			Kernel.addTask("././memorytest.txt");
+			Kernel.addTask("././inputTest.txt");
 			
 			Kernel.RunOS();
 			

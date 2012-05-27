@@ -1,6 +1,7 @@
 package machine;
 
 import exception.BadFileException;
+import exception.VirtualMachineProgramException;
 import gui.OsFrame;
 import gui.vm.MainFrame;
 
@@ -148,140 +149,211 @@ public class Realmachine {
 	
 	// COMMANDS
 	
-	public static void AD(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		int result = RealMachineRegisters.getR1().getHexValue() + RealMachineRegisters.getR2().getHexValue();
-		memory[realAddress].setWordHexInt(result);
-	}
-	
-	public static void SB(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		int result = RealMachineRegisters.getR1().getHexValue() - RealMachineRegisters.getR2().getHexValue();
-		memory[realAddress].setWordHexInt(result);
-	}
-	
-	public static void ML(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		int result = 0;
-		int num1 = RealMachineRegisters.getR1().getHexValue();
-		int num2 = RealMachineRegisters.getR2().getHexValue();
-		
-		for(int i = 0; i < num2; i++) {
-			result = result + num1;
-		}
-		
-		memory[realAddress].setWordHexInt(result);
-	}
-	
-	public static void DV(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		int num1 = RealMachineRegisters.getR1().getHexValue();
-		int num2 = RealMachineRegisters.getR2().getHexValue();
-		int mod = 0;
-		int div = 0;
-		
-		while(num1 >= num2) {
-			div++;
-			num1 = num1 - num2;
-		}
-		
-		mod = num1;
-		
-		memory[realAddress].setWordHexInt(div);
-		RealMachineRegisters.getR1().setWordHexInt(mod);
-	}
-	
-	public static void CP() {
-		int R1 = RealMachineRegisters.getR1().getHexValue();
-		int R2 = RealMachineRegisters.getR2().getHexValue();
-		
-		if (R1 == R2) {
-			RealMachineRegisters.setSF((byte) 0);
-		} else if(R1 > R2) {
-			RealMachineRegisters.setSF((byte) 1);
-		} else {
-			RealMachineRegisters.setSF((byte) 2);
+	public static void AD(int virtualAddress) throws VirtualMachineProgramException {
+		try {
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			int result = RealMachineRegisters.getR1().getHexValue() + RealMachineRegisters.getR2().getHexValue();
+			memory[realAddress].setWordHexInt(result);
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
 		}
 	}
 	
-	public static void CS() {
-		int R1 = RealMachineRegisters.getR1().getHexValue();
-		int R2 = RealMachineRegisters.getR2().getHexValue();
-		
-		if(R1 >= R2) {
-			RealMachineRegisters.setSF((byte) 3);
-		} else {
-			RealMachineRegisters.setSF((byte) 4);
+	public static void SB(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			int result = RealMachineRegisters.getR1().getHexValue() - RealMachineRegisters.getR2().getHexValue();
+			memory[realAddress].setWordHexInt(result);
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
 		}
 	}
 	
-	public static void L1(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		RealMachineRegisters.getR1().setWordHexInt(memory[realAddress].getHexValue());
+	public static void ML(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			int result = 0;
+			int num1 = RealMachineRegisters.getR1().getHexValue();
+			int num2 = RealMachineRegisters.getR2().getHexValue();
+			
+			for(int i = 0; i < num2; i++) {
+				result = result + num1;
+			}
+			
+			memory[realAddress].setWordHexInt(result);
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void L2(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		RealMachineRegisters.getR2().setWordHexInt(memory[realAddress].getHexValue());
+	public static void DV(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			int num1 = RealMachineRegisters.getR1().getHexValue();
+			int num2 = RealMachineRegisters.getR2().getHexValue();
+			int mod = 0;
+			int div = 0;
+			
+			while(num1 >= num2) {
+				div++;
+				num1 = num1 - num2;
+			}
+			
+			mod = num1;
+			
+			memory[realAddress].setWordHexInt(div);
+			RealMachineRegisters.getR1().setWordHexInt(mod);
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void S1(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		memory[realAddress].setWordHexInt(RealMachineRegisters.getR1().getHexValue());
+	public static void CP() throws VirtualMachineProgramException {
+		try {	
+			int R1 = RealMachineRegisters.getR1().getHexValue();
+			int R2 = RealMachineRegisters.getR2().getHexValue();
+			
+			if (R1 == R2) {
+				RealMachineRegisters.setSF((byte) 0);
+			} else if(R1 > R2) {
+				RealMachineRegisters.setSF((byte) 1);
+			} else {
+				RealMachineRegisters.setSF((byte) 2);
+			}
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void S2(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		memory[realAddress].setWordHexInt(RealMachineRegisters.getR2().getHexValue());
+	public static void CS() throws VirtualMachineProgramException {
+		try {	
+
+			int R1 = RealMachineRegisters.getR1().getHexValue();
+			int R2 = RealMachineRegisters.getR2().getHexValue();
+			
+			if(R1 >= R2) {
+				RealMachineRegisters.setSF((byte) 3);
+			} else {
+				RealMachineRegisters.setSF((byte) 4);
+			}
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void SI(int virtualAddress) {
-		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
-		memory[realAddress].setWordHexInt(RealMachineRegisters.getIC());
+	public static void L1(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			RealMachineRegisters.getR1().setWordHexInt(memory[realAddress].getHexValue());
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void JP(int address) {
-		RealMachineRegisters.setIC(address);
+	public static void L2(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			RealMachineRegisters.getR2().setWordHexInt(memory[realAddress].getHexValue());
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void JE(int address) {
-		if (RealMachineRegisters.getSF() == 0) {
+	public static void S1(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			memory[realAddress].setWordHexInt(RealMachineRegisters.getR1().getHexValue());
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
+	}
+	
+	public static void S2(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			memory[realAddress].setWordHexInt(RealMachineRegisters.getR2().getHexValue());
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
+	}
+	
+	public static void SI(int virtualAddress) throws VirtualMachineProgramException {
+		try {	
+			int realAddress = paginationMechanism.getRealAddress(virtualAddress);
+			memory[realAddress].setWordHexInt(RealMachineRegisters.getIC());
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
+	}
+	
+	public static void JP(int address) throws VirtualMachineProgramException {
+		try {	
 			RealMachineRegisters.setIC(address);
-		} else {
-			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
+	}
+	
+	public static void JE(int address) throws VirtualMachineProgramException {
+		try {	
+			if (RealMachineRegisters.getSF() == 0) {
+				RealMachineRegisters.setIC(address);
+			} else {
+				RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+			}
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
 		}
 	}
 		
-	public static void JM(int address) {
-		if (RealMachineRegisters.getSF() == 1) {
-			RealMachineRegisters.setIC(address);
-		} else {
-			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
-		}	
+	public static void JM(int address) throws VirtualMachineProgramException {
+		try {
+			if (RealMachineRegisters.getSF() == 1) {
+				RealMachineRegisters.setIC(address);
+			} else {
+				RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+				
+			}	
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void JL(int address) {
-		if (RealMachineRegisters.getSF() == 2) {
-			RealMachineRegisters.setIC(address);
-		} else {
-			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
-		}	
+	public static void JL(int address) throws VirtualMachineProgramException {
+		try {
+			if (RealMachineRegisters.getSF() == 2) {
+				RealMachineRegisters.setIC(address);
+			} else {
+				RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+			}	
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void JF(int address) {
-		if (RealMachineRegisters.getSF() == 3) {
-			RealMachineRegisters.setIC(address);
-		} else {
-			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
-		}	
+	public static void JF(int address) throws VirtualMachineProgramException {
+		try {
+			if (RealMachineRegisters.getSF() == 3) {
+				RealMachineRegisters.setIC(address);
+			} else {
+				RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+			}	
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
-	public static void JS(int address) {
-		if (RealMachineRegisters.getSF() == 4) {
-			RealMachineRegisters.setIC(address);
-		} else {
-			RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
-		}	
+	public static void JS(int address) throws VirtualMachineProgramException {
+		try {
+			if (RealMachineRegisters.getSF() == 4) {
+				RealMachineRegisters.setIC(address);
+			} else {
+				RealMachineRegisters.setIC(RealMachineRegisters.getIC()+1);
+			}	
+		} catch (Exception ex) {
+			throw new VirtualMachineProgramException(ex.getMessage());
+		}
 	}
 	
 	public static void PD(int virtualAddress, int num) {
