@@ -66,8 +66,8 @@ public class Realmachine {
 		});
 	}
 	
-	public static void setActiveVirtualMachine(VirtualMachine machine) {
-		activeVirtualMachine = machine;
+	public static void setActiveVirtualMachine(int num) {
+		activeVirtualMachine = virtualMachines[num];
 	}
 	
 	public static Word getWord(int index) {
@@ -100,6 +100,7 @@ public class Realmachine {
 	
 	public static void addVirtualMachine(VirtualMachine vm, int num) {
 		virtualMachines[num] = vm;
+		vm.getRegisters().setPLR(num);
 	}
 	
 	public static Word[] getVirtualMachineMemory(int num) {
@@ -138,7 +139,7 @@ public class Realmachine {
 				new VirtualMachine(new VirtualMachineRegisters(), mem); // create vm
 		addVirtualMachine(vm);
 		// no need to set active vm
-		setActiveVirtualMachine(vm);
+		setActiveVirtualMachine(1);
 		return vm;
 	}
 	
