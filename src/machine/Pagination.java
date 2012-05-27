@@ -14,7 +14,7 @@ public class Pagination {
 	
 	/* return real address */
 	public int getRealAddress(int virtualAddress) {
-		byte plr = RealMachineRegisters.getPLR();
+		int plr = RealMachineRegisters.getPLR();
 		int block = virtualAddress / Realmachine.BLOCK_SIZE;
 		int offset = virtualAddress % Realmachine.BLOCK_SIZE;
 		int realMemoryblock = Realmachine.getWord(plr*Realmachine.BLOCK_SIZE+block).getHexValue(); // returns real memory block number
@@ -80,11 +80,10 @@ public class Pagination {
 
 		  
 		int VMNum = num;
-		System.out.println(num);
 		
 		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
-			Word[] block = Realmachine.getBlock(((VMNum-1) * 0x10) + (i + Realmachine.PAGINATION_TABLE_SIZE)); //  get block from real memory
-			this.table[VMNum*0x10+i].setWordHexInt(VMNum*0x10+i + Realmachine.PAGINATION_TABLE_SIZE); // set block address in paging table  
+			Word[] block = Realmachine.getBlock((VMNum * 0x10) + i); //  get block from real memory
+			this.table[VMNum*0x10+i].setWordHexInt(VMNum*0x10 + i); // set block address in paging table  
 			for (int j = 0; j < Realmachine.BLOCK_SIZE; j++) {
 				virtualMachineMemory[i*Realmachine.BLOCK_SIZE + j] = block[j];
 			}

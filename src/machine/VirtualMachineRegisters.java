@@ -3,7 +3,7 @@ package machine;
 public class VirtualMachineRegisters {
 	private Word R1;
 	private Word R2;
-	private int IC;
+	private int IC, PLR;
 	private byte SF;
 	
 	
@@ -13,6 +13,14 @@ public class VirtualMachineRegisters {
 	public VirtualMachineRegisters() {
 		this.R1 = new Word();
 		this.R2 = new Word();
+	}
+	
+	public int getPLR() {
+		return PLR;
+	}
+	
+	public void setPLR(int pLR) {
+		PLR = pLR;
 	}
 	
 	public Word getR1() {

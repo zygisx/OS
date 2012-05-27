@@ -208,11 +208,11 @@ public class VmPanel extends JPanel {
 	
 	public void update() {
 		((AbstractTableModel) this.table.getModel()).fireTableDataChanged();
-		this.labelR1.setText(RealMachineRegisters.getR1().getStringValue());
-		this.labelR2.setText(RealMachineRegisters.getR2().getStringValue());
-		this.labelIC.setText(Integer.toString(RealMachineRegisters.getIC()));
-		this.labelSF.setText(Integer.toString(RealMachineRegisters.getSF()));
-		this.labelPLR.setText(Integer.toString(RealMachineRegisters.getPLR()));
+		this.labelR1.setText(Realmachine.getVirtualMachine(this.id).getRegisters().getR1().getStringValue());
+		this.labelR2.setText(Realmachine.getVirtualMachine(this.id).getRegisters().getR2().getStringValue());
+		this.labelIC.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getIC()));
+		this.labelSF.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getSF()));
+		this.labelPLR.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getPLR()));
 		this.labelMODE.setText(Integer.toString(RealMachineRegisters.getMODE()));
 		this.labelTIMER.setText(Integer.toString(RealMachineRegisters.getTIMER()));
 		this.labelCH1.setText(Integer.toString(RealMachineRegisters.getCH1()));

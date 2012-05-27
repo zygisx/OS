@@ -30,6 +30,7 @@ public class VirtualMachine extends Process {
 		Kernel.getResources().get("vmrun").free();	// vmrun resource is always available
 		
 		machine.VirtualMachine vm = Realmachine.getVirtualMachine(VMNum);
+		Realmachine.setActiveVirtualMachine(VMNum);
 		String command = "";
 		if (vm == null) {
 			throw new ProcessException("Misteke in vm. Maybe vm added to wrong place");
