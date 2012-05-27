@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 public class OsFrame extends JFrame {
 	
@@ -27,6 +28,7 @@ public class OsFrame extends JFrame {
 	private ProcessesPanel processesPanel;
 	private ResourcesPanel resourcesPanel;
 	private RealMachinePanel realMachinePanel;
+	private JLabel activeVmLabel;
 	
 	private ArrayList<VmPanel> vmPanelsList = new ArrayList<VmPanel>();
 
@@ -104,6 +106,18 @@ public class OsFrame extends JFrame {
 		
 		btnLoadTask.setBounds(10, 73, 89, 23);
 		utilitiesPanel.add(btnLoadTask);	
+		
+		JLabel lblNewLabel = new JLabel("Active VM:");
+		lblNewLabel.setBounds(125, 74, 54, 23);
+		utilitiesPanel.add(lblNewLabel);
+		
+		activeVmLabel = new JLabel("");
+		activeVmLabel.setBounds(189, 74, 100, 23);
+		utilitiesPanel.add(activeVmLabel);
+	}
+	
+	public void setActiveVmLabel(int num) {
+		activeVmLabel.setText(Integer.toString(num));
 	}
 	
 	public ProcessesPanel getProcessesPanel() {
@@ -158,10 +172,10 @@ public class OsFrame extends JFrame {
 		}
 	}
 	
-	public String input()  {
+	public String input(int num)  {
 		
 		String s = (String)JOptionPane.showInputDialog(
-				this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
+				this, "Enter your input", "Input (VM " + num +")", JOptionPane.INFORMATION_MESSAGE);
 		while (s == null || s.equals("")) {
 			
 			if (s == null || s.equals("")) {
@@ -171,7 +185,7 @@ public class OsFrame extends JFrame {
 					    JOptionPane.ERROR_MESSAGE);
 			}
 			s = (String)JOptionPane.showInputDialog(
-					this, "Enter your input", "Input", JOptionPane.INFORMATION_MESSAGE);
+					this, "Enter your input", "Input (VM " + num +")", JOptionPane.INFORMATION_MESSAGE);
 		}
 		return s;
 	}
