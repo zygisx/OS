@@ -80,7 +80,6 @@ public class Pagination {
 
 		  
 		int VMNum = num;
-		System.out.println(num);
 		
 		for (int i = 0; i < Realmachine.VIRTUAL_MACHINE_MEMORY_SIZE; i++) {
 			Word[] block = Realmachine.getBlock((VMNum * 0x10) + i); //  get block from real memory
