@@ -1,50 +1,50 @@
 package os;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
+
 import processes.Process;
 import processes.Process.Status;
+import processes.VirtualMachine;
 
 public class TaskManager {
 	
 	private PriorityQueue<processes.Process> readyProcesses;
 	private PriorityQueue<processes.Process> blockedProcesses;
-	private processes.Process currentProcess;
-
-	
-	
 	
 	
 	
 	public TaskManager() {
-		this.readyProcesses = new PriorityQueue<processes.Process>();
-		this.blockedProcesses = new PriorityQueue<processes.Process>();
+		Comparator<processes.Process> comparator = new PriorityComparator();
+		this.readyProcesses = new PriorityQueue<processes.Process>(10, comparator);
+		this.blockedProcesses = new PriorityQueue<processes.Process>(10, comparator);
 	}
 	
 	public Process getCurrentProcess() {
+
+		//FIXME
+	/*Testing*/
+		
+//		System.out.print("BEGIN READY: ");
+//		this.readyProcesses = printVMProceses(this.readyProcesses);
+//		System.out.print("BEGIN BLOCK: ");
+//		this.blockedProcesses = printVMProceses(this.blockedProcesses);
 		
 		// check all ready processes
 		this.checkReadyProcesses();
+
 		// run resource manager. To check if some of processes get resource they needed.
 		this.resourceManager();
+		
 		// check all blocked processes
 		this.checkBlockedProcesses();
-		
-		// check all ready processes
-		
-		//FIXME leave this for testing purpose
-		this.checkReadyProcesses1();
 		
 		return this.readyProcesses.peek();
 	}
 	
-	
-	
 	private void resourceManager() {
 		ResourcesList resources = Kernel.getResources();
-		
-		
 		
 		
 		PriorityQueue<processes.Process> newQueue = new PriorityQueue<processes.Process>();
@@ -56,6 +56,7 @@ public class TaskManager {
 				if (missingRes != "" && resources.isExists(missingRes)) {
 					Resource r = resources.getAvailable(missingRes);
 					if (r != null) {
+						
 						proc.setStatus(Status.READY);
 						r.occupy();
 					}
@@ -99,7 +100,6 @@ public class TaskManager {
 			this.blockedProcesses.add(newProcess);
 		else if (newProcess.getStatus() == Status.READY)
 			this.readyProcesses.add(newProcess);
-		//TODO work with stopped processes
 	}
 	
 	public void removeProcess(String id) {
@@ -117,77 +117,79 @@ public class TaskManager {
 			if (p.getId().equals(id)) {
 				i.remove();
 			}
-		}
-		
-		
+		}	
 	}
 	
 	private void checkBlockedProcesses() {
-
-		Iterator<processes.Process> i = this.blockedProcesses.iterator();
 		
-		while (i.hasNext()) {
-			processes.Process proc = i.next();
-			if (proc.getStatus() == Status.READY) {
+		PriorityQueue<processes.Process> newQueue = new PriorityQueue<processes.Process>();
+		while (! this.blockedProcesses.isEmpty()) {
+			processes.Process proc = this.blockedProcesses.poll();
+			if (proc.getStatus() == Status.READY) {		
 				this.readyProcesses.add(proc);
-				i.remove();
+			}
+			else {
+				newQueue.add(proc);
 			}
 		}
+		this.blockedProcesses = newQueue;
 	}
 	
 
-	private void checkReadyProcesses() {
-		// TODO Auto-generated method stub
+	private void checkReadyProcesses() {		
 		
-		Iterator<processes.Process> i = this.readyProcesses.iterator();
-		
-		while (i.hasNext()) {
-			processes.Process proc = i.next();
-			if (proc.getStatus() == Status.BLOCKED) {
+		PriorityQueue<processes.Process> newQueue = new PriorityQueue<processes.Process>();
+		while (! this.readyProcesses.isEmpty()) {
+			processes.Process proc = this.readyProcesses.poll();
+			if (proc.getStatus() == Status.BLOCKED) {		
 				this.blockedProcesses.add(proc);
-				i.remove();
 			}
-			//TODO add BLOCKEDS
-		}
-	}
-	
-	private void checkReadyProcesses1() {
-		// TODO Auto-generated method stub
-		
-		Iterator<processes.Process> i = this.readyProcesses.iterator();
-		
-		while (i.hasNext()) {
-			processes.Process proc = i.next();
-			if (proc.getStatus() == Status.BLOCKED) {
-				this.blockedProcesses.add(proc);
-				i.remove();
-				System.out.println("BUNA IR TAIP KARTAIS");
+			else {
+				newQueue.add(proc);
 			}
-			//TODO add BLOCKEDS
 		}
+		this.readyProcesses = newQueue;
 	}
-
 	
 	public String getWaitingListString(String id) {
 		String result = "";
-		
-		Iterator<processes.Process> i = blockedProcesses.iterator();
-		while (i.hasNext()) {
-			processes.Process p = i.next();
-			if (p.getMissingResource().equals(id)) {
-				result += p.getId() + " ";
+		try {
+			Iterator<processes.Process> i = blockedProcesses.iterator();
+			while (i.hasNext()) {
+				processes.Process p = i.next();
+				if (p.getMissingResource().equals(id)) {
+					result += p.getId() + " ";
+				}
 			}
-		}
-		
-		Iterator<processes.Process> iR = readyProcesses.iterator();
-		while (iR.hasNext()) {
-			processes.Process p = iR.next();
-			if (p.getMissingResource().equals(id)) {
-				result += p.getId() + " ";
+			
+			Iterator<processes.Process> iR = readyProcesses.iterator();
+			while (iR.hasNext()) {
+				processes.Process p = iR.next();
+				if (p.getMissingResource().equals(id)) {
+					result += p.getId() + " ";
+				}
 			}
+		} catch (java.util.ConcurrentModificationException ex) {
+			System.out.println("Failed to update GUI table.");
 		}
 		
 		return result;
+	}
+	
+	//FIXME method for testing
+	public static PriorityQueue<processes.Process> printVMProceses(PriorityQueue<processes.Process> list) {
+		PriorityQueue<processes.Process> tempList = new PriorityQueue<processes.Process>();
+		String res = "";
+		processes.Process p = list.poll();
+		while (p != null) {
+			if (p instanceof VirtualMachine) {
+				res += (p.getId() + " ");
+			}
+			tempList.add(p);
+			p = list.poll();
+		}
+		System.out.println(res);
+		return tempList;
 	}
 	
 }
