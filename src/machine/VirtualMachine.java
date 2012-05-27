@@ -137,7 +137,9 @@ public class VirtualMachine {
 	public String step(int num) throws VirtualMachineProgramException {
 		String command = null;
 		if(!isHalted) {
-			Kernel.waitForStep();
+			if(!Kernel.getBigStep()) {
+				Kernel.waitForStep();
+			}
 			command = memory[registers.getIC()].getStringValue().toUpperCase();
 			// new lines for interrupts with IO operations
 			String prefix = command.substring(0, 2);

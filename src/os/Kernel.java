@@ -42,6 +42,7 @@ public class Kernel {
 	private static OsFrame osFrame;
 	private static boolean stepMode = true;
 	private static boolean nextStep = false;
+	private static boolean bigStep = false;
 	
 	public static void RunOS() throws VirtualMachineProgramException {
 		Kernel.launchOsFrame();
@@ -142,7 +143,9 @@ public class Kernel {
 	
 	public static void createProcess(processes.Process newProcess) {
 		
-		waitForStep();
+		if(!Kernel.bigStep) {
+			waitForStep();
+		}
 		
 		System.out.println("\tProcess " + newProcess.getId() + " created");
 		
@@ -294,6 +297,15 @@ public class Kernel {
 	
 	public static OsFrame getOsFrame() {
 		return osFrame;
+	}
+
+
+	public static void setBigStep(boolean value) {
+		Kernel.bigStep = value;
+	}
+	
+	public static boolean getBigStep() {
+		return bigStep;
 	}
 	
 }
