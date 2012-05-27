@@ -202,6 +202,10 @@ public class VmPanel extends JPanel {
 		return id;
 	}
 	
+	public void setCommand(String command) {
+		consolePanel.setCommand(command);
+	}
+	
 	public void update() {
 		((AbstractTableModel) this.table.getModel()).fireTableDataChanged();
 		
@@ -255,8 +259,9 @@ class MemoryTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 		if (col == 0) return Integer.toHexString(row).toUpperCase();
-		//	return Realmachine.getVirtualMachine(id).getWord((row)*0x10 + col-1);
-		return 0;
+		//System.out.println((row)*0x10 + col-1);
+		return Realmachine.getVirtualMachine(id).getWord((row)*0x10 + col-1);
+		//return 0;
 	}
 	
 	public String getColumnName(int col) {
@@ -266,5 +271,4 @@ class MemoryTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int row, int col) {
         return false;
     }
-	
 }
