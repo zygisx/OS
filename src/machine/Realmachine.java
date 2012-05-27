@@ -71,6 +71,7 @@ public class Realmachine {
 	
 	public static void setActiveVirtualMachine(int num) {
 		activeVirtualMachine = virtualMachines[num];
+		frame.setActiveVmLabel(num);
 	}
 	
 	public static Word getWord(int index) {
@@ -317,7 +318,7 @@ public class Realmachine {
 	
 	public static void GD(int virtualAddress, int num) {
 		String inputWord = null;
-		String s = frame.input();
+		String s = frame.input(num);
 		int realAddress = paginationMechanism.getRealAddress(virtualAddress);
 		Word[] block = getBlock(getBlockNum(realAddress));
 		int wordsCount, i = 0;
