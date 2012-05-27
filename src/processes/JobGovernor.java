@@ -3,6 +3,7 @@ package processes;
 import java.util.Iterator;
 
 import exception.ProcessException;
+import exception.VirtualMachineProgramException;
 import machine.Realmachine;
 import machine.VirtualMachine;
 import machine.VirtualMachineRegisters;
@@ -27,7 +28,7 @@ public class JobGovernor extends Process {
 	}
 	
 	@Override
-	public void run() throws ProcessException{
+	public void run() throws ProcessException, VirtualMachineProgramException{
 		
 		if (this.missingResource.equals(this.firstMissingRes)) {
 			Kernel.createProcess(new processes.VirtualMachine("VM" + this.jobNum, this.id, Constants.USER_PROCESS_PRIORITY));
@@ -49,9 +50,11 @@ public class JobGovernor extends Process {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
 				case "IO":
 					
-					//TODO input output. 
+					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(2);
+					Realmachine.getActiveVM().processCommand(command, this.jobNum);
+					Realmachine.getActiveVM().increaseIc();
 					
-					
+					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
 					return;
 					
 				case "PI":	

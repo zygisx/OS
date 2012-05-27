@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 import exception.ProcessException;
+import exception.VirtualMachineProgramException;
+
 import java.util.Random;
 
 import os.Resource;
@@ -35,7 +37,7 @@ public abstract class Process implements Comparable<Process> {
 	
 	
 	// abstract method
-	public abstract void run() throws ProcessException;
+	public abstract void run() throws ProcessException, VirtualMachineProgramException;
 	
 	public void askResource() {
 		

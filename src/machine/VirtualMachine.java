@@ -33,8 +33,8 @@ public class VirtualMachine {
 		String commandPart;
 		int address = -1;
 		if (!command.equals("HALT")) {
-			commandPart = command.substring(0, 2);
 			command = command.replaceAll("\\s+", "");
+			commandPart = command.substring(0, 2);
 //			System.out.println(command);   // uncomment to see current command
 			Kernel.getOsFrame().getVmTab(num).setCommand(commandPart);
 			if (command.length() >= 4) {
@@ -101,13 +101,13 @@ public class VirtualMachine {
 				Realmachine.JS(address + Realmachine.CODE_SEGMENT_START);
 			break;
 			case "PD":
-				Realmachine.PD(address);
+				Realmachine.PD(address, num);
 			break;
 			case "PP":
-				Realmachine.PP(address);
+				Realmachine.PP(address, num);
 			break;
 			case "GD":
-				Realmachine.GD(address);
+				Realmachine.GD(address, num);
 			break;
 			default:
 				throw new IncorrectCommandException("Incorrect command in " + this.getRegisters().getIC());
@@ -146,7 +146,7 @@ public class VirtualMachine {
 			}
 			processCommand(command, num);
 			if (isIcChangeAvailible(command)) {
-				registers.setIC(registers.getIC()+1);
+				increaseIc();
 			}
 		}
 		return command;
@@ -163,6 +163,10 @@ public class VirtualMachine {
 
 	public boolean isHalted() {
 		return isHalted;
+	}
+	
+	public void increaseIc() {
+		registers.setIC(registers.getIC()+1);
 	}
 
 	

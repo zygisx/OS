@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import exception.ProcessException;
+import exception.VirtualMachineProgramException;
 
 import processes.*;
 import processes.Process;
@@ -42,7 +43,7 @@ public class Kernel {
 	private static boolean stepMode = true;
 	private static boolean nextStep = false;
 	
-	public static void RunOS() {
+	public static void RunOS() throws VirtualMachineProgramException {
 		Kernel.launchOsFrame();
 		
 		if(stepMode) {

@@ -149,4 +149,18 @@ public class OsFrame extends JFrame {
 		}
 		return null;
 	}
+	
+	public void output(String output, int id) {
+		for (VmPanel vmPanel : vmPanelsList) {
+			if (vmPanel.getId() == id) {
+				vmPanel.output(output);
+			}
+		}
+	}
+	
+	public String input() {
+		String result = null;
+		
+		return result;
+	}
 }

@@ -202,6 +202,10 @@ public class VmPanel extends JPanel {
 		return id;
 	}
 	
+	public void output(String output) {
+		consolePanel.output(output);
+	}
+	
 	public void setCommand(String command) {
 		consolePanel.setCommand(command);
 	}
