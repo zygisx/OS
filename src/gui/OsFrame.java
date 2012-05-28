@@ -140,17 +140,6 @@ public class OsFrame extends JFrame {
 		btnTurnOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Kernel.setIsSystemOn(true);
-				if(Kernel.getWasOnBefore()) {
-					System.out.println(Kernel.getWasOnBefore());
-//					try {
-//						Kernel.RunOS();
-//					} catch (VirtualMachineProgramException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-				} else {
-					Kernel.setWasOnBefore(true);
-				}
 				setTurnOnButton(false);
 				setShutDownButton(true);
 				btnLoadTask.setEnabled(true);
