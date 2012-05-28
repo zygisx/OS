@@ -44,6 +44,9 @@ public class Kernel {
 	private static boolean stepMode = true;
 	private static boolean nextStep = false;
 	private static boolean bigStep = false;
+	private static boolean autostep = false;
+	
+	private static long sleepTime = 100;
 	
 	public static void LaunchOS() throws VirtualMachineProgramException {
 		Kernel.launchOsFrame();
@@ -297,7 +300,14 @@ public class Kernel {
 	}
 
 	public static void waitForStep() {
-		
+		if (autostep) {
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Kernel.nextStep = true;
+		}
 		while(!nextStep) {
 			try {
 				Thread.sleep(1);
@@ -335,4 +345,18 @@ public class Kernel {
 	public static void setStepMode(boolean b) {
 		stepMode = b;
 	}
+	
+	
+	public static void invertAutoStep() {
+		Kernel.autostep = (! Kernel.autostep);
+	}
+	
+	public static boolean isAutoStep() {
+		return Kernel.autostep;
+	}
+	
+	public static void setAutoStepLength(long step) {
+		Kernel.sleepTime = step;
+	}
+	
 }

@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import exception.VirtualMachineProgramException;
+import javax.swing.JSlider;
 
 public class OsFrame extends JFrame {
 	
@@ -40,7 +44,8 @@ public class OsFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private UtilitiesPanel utilitiesPanel;
-	
+	private JLabel lblStepInterval;
+	private JSlider slider;
 	
 	/**
 	 *  Create frame
@@ -148,6 +153,43 @@ public class OsFrame extends JFrame {
 		});
 		btnTurnOn.setBounds(726, 73, 89, 23);
 		utilitiesPanel.add(btnTurnOn);
+		
+		JButton btnAutoStep = new JButton("Auto Step ON/OFF");
+		btnAutoStep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Kernel.invertAutoStep();
+				
+			}
+		});
+		btnAutoStep.setBounds(773, 39, 141, 23);
+		utilitiesPanel.add(btnAutoStep);
+		
+		
+		lblStepInterval = new JLabel("Step interval: 100");
+		lblStepInterval.setBounds(604, 11, 100, 23);
+		utilitiesPanel.add(lblStepInterval);
+		
+		slider = new JSlider();
+		
+		slider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				OsFrame.this.lblStepInterval.setText("Step interval: " + OsFrame.this.slider.getValue());
+				Kernel.setAutoStepLength(OsFrame.this.slider.getValue());
+				
+			}
+		});
+		
+		slider.setMajorTickSpacing(50);
+		slider.setValue(100);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setMinorTickSpacing(50);
+		slider.setMinimum(50);
+		slider.setMaximum(1000);
+		slider.setBounds(714, 11, 200, 23);
+		utilitiesPanel.add(slider);
 	}
 	
 	public void turnOnUtillsButtons() {
