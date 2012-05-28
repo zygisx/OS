@@ -313,4 +313,8 @@ public class Kernel {
 		return currentProcess;
 	}
 	
+	public static void setStepMode(boolean b) {
+		stepMode = b;
+	}
+	
 }
