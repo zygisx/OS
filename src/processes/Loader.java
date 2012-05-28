@@ -39,11 +39,11 @@ public class Loader extends Process{
 				
 				
 				// get data and code from resources list
-				dataRes = Kernel.getResources().getStartsWith("DATA");
-				String data = dataRes.getId().substring(4);
+				dataRes = Kernel.getResources().get("DATA");
+				String data = dataRes.getInfo();
 				
-				codeRes = Kernel.getResources().getStartsWith("CODE");
-				String code = codeRes.getId().substring(4);
+				codeRes = Kernel.getResources().get("CODE");
+				String code = codeRes.getInfo();
 				
 				
 				// load data and code to memory
