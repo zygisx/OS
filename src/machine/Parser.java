@@ -204,6 +204,7 @@ public class Parser {
 					if (s.length() > 4)
 						s = s.substring(0, 4);
 					//System.out.println(s + "  " + cursor);
+					s = s.replaceAll("\\s+", "");
 					mem[cursor].setWordHexInt(Integer.parseInt(s, 16));
 				}
 				else if (line.startsWith("DB") || line.startsWith("db")) {
