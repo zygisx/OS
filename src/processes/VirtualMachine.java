@@ -4,10 +4,11 @@ import exception.AddressOutOfBoundsException;
 import exception.IncorrectCommandException;
 import exception.ProcessException;
 import exception.VirtualMachineProgramException;
+import machine.RealMachineRegisters;
 import machine.Realmachine;
+import machine.Timer;
 import os.Kernel;
 import os.Resource;
-import os.Timer;
 
 public class VirtualMachine extends Process {
 
@@ -18,9 +19,8 @@ public class VirtualMachine extends Process {
 		super(id, parent, priority);
 		this.status = Status.BLOCKED;
 		this.isSupervisorMode = false;	// true defines that it is system process
-		this.timer = new Timer();
 		this.VMNum = Integer.parseInt(id.substring(2));
-		
+		this.timer = RealMachineRegisters.getTimer();
 		this.missingResource = "vmrun";  // this resource is always free.
 	}
 	
@@ -78,6 +78,7 @@ public class VirtualMachine extends Process {
 				 */
 				Resource r = new Resource("jbinterrupt" + this.VMNum, this.id, "IO " + command);
 				Kernel.getResources().create(r);
+				timer.reset();
 				return;
 			}
 			else {
