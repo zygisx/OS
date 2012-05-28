@@ -1,5 +1,7 @@
 package processes;
 
+import java.util.Iterator;
+
 import exception.ProcessException;
 import os.Constants;
 import os.Kernel;
@@ -105,12 +107,12 @@ public class StartStop extends Process {
 	}
 	
 	private void destroyProcesses() {
-		Kernel.removeProcess("read");
-		Kernel.removeProcess("chan3device");
-		Kernel.removeProcess("jcl");
-		Kernel.removeProcess("loader");
-		Kernel.removeProcess("interrupt");
-		Kernel.removeProcess("mainproc");
+
+		Iterator<processes.Process> i = Kernel.getProcessesIterator();
+		while (i.hasNext()) {
+			if (! i.next().getId().equals("startstop"))
+				i.remove();
+		}
 	}
 
 
