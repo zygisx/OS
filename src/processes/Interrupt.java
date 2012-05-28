@@ -1,5 +1,6 @@
 package processes;
 
+import machine.RealMachineRegisters;
 import exception.ProcessException;
 import os.Kernel;
 import os.Resource;
@@ -34,6 +35,9 @@ public class Interrupt extends Process {
 				
 				//destroy interrupt resource
 				Kernel.getResources().destroy(interruptResource.getId());
+				
+				RealMachineRegisters.setPI(0);
+				RealMachineRegisters.setSI(0);
 		}
 	}
 	

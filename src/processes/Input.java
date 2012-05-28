@@ -37,6 +37,7 @@ public class Input extends Process {
 		Kernel.getResources().destroy("inputstart");
 
 		RealMachineRegisters.setCH2(1);
+		RealMachineRegisters.setIOI(0);
 	}
 
 }
