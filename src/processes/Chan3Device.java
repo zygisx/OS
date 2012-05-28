@@ -7,6 +7,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+import machine.RealMachineRegisters;
+
 import os.Kernel;
 import os.Resource;
 
@@ -24,6 +26,7 @@ public class Chan3Device extends Process {
 	
 	@Override
 	public void run() throws ProcessException {
+		RealMachineRegisters.setCH3(1);
 		
 		String task;
 		try {
@@ -36,13 +39,14 @@ public class Chan3Device extends Process {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Kernel.getResources().destroy("chan3devicestart");
-		Kernel.getResources().create(new Resource("chan3devicefinised", this.getId()));
-		
+		finally {
+			
+			Kernel.getResources().destroy("chan3devicestart");
+			Kernel.getResources().create(new Resource("chan3devicefinised", this.getId()));
+			RealMachineRegisters.setCH3(0);
+		}
 	}
 	
 	

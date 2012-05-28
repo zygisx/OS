@@ -1,5 +1,6 @@
 package processes;
 
+import machine.RealMachineRegisters;
 import machine.Realmachine;
 import os.Kernel;
 import exception.ProcessException;
@@ -17,7 +18,7 @@ public class Print extends Process {
 	
 	@Override
 	public void run() throws ProcessException {
-		
+		RealMachineRegisters.setCH2(1);
 		String[] info = Kernel.getResources().get("printstart").getInfo().split(" ");
 		
 		int vmNum = Integer.parseInt(info[0]);
@@ -34,6 +35,8 @@ public class Print extends Process {
 		
 		
 		Kernel.getResources().destroy("printstart");
+		
+		RealMachineRegisters.setCH4(0);
 		
 	}
 }
