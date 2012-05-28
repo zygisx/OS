@@ -49,6 +49,8 @@ public class StartStop extends Process {
 				this.destroyProcesses();
 				// system shut down
 				//Kernel.turnOffSystem();
+				Kernel.getOsFrame().removeAllVmTabs();
+				Kernel.getOsFrame().setActiveVmLabel("");
 				Kernel.getOsFrame().turnOffUtillsButtons();
 				return;
 			

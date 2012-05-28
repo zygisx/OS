@@ -162,6 +162,10 @@ public class OsFrame extends JFrame {
 		activeVmLabel.setText(Integer.toString(num));
 	}
 	
+	public void setActiveVmLabel(String val) {
+		activeVmLabel.setText(val);
+	}
+	
 	public ProcessesPanel getProcessesPanel() {
 		return (ProcessesPanel) this.processesPanel;
 	}
@@ -195,6 +199,12 @@ public class OsFrame extends JFrame {
 		
 		tabsPanel.remove(vmPanelToRemove);
 		vmPanelsList.remove(vmPanelToRemove);
+	}
+	
+	public void removeAllVmTabs() {
+		for (VmPanel vmPanel : vmPanelsList) {
+			tabsPanel.remove(vmPanel);
+		}
 	}
 	
 	public VmPanel getVmTab(int id) {
