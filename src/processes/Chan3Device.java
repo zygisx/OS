@@ -26,7 +26,7 @@ public class Chan3Device extends Process {
 	
 	@Override
 	public void run() throws ProcessException {
-		RealMachineRegisters.setCH3((byte) 1);
+		RealMachineRegisters.setCH3(1);
 		
 		String task;
 		try {
@@ -42,7 +42,7 @@ public class Chan3Device extends Process {
 			
 			Kernel.getResources().destroy("chan3devicestart");
 			Kernel.getResources().create(new Resource("chan3devicefinised", this.getId()));
-			RealMachineRegisters.setCH3((byte) 0);
+			RealMachineRegisters.setCH3(0);
 		}
 	}
 	

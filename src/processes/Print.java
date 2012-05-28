@@ -18,7 +18,7 @@ public class Print extends Process {
 	
 	@Override
 	public void run() throws ProcessException {
-		RealMachineRegisters.setCH2((byte) 1);
+		RealMachineRegisters.setCH2(1);
 		String[] info = Kernel.getResources().get("printstart").getInfo().split(" ");
 		
 		int vmNum = Integer.parseInt(info[0]);
