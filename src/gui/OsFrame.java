@@ -141,23 +141,32 @@ public class OsFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Kernel.setIsSystemOn(true);
 				if(Kernel.getWasOnBefore()) {
-					try {
-						Kernel.RunOS();
-					} catch (VirtualMachineProgramException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					System.out.println(Kernel.getWasOnBefore());
+//					try {
+//						Kernel.RunOS();
+//					} catch (VirtualMachineProgramException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 				} else {
 					Kernel.setWasOnBefore(true);
 				}
 				setTurnOnButton(false);
 				setShutDownButton(true);
 				btnLoadTask.setEnabled(true);
-				utilitiesPanel.turnOnButtons();
+				turnOnUtillsButtons();
 			}
 		});
 		btnTurnOn.setBounds(726, 73, 89, 23);
 		utilitiesPanel.add(btnTurnOn);
+	}
+	
+	public void turnOnUtillsButtons() {
+		this.utilitiesPanel.turnOnButtons();
+	}
+	
+	public void turnOffUtillsButtons() {
+		this.utilitiesPanel.turnOffButtons();
 	}
 	
 	public void setActiveVmLabel(int num) {
