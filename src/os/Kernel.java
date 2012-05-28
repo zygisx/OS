@@ -37,7 +37,7 @@ public class Kernel {
 	private static TaskManager taskManager = new TaskManager(); 
 	private static Process currentProcess;
 	
-	private static boolean isSystemOn = true; 
+	private static boolean isSystemOn = false; 
 	private static Queue<String> tasks = new LinkedList<String>();
 	
 	private static OsFrame osFrame;
@@ -45,11 +45,13 @@ public class Kernel {
 	private static boolean nextStep = false;
 	private static boolean bigStep = false;
 	
-	public static void RunOS() throws VirtualMachineProgramException {
+	public static void LaunchOS() throws VirtualMachineProgramException {
 		Kernel.launchOsFrame();
+	}
+	
+	public static void RunOS() throws VirtualMachineProgramException {
 		
 		if(stepMode) {
-
 //			waitForStep();
 		
 			// at first we start start/stop process.
@@ -185,10 +187,26 @@ public class Kernel {
 		return processes.iterator();
 	}
 	
-	private static void launchOsFrame() {
+	private static void launchOsFrame() throws VirtualMachineProgramException {
 		osFrame = new OsFrame();
 		osFrame.setVisible(true);
+		Kernel.waitForTurnOn();
+		Kernel.RunOS();
 //		osFrame.addVmTab(0);
+	}
+	
+	private static void waitForTurnOn() {
+		while(!isSystemOn) {
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void setIsSystemOn(boolean value) {
+		Kernel.isSystemOn = value;
 	}
 	
 	

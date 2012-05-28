@@ -17,7 +17,7 @@ public class MosTest {
 			Kernel.addTask("././fibonacci.txt");
 //			Kernel.addTask("././inputTest.txt");
 			
-			Kernel.RunOS();
+			Kernel.LaunchOS();
 			
 			System.out.println("System OFF.");
 			

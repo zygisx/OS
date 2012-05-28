@@ -21,6 +21,7 @@ public class UtilitiesPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JCheckBox chckbxBigStep;
+	private JButton btnStep;
 
 	public UtilitiesPanel() {
 		setBorder(null);
@@ -34,7 +35,7 @@ public class UtilitiesPanel extends JPanel {
 		chckbxBigStep.setBounds(71, 41, 63, 23);
 		add(chckbxBigStep);
 		
-		JButton btnStep = new JButton("Step");
+		btnStep = new JButton("Step");
 		btnStep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Kernel.setBigStep(chckbxBigStep.isSelected());
@@ -45,5 +46,15 @@ public class UtilitiesPanel extends JPanel {
 		btnStep.setBounds(10, 41, 55, 23);
 		add(btnStep);
 	
+	}
+	
+	public void turnOnButtons() {
+		btnStep.setEnabled(true);
+		chckbxBigStep.setEnabled(true);
+	}
+	
+	public void turnOffButtons() {
+		btnStep.setEnabled(false);
+		chckbxBigStep.setEnabled(false);
 	}
 }

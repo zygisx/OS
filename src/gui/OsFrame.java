@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
+import exception.VirtualMachineProgramException;
+
 public class OsFrame extends JFrame {
 	
 	private JPanel contentPanel;
@@ -29,6 +31,8 @@ public class OsFrame extends JFrame {
 	private ResourcesPanel resourcesPanel;
 	private RealMachinePanel realMachinePanel;
 	private JLabel activeVmLabel;
+	private JButton btnLoadTask;
+	private JButton btnTurnOn;
 	
 	private ArrayList<VmPanel> vmPanelsList = new ArrayList<VmPanel>();
 
@@ -89,7 +93,8 @@ public class OsFrame extends JFrame {
 		utilitiesPanel = new UtilitiesPanel();
 		contentPanel.add(utilitiesPanel, BorderLayout.SOUTH);
 		
-		JButton btnLoadTask = new JButton("Load task");
+		btnLoadTask = new JButton("Load task");
+		btnLoadTask.setEnabled(false);
 		btnLoadTask.addActionListener(new ActionListener() {
 			
 			@Override
@@ -115,11 +120,29 @@ public class OsFrame extends JFrame {
 		activeVmLabel.setBounds(189, 74, 100, 23);
 		utilitiesPanel.add(activeVmLabel);
 		
+		utilitiesPanel.turnOffButtons();
+		
 		JButton btnShutDown = new JButton("Shut down");
+		btnShutDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Kernel.turnOffSystem();
+				btnTurnOn.setEnabled(true);
+				btnLoadTask.setEnabled(false);
+				utilitiesPanel.turnOffButtons();
+			}
+		});
 		btnShutDown.setBounds(825, 73, 89, 23);
 		utilitiesPanel.add(btnShutDown);
 		
-		JButton btnTurnOn = new JButton("Turn on");
+		btnTurnOn = new JButton("Turn on");
+		btnTurnOn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Kernel.setIsSystemOn(true);
+				btnTurnOn.setEnabled(false);
+				btnLoadTask.setEnabled(true);
+				utilitiesPanel.turnOnButtons();
+			}
+		});
 		btnTurnOn.setBounds(726, 73, 89, 23);
 		utilitiesPanel.add(btnTurnOn);
 	}
