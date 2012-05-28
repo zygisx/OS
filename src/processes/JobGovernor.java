@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import exception.ProcessException;
 import exception.VirtualMachineProgramException;
+import machine.RealMachineRegisters;
 import machine.Realmachine;
 import machine.VirtualMachine;
 import machine.VirtualMachineRegisters;
@@ -49,7 +50,7 @@ public class JobGovernor extends Process {
 		else if (this.missingResource.equals("jbinterrupt" + this.jobNum)) {
 			switch (Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(0, 2)) {
 				case "IO":
-					
+					RealMachineRegisters.setIOI(1);
 					String command = Kernel.getResources().get("jbinterrupt" + this.jobNum).getInfo().substring(3);			
 					if (command.substring(0, 2).equalsIgnoreCase("GD") ) {
 						Kernel.getResources().create(new Resource("inputstart", this.getId(), this.jobNum + " " + command));
@@ -62,8 +63,9 @@ public class JobGovernor extends Process {
 					return;
 					
 				case "PI":	
+					RealMachineRegisters.setPI(1);
 				case "SI":
-					
+					RealMachineRegisters.setSI(1);
 					
 					Kernel.getOsFrame().removeVmTab(this.jobNum);
 					
