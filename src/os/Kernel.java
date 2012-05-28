@@ -38,6 +38,7 @@ public class Kernel {
 	private static Process currentProcess;
 	
 	private static boolean isSystemOn = false; 
+	private static boolean wasOnBefore = false;
 	private static Queue<String> tasks = new LinkedList<String>();
 	
 	private static OsFrame osFrame;
@@ -90,9 +91,9 @@ public class Kernel {
 					
 					
 				}
-				else {
-					resourceList.create(new Resource("mosworkend", null));
-				}
+//				else {
+//					resourceList.create(new Resource("mosworkend", null));
+//				}
 
 
 				
@@ -105,7 +106,6 @@ public class Kernel {
 			}
 
 			
-
 			System.out.println("Mos successfully ended work");
 		
 		}
@@ -170,7 +170,8 @@ public class Kernel {
 	}
 	
 	public static void turnOffSystem() {
-		isSystemOn = false;
+		resourceList.create(new Resource("mosworkend", null));
+		//isSystemOn = false;
 	}
 	
 	
@@ -204,6 +205,7 @@ public class Kernel {
 			}
 		}
 	}
+	
 	
 	public static void setIsSystemOn(boolean value) {
 		Kernel.isSystemOn = value;
@@ -335,4 +337,11 @@ public class Kernel {
 		stepMode = b;
 	}
 	
+	public static boolean getWasOnBefore() {
+		return wasOnBefore;
+	}
+	
+	public static void setWasOnBefore(boolean value) {
+		wasOnBefore = value;
+	}
 }

@@ -31,8 +31,7 @@ public class OsFrame extends JFrame {
 	private ResourcesPanel resourcesPanel;
 	private RealMachinePanel realMachinePanel;
 	private JLabel activeVmLabel;
-	private JButton btnLoadTask;
-	private JButton btnTurnOn;
+	private JButton btnLoadTask, btnTurnOn, btnShutDown;
 	
 	private ArrayList<VmPanel> vmPanelsList = new ArrayList<VmPanel>();
 
@@ -122,13 +121,16 @@ public class OsFrame extends JFrame {
 		
 		utilitiesPanel.turnOffButtons();
 		
-		JButton btnShutDown = new JButton("Shut down");
+		btnShutDown = new JButton("Shut down");
+		setShutDownButton(false);
 		btnShutDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Kernel.turnOffSystem();
-				btnTurnOn.setEnabled(true);
+//				btnTurnOn.setEnabled(true);
+				btnShutDown.setEnabled(false);
 				btnLoadTask.setEnabled(false);
-				utilitiesPanel.turnOffButtons();
+				//utilitiesPanel.turnOffButtons();
+				
 			}
 		});
 		btnShutDown.setBounds(825, 73, 89, 23);
@@ -138,7 +140,18 @@ public class OsFrame extends JFrame {
 		btnTurnOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Kernel.setIsSystemOn(true);
-				btnTurnOn.setEnabled(false);
+				if(Kernel.getWasOnBefore()) {
+					try {
+						Kernel.RunOS();
+					} catch (VirtualMachineProgramException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					Kernel.setWasOnBefore(true);
+				}
+				setTurnOnButton(false);
+				setShutDownButton(true);
 				btnLoadTask.setEnabled(true);
 				utilitiesPanel.turnOnButtons();
 			}
@@ -219,5 +232,13 @@ public class OsFrame extends JFrame {
 					this, "Enter your input", "Input (VM " + num +")", JOptionPane.INFORMATION_MESSAGE);
 		}
 		return s;
+	}
+	
+	public void setTurnOnButton(boolean value) {
+		btnTurnOn.setEnabled(value);
+	}
+	
+	public void setShutDownButton(boolean value) {
+		btnShutDown.setEnabled(value);
 	}
 }
