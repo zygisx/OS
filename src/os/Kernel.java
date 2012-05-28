@@ -37,8 +37,7 @@ public class Kernel {
 	private static TaskManager taskManager = new TaskManager(); 
 	private static Process currentProcess;
 	
-	private static boolean isSystemOn = false; 
-	private static boolean wasOnBefore = false;
+	private static boolean isSystemOn = false;
 	private static Queue<String> tasks = new LinkedList<String>();
 	
 	private static OsFrame osFrame;
@@ -335,13 +334,5 @@ public class Kernel {
 	
 	public static void setStepMode(boolean b) {
 		stepMode = b;
-	}
-	
-	public static boolean getWasOnBefore() {
-		return wasOnBefore;
-	}
-	
-	public static void setWasOnBefore(boolean value) {
-		wasOnBefore = value;
 	}
 }

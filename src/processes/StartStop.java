@@ -49,7 +49,6 @@ public class StartStop extends Process {
 				this.destroyProcesses();
 				// system shut down
 				//Kernel.turnOffSystem();
-				Kernel.getOsFrame().setTurnOnButton(true);
 				Kernel.getOsFrame().turnOffUtillsButtons();
 				return;
 			
