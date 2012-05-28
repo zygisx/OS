@@ -34,7 +34,8 @@ public class Kernel {
 	 */
 	private static ResourcesList resourceList = new ResourcesList();
 	private static ArrayList<processes.Process> processes = new ArrayList<processes.Process>(); 
-	private static TaskManager taskManager = new TaskManager(); //FIXME
+	private static TaskManager taskManager = new TaskManager(); 
+	private static Process currentProcess;
 	
 	private static boolean isSystemOn = true; 
 	private static Queue<String> tasks = new LinkedList<String>();
@@ -62,7 +63,7 @@ public class Kernel {
 				
 				// ask task manager for process with highest priority
 				processes.Process p = taskManager.getCurrentProcess();
-				
+				currentProcess = p;
 				if (p != null) {   // p == null when no ready processes are available
 					
 					
@@ -128,7 +129,6 @@ public class Kernel {
 	 */
 	public static void addTask(String task) {
 		tasks.add(task);
-		System.out.println("VISKAS");
 	}
 	
 	
@@ -227,7 +227,7 @@ public class Kernel {
 				result = process.getStatus().toString();
 				break;
 			case 4:
-				result = Boolean.toString(process.getSuperVisorValue());
+				result = Boolean.toString(process.isSupervizorMode());
 				break;
 			case 5:
 				result = Integer.toString(process.getPriority());
@@ -306,6 +306,15 @@ public class Kernel {
 	
 	public static boolean getBigStep() {
 		return bigStep;
+	}
+
+
+	public static Process getCurrentProcess() {
+		return currentProcess;
+	}
+	
+	public static void setStepMode(boolean b) {
+		stepMode = b;
 	}
 	
 }

@@ -217,12 +217,16 @@ public class VmPanel extends JPanel {
 		this.labelIC.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getIC()));
 		this.labelSF.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getSF()));
 		this.labelPLR.setText(Integer.toString(Realmachine.getVirtualMachine(this.id).getRegisters().getPLR()));
-		this.labelMODE.setText(Integer.toString(RealMachineRegisters.getMODE()));
+		this.labelMODE.setText(Character.toString(RealMachineRegisters.getMODE()));
 		this.labelTIMER.setText(Integer.toString(RealMachineRegisters.getTIMER()));
-		this.labelCH1.setText(Integer.toString(RealMachineRegisters.getCH1()));
-		this.labelCH2.setText(Integer.toString(RealMachineRegisters.getCH2()));
-		this.labelCH3.setText(Integer.toString(RealMachineRegisters.getCH3()));
-		this.labelCH4.setText(Integer.toString(RealMachineRegisters.getCH4()));
+		this.labelCH1.setText(
+				RealMachineRegisters.getCH1() == 0 ? "free" : "busy");
+		this.labelCH2.setText(
+				RealMachineRegisters.getCH2() == 0 ? "free" : "busy");
+		this.labelCH3.setText(
+				RealMachineRegisters.getCH3() == 0 ? "free" : "busy");
+		this.labelCH4.setText(
+				RealMachineRegisters.getCH4() == 0 ? "free" : "busy");
 		this.labelSI.setText(Integer.toString(RealMachineRegisters.getSI()));
 		this.labelPI.setText(Integer.toString(RealMachineRegisters.getPI()));
 		this.labelIOI.setText(Integer.toString(RealMachineRegisters.getIOI()));

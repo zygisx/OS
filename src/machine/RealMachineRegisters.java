@@ -1,16 +1,20 @@
 package machine;
 
-import os.Timer;
+import os.Kernel;
+
 
 public class RealMachineRegisters {
 	private static Word R1, R2;	
-	private static byte MODE;
-	private static byte SF, TIMER, CH1, CH2, CH3, CH4, PI, SI, IOI, TI;
+	private static char MODE;
+	private static byte SF;
+	private static int CH3, CH1, CH2, CH4, PI, SI, IOI, TI;
 	private static int IC, PLR;
+	private static Timer TIMER;
 	
 	static {
 		setR1(new Word());
 		setR2(new Word());
+		TIMER = new Timer();
 	}
 	
 	public static Word getR1() {
@@ -29,9 +33,15 @@ public class RealMachineRegisters {
 		return IC;
 	}
 
-	public static byte getMODE() {
-		return MODE;
+	public static char getMODE() {
+		if (Kernel.getCurrentProcess() != null) {
+			return (Kernel.getCurrentProcess().isSupervizorMode()) ? 
+					'S' :
+					'U';
+		}
+		else return 'S';
 	}
+	
 	public static byte getSF() {
 		VirtualMachine vm = Realmachine.getActiveVM();
 		if (vm != null) return vm.getRegisters().getSF();
@@ -42,31 +52,34 @@ public class RealMachineRegisters {
 		if (vm != null) return vm.getRegisters().getPLR();
 		return PLR;
 	}
-	public static byte getTIMER() {
+	public static int getTIMER() {
+		return TIMER.getTime();
+	}
+	public static Timer getTimer() {
 		return TIMER;
 	}
-	public static byte getCH1() {
+	public static int getCH1() {
 		return CH1;
 	}
-	public static byte getCH2() {
+	public static int getCH2() {
 		return CH2;
 	}
-	public static byte getCH3() {
+	public static int getCH3() {
 		return CH3;
 	}
-	public static byte getCH4() {
+	public static int getCH4() {
 		return CH4;
 	}
-	public static byte getPI() {
+	public static int getPI() {
 		return PI;
 	}
-	public static byte getSI() {
+	public static int getSI() {
 		return SI;
 	}
-	public static byte getIOI() {
+	public static int getIOI() {
 		return IOI;
 	}
-	public static byte getTI() {
+	public static int getTI() {
 		return TI;
 	}
 	public static void setR1(Word r1) {
@@ -85,8 +98,8 @@ public class RealMachineRegisters {
 		if (vm != null) vm.getRegisters().setIC(iC);
 	}
 	
-	public static void setMODE(byte mODE) {
-		MODE = mODE;
+	public static void setMODE(char mODE) {
+		// no need to set mode
 	}
 	public static void setSF(byte sF) {
 		SF = sF;
@@ -101,30 +114,30 @@ public class RealMachineRegisters {
 	}
 	
 	public static void setTIMER(byte tIMER) {
-	//	TIMER.reset();
+		TIMER.reset();
 	}
-	public static void setCH1(byte cH1) {
+	public static void setCH1(int cH1) {
 		CH1 = cH1;
 	}
-	public static void setCH2(byte cH2) {
+	public static void setCH2(int cH2) {
 		CH2 = cH2;
 	}
-	public static void setCH3(byte cH3) {
-		CH3 = cH3;
+	public static void setCH3(int i) {
+		CH3 = i;
 	}
-	public static void setCH4(byte cH4) {
+	public static void setCH4(int cH4) {
 		CH4 = cH4;
 	}
-	public static void setPI(byte pI) {
+	public static void setPI(int pI) {
 		PI = pI;
 	}
-	public static void setSI(byte sI) {
+	public static void setSI(int sI) {
 		SI = sI;
 	}
-	public static void setIOI(byte iOI) {
+	public static void setIOI(int iOI) {
 		IOI = iOI;
 	}
-	public static void setTI(byte tI) {
+	public static void setTI(int tI) {
 		TI = tI;
 	}
 	

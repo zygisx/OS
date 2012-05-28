@@ -32,10 +32,7 @@ public class Chan3Device extends Process {
 		try {
 			task = this.readFile(Kernel.useTask());
 		
-		
-			// create resource
-			task = "TASK" + task;
-			Kernel.getResources().create(new Resource(task, this.id));
+			Kernel.getResources().create(new Resource("TASK", this.id, task));
 			
 			
 		} catch (IOException e) {

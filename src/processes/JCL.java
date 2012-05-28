@@ -30,18 +30,18 @@ public class JCL extends Process {
 		
 			case "taskinsupmemory":
 				
-				Resource res = Kernel.getResources().getStartsWith("TASK");
+				Resource res = Kernel.getResources().get("TASK");
 				if (res != null) {
 					 
 					try {
 						// ignoring first 4 chars
-						String[] task = Parser.validateTask(res.getId().substring(4));
+						String[] task = Parser.validateTask(res.getInfo());
 						
 						//create resource with task data
-						Kernel.getResources().create(new Resource("DATA" + task[0], this.id));
+						Kernel.getResources().create(new Resource("DATA", this.id, task[0]));
 						
 						// create resource with task source code
-						Kernel.getResources().create(new Resource("CODE" + task[1], this.id));
+						Kernel.getResources().create(new Resource("CODE", this.id, task[1]));
 							
 						Kernel.getResources().create(new Resource("loaderstart", this.id));
 						

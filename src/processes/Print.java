@@ -36,7 +36,8 @@ public class Print extends Process {
 		
 		Kernel.getResources().destroy("printstart");
 		
-		RealMachineRegisters.setCH2((byte) 0);
+		RealMachineRegisters.setCH2(0);
+		RealMachineRegisters.setIOI(0);
 		
 	}
 }
