@@ -42,17 +42,18 @@ public class JCL extends Process {
 						
 						// create resource with task source code
 						Kernel.getResources().create(new Resource("CODE" + task[1], this.id));
-						
-						// destroy task resource 
-						Kernel.getResources().destroy(res.getId());
-						Kernel.getResources().destroy("taskinsupmemory");
-						
+							
 						Kernel.getResources().create(new Resource("loaderstart", this.id));
 						
 					} catch (BadFileException e) {
-						
-						//FIXME change, resource should be created for print process
 						Kernel.getResources().create(new Resource("jclerror " + e.getMessage(), this.id));
+					} catch (Exception e) {
+						Kernel.getResources().create(new Resource("jclerror " + e.getMessage(), this.id));
+					}
+					finally {
+						// destroy task resource 
+						Kernel.getResources().destroy(res.getId());
+						Kernel.getResources().destroy("taskinsupmemory");
 					}
 					
 				}

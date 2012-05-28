@@ -99,10 +99,6 @@ public class JobGovernor extends Process {
 			Kernel.getResources().destroy(this.missingResource);
 		}
 		
-		//TODO find more elegant solution
-		// case jobgovstart
-		
-		
 	}
 	
 	
