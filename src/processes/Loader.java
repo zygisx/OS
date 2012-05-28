@@ -32,7 +32,7 @@ public class Loader extends Process{
 			Resource dataRes = null, codeRes = null;
 			
 			try {
-				RealMachineRegisters.setCH4(1);
+				RealMachineRegisters.setCH4((byte) 1);
 				
 				// get memory from realMachine			
 				Word[] mem = Realmachine.getVirtualMachineMemory(Integer.parseInt(this.receivedResource.getInfo()));
@@ -65,7 +65,7 @@ public class Loader extends Process{
 				Kernel.getResources().destroy(codeRes.getId());
 				
 				this.missingResource = "loaderstart";
-				RealMachineRegisters.setCH4(0);
+				RealMachineRegisters.setCH4((byte) 0);
 			}
 		
 			

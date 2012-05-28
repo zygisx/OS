@@ -114,6 +114,14 @@ public class OsFrame extends JFrame {
 		activeVmLabel = new JLabel("");
 		activeVmLabel.setBounds(189, 74, 100, 23);
 		utilitiesPanel.add(activeVmLabel);
+		
+		JButton btnShutDown = new JButton("Shut down");
+		btnShutDown.setBounds(825, 73, 89, 23);
+		utilitiesPanel.add(btnShutDown);
+		
+		JButton btnTurnOn = new JButton("Turn on");
+		btnTurnOn.setBounds(726, 73, 89, 23);
+		utilitiesPanel.add(btnTurnOn);
 	}
 	
 	public void setActiveVmLabel(int num) {

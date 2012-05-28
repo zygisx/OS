@@ -18,7 +18,7 @@ public class Input extends Process {
 
 	@Override
 	public void run() throws ProcessException {
-		RealMachineRegisters.setCH2(1);
+		RealMachineRegisters.setCH2((byte) 1);
 		String[] info = Kernel.getResources().get("inputstart").getInfo().split(" ");
 		
 		int vmNum = Integer.parseInt(info[0]);
@@ -36,7 +36,7 @@ public class Input extends Process {
 		
 		Kernel.getResources().destroy("inputstart");
 
-		RealMachineRegisters.setCH2(1);
+		RealMachineRegisters.setCH2((byte) 1);
 	}
 
 }
