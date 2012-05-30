@@ -297,6 +297,7 @@ public class Kernel {
 	
 	public static int getResourcesCount() {
 		return resourceList.getCount();
+		System.out.println("test");
 	}
 
 	public static void waitForStep() {
