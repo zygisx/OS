@@ -92,6 +92,7 @@ public class JobGovernor extends Process {
 					
 					Kernel.getResources().destroy("jbinterrupt" + this.jobNum);
 					
+					RealMachineRegisters.setTI(0);
 					
 					return ;
 					
